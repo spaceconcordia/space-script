@@ -7,6 +7,7 @@ mkdir /home/apps/current
 mkdir /home/apps/new
 mkdir /home/apps/old
 mkdir /home/apps/rollback
+mkdir /home/test
 
 #
 #
@@ -25,3 +26,11 @@ cp baby-cron /home/apps/current/baby-cron
 cp watch-puppy /home/apps/current/watch-puppy
 cp space-commander /home/apps/current/space-commander
 cp Updater-Q6 /home/apps/current/updater
+
+#
+# 
+# Copy test scripts
+#
+cp start.sh /home/test
+cp AwkTest.awk /home/test
+cp RunAwkTest.sh /home/test
