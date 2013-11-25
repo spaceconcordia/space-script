@@ -8,6 +8,9 @@ mkdir /home/apps/new
 mkdir /home/apps/old
 mkdir /home/apps/rollback
 mkdir /home/test
+mkdir /home/pipes
+mkdir /home/logs
+mkdir /home/pids
 
 #
 #
