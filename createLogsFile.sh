@@ -5,7 +5,6 @@
 
 FOLDER="."
 STR="1234567890"
-FILE="ACS.1.log"
 
 if [ -n "$1" ]; then
     FOLDER=$1
