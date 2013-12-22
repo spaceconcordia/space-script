@@ -3,7 +3,7 @@
 #
 #
 
-FOLDER="."
+FOLDER="/home/logs/"
 STR="1234567890"
 
 if [ -n "$1" ]; then
