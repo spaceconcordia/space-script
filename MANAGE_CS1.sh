@@ -10,16 +10,26 @@ command -v gcc >/dev/null 2>&1 || { echo >&2 "I require gcc but it's not install
 READ_DIR=$(readlink -f "$0")
 CURRENT_DIR=$(dirname "$READ_DIR")
 project_name='https://github.com/spaceconcordia/'
-RepoList[0]='baby-cron'
-RepoList[1]='space-commander'
-RepoList[2]='space-jobs'
-RepoList[3]='space-netman'
-RepoList[4]='space-script'
-RepoList[5]='space-tools'
-RepoList[8]='space-timer-lib'
-RepoList[9]='acs'
-RepoList[10]='SRT'
-RepoList[11]='mail_arc'
+RepoList[0]='acs'
+RepoList[1]='baby-cron'
+RepoList[2]='ground-commander'
+RepoList[3]='HE100-lib'
+RepoList[4]='mail_arc'
+RepoList[5]='space-commander'
+RepoList[6]='space-lib'
+RepoList[7]='space-jobs'
+RepoList[8]='space-netman'
+RepoList[9]='space-script'
+RepoList[10]='space-tools'
+RepoList[11]='space-timer-lib'
+RepoList[12]='SRT'
+
+#check-errors () {
+    #Fatal 
+    #error
+    #No such file or directory
+    #make: *** [target] Error 1
+#}
 
 confirm () {
     read -r -p "${1:-[y/N]} " response
@@ -90,22 +100,26 @@ cs1-build-q6 () {
 
 echo "Repo size: ${#RepoList[*]}"
 echo "Current Dir: $CURRENT_DIR"
-if [ -d $item ]; then
-    for item in ${RepoList[*]}
+
+for item in ${RepoList[*]}
     do
+    if [ -d "$item" ]; then
         cd $item
         CHANGED=$(git diff-index --name-only HEAD --)
         if [ -n "$CHANGED" ]; then
-            printf "%s has changes\n" $item
+            echo "---"
+            printf "%s has local changes\n" $item
+            git status
         fi;
         cd $CURRENT_DIR
-    done;
-fi;
+    fi;
+done;
+
 echo "---"
 echo "Clone missing projects?";
 confirm && clone=1;
 
-echo "Update cloned projects?";
+echo "Pull updates for cloned projects?";
 confirm && update=1;
 
 for item in ${RepoList[*]}
