@@ -1,28 +1,17 @@
 #!/bin/bash
-# DEPENDENCIES:
-command -v git >/dev/null 2>&1 || { echo >&2 "I require git but it's not installed.  Aborting."; exit 1; }
-command -v g++ >/dev/null 2>&1 || { echo >&2 "I require g++ but it's not installed.  Aborting."; exit 1; }
-command -v gcc >/dev/null 2>&1 || { echo >&2 "I require gcc but it's not installed.  Aborting."; exit 1; }
+if [ -z "$BASH_VERSION" ]; then exec bash "$0" "$@"; fi;
 #http://en.wikibooks.org/wiki/Bash_Shell_Scripting/Whiptail
 #http://snipplr.com/view/63919/
 #API="https://api.github.com"
 #GITHUBLIST=`curl --silent -u $USER:$PASS ${API}/orgs/${ORG}/repos -q | grep name | awk -F': "' '{print $2}' | sed -e 's/",//g'`
+
+declare -a SysReqs=('git' 'g++' 'gcc')
+for item in ${SysReqs[*]}; do command -v $item >/dev/null 2>&1 || { echo >&2 "I require $item but it's not installed.  Aborting."; exit 1; }; done
+
 READ_DIR=$(readlink -f "$0")
 CURRENT_DIR=$(dirname "$READ_DIR")
 project_name='https://github.com/spaceconcordia/'
-RepoList[0]='acs'
-RepoList[1]='baby-cron'
-RepoList[2]='ground-commander'
-RepoList[3]='HE100-lib'
-RepoList[4]='mail_arc'
-RepoList[5]='space-commander'
-RepoList[6]='space-lib'
-RepoList[7]='space-jobs'
-RepoList[8]='space-netman'
-RepoList[9]='space-script'
-RepoList[10]='space-tools'
-RepoList[11]='space-timer-lib'
-RepoList[12]='SRT'
+declare -a RepoList=('acs' 'baby-cron' 'ground-commander' 'HE100-lib' 'mail_arc' 'space-commander' 'space-lib' 'space jobs' 'space-netman' 'space-script' 'space-tools' 'space-timer-lib' 'SRT')
 
 #check-errors () {
     #Fatal 
