@@ -11,7 +11,7 @@ for item in ${SysReqs[*]}; do command -v $item >/dev/null 2>&1 || { echo >&2 "I 
 READ_DIR=$(readlink -f "$0")
 CURRENT_DIR=$(dirname "$READ_DIR")
 project_name='https://github.com/spaceconcordia/'
-declare -a RepoList=('acs' 'baby-cron' 'ground-commander' 'HE100-lib' 'mail_arc' 'space-commander' 'space-lib' 'space jobs' 'space-netman' 'space-script' 'space-tools' 'space-timer-lib' 'SRT')
+declare -a RepoList=('acs' 'baby-cron' 'ground-commander' 'HE100-lib' 'mail_arc' 'space-commander' 'space-lib' 'space-jobs' 'space-netman' 'space-script' 'space-tools' 'space-timer-lib' 'SRT')
 
 #check-errors () {
     #Fatal 
