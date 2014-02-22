@@ -20,6 +20,7 @@ mkdir /home/apps/current/baby-cron
 mkdir /home/apps/current/space-commander
 mkdir /home/apps/current/watch-puppy
 mkdir /home/apps/current/updater
+mkdir /home/apps/current/space-netman
 
 #
 #
@@ -29,6 +30,7 @@ cp baby-cron /home/apps/current/baby-cron
 cp watch-puppy /home/apps/current/watch-puppy
 cp space-commander /home/apps/current/space-commander
 cp Updater-Q6 /home/apps/current/updater
+cp sat /home/apps/current/space-netman/sat
 
 #
 # 
