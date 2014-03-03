@@ -1,3 +1,11 @@
+#!/bin/bash
+if [ -z "$BASH_VERSION" ]; then exec bash "$0" "$@"; fi;
+
+declare -a SysReqs=('g++' 'gcc' 'microblazeel-xilinx-linux-gnu-c++' 'microblazeel-xilinx-linux-gnu-cc')
+for item in ${SysReqs[*]}; do command -v $item >/dev/null 2>&1 || { echo >&2 "I require $item but it's not installed.  Aborting."; exit 1; }; done
+
+set -e # exit on errors or failed steps
+
 cd ..
 CS1=$(pwd)
 NETMAN_DIR="$CS1/space-netman"
@@ -5,20 +13,21 @@ echo "CS1 Dir: $CS1"
 
 if [ "$#" -ne 1 ]; then
   echo "Enter the build environment"
-  read 1 
+  read build_environment
+else 
+  build_environment=$1
 fi
 
-confirm-build-q6 () {
-if [ "$1"="Q6" ]; then
- true
- ;;
-else
-  false
- ;;
-fi
+confirm-build-q6 () {    
+    case $build_environment in
+      "Q6") 
+            true
+            ;;
+        *)
+            false
+            ;;
+    esac
 }
-
-set -e # exit on errors or failed steps
 
 setup-netman () {
   echo "Netman Dir: $NETMAN_DIR"
@@ -44,11 +53,11 @@ build-helium () {
   mkdir -p $CS1/HE100-lib/C/lib
   echo "cd: \c" 
   pwd
-  sh x86-compile-lib-static-cpp.sh
-  cp lib/libhe100-cpp.a $NETMAN_DIR/lib
+  confirm-build-q6 && sh mbcc-compile-lib-static-cpp.sh || sh x86-compile-lib-static-cpp.sh
+  cp lib/libhe100* $NETMAN_DIR/lib
   cp inc/SC_he100.h $NETMAN_DIR/lib/include
   cd $NETMAN_DIR/lib 
-  mv libhe100-cpp.a libhe100.a
+  #mv libhe100* $NETMAN_DIR/lib # why this line
 }
 
 build-timer () {
@@ -59,8 +68,8 @@ build-timer () {
   mkdir -p $CS1/space-timer-lib/lib
   echo "cd: \c" 
   pwd
-  sh x86-compile-lib-static-cpp.sh
-  cp lib/libtimer.a $NETMAN_DIR/lib
+  confirm-build-q6 && sh mbcc-compile-lib-static-cpp.sh || sh x86-compile-lib-static-cpp.sh
+  cp lib/libtimer* $NETMAN_DIR/lib
   cp inc/timer.h $NETMAN_DIR/lib/include
 }
 
@@ -74,9 +83,10 @@ build-commander () {
   pwd
   cp include/Net2Com.h $NETMAN_DIR/lib/include
   cp include/NamedPipe.h $NETMAN_DIR/lib/include
-  make buildBin
-  cp bin/space-commander $NETMAN_DIR/bin
-  make staticlibs.tar
+  confirm-build-q6 && make buildQ6 || make buildBin
+  cp bin/space-commander* $NETMAN_DIR/bin
+  confirm-build-q6 && make staticlibsQ6.tar || make staticlibs.tar
+
   cp staticlibs.tar $NETMAN_DIR/lib
   cd $NETMAN_DIR/lib
   tar -xf staticlibs.tar

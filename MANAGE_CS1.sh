@@ -1,9 +1,6 @@
 #!/bin/bash
 if [ -z "$BASH_VERSION" ]; then exec bash "$0" "$@"; fi;
 
-#EXIT ON ERROR
-set -e
-
 #http://en.wikibooks.org/wiki/Bash_Shell_Scripting/Whiptail
 #http://snipplr.com/view/63919/
 #API="https://api.github.com"
@@ -23,6 +20,27 @@ declare -a RepoList=('acs' 'baby-cron' 'ground-commander' 'HE100-lib' 'mail_arc'
     #No such file or directory
     #make: *** [target] Error 1
 #}
+
+#EXIT ON ERROR
+set -e
+
+if [ "$#" -ne 1 ]; then
+  echo "Enter the build environment"
+  read build_environment
+else 
+  build_environment=$1
+fi
+
+confirm-build-q6 () {    
+    case $build_environment in
+      "Q6") 
+            true
+            ;;
+        *)
+            false
+            ;;
+    esac
+}
 
 confirm () {
     read -r -p "${1:-[y/N]} " response
@@ -57,71 +75,49 @@ cs1-build-commander () {
     #COMMANDER
     echo "Building Commander..."
     cd $CURRENT_DIR/space-commander
-    if [ "$1" = "Q6" ]; then
-        make buildQ6
-    else
-        make buildBin
-    fi
+    confirm-build-q6 && make buildQ6 || make buildBin
 }
 
 cs1-build-netman () {
     echo "Building Netman..."
     cd $CURRENT_DIR/space-netman
-    if [ "$1" = "Q6" ]; then
-        make Q6
-    else
-        make 
-    fi
+    confirm-build-q6 && make Q6 || make 
 }
 
 cs1-build-watch-puppy () {
     echo "Building Watch-Puppy"
+    cp $CURRENT_DIR/space-lib/shakespeare/inc/shakespeare.h $CURRENT_DIR/watch-puppy/lib/include
     cd $CURRENT_DIR/watch-puppy
-    if [ "$1" = "Q6" ]; then
-        make buildQ6
-    else
-        make buildBin
-    fi
+    confirm-build-q6 && make buildQ6 || make buildBin
 }
 
 cs1-build-baby-cron () {
     echo "Building baby-cron"
     cd $CURRENT_DIR/baby-cron
+    cp $CURRENT_DIR/space-lib/shakespeare/inc/shakespeare.h $CURRENT_DIR/baby-cron/lib/include
     mkdir -p ./bin
-    if [ "$1" = "Q6" ]; then
-        make buildQ6
-    else
-        make buildBin
-    fi
+    confirm-build-q6 && make buildQ6 || make buildBin
 }
 
 cs1-build-space-updater () {
     echo "Building space-updater"
     cd $CURRENT_DIR/space-updater
     mkdir -p ./bin
-    if [ "$1" = "Q6" ]; then
-        make buildQ6
-    else
-        make buildPC
-    fi
+    confirm-build-q6 && make buildQ6 || make buildPC
 }
 
 cs1-build-space-updater-api () {
     echo "Building space-updater-api"
     cd $CURRENT_DIR/space-updater-api
     mkdir -p ./bin
-    if [ "$1" = "Q6" ]; then
-        make buildQ6
-    else
-        make buildPC
-    fi
+    confirm-build-q6 && make buildQ6 || make buildPC
 }
 
 cs1-build-pc () {
     #DEPENDENCIES
     cd $CURRENT_DIR/space-script
     printf "sh get-libs-PC.sh\n"
-    sh get-libs-PC.sh
+    sh cs1-get-libs.sh PC
    
     cs1-build-commander PC
     cs1-build-netman PC
@@ -148,7 +144,7 @@ cs1-build-q6 () {
     #DEPENDENCIES
     cd $CURRENT_DIR/space-script
     printf "sh get-libs-Q6.sh\n"
-    sh get-libs-Q6.sh
+    sh cs1-get-libs.sh Q6
 
     cs1-build-commander Q6
     cs1-build-netman Q6
