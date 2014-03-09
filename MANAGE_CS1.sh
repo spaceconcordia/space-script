@@ -42,6 +42,15 @@ check-package () {
     command -v $1 >/dev/null 2>&1
 }
 
+check-master-branch () {
+    branch_name="$(git symbolic-ref --short -q HEAD)"
+    echo "Currently on branch: $branch_name"
+    if [ "$branch_name" != "master" ]; then 
+        confirm "This repo is on the '$branch_name' branch, are you sure you wish to continue?" && return 0 || return 1
+    fi
+    return 0
+}
+
 check-projects () {
   projects_bool=0
   for item in ${RepoList[*]};
@@ -109,12 +118,14 @@ cs1-build-commander () {
     #COMMANDER
     echo "Building Commander..."
     cd $CURRENT_DIR/space-commander
+    check-master-branch || quit
     confirm-build-q6 && make buildQ6 || make buildBin
 }
 
 cs1-build-netman () {
     echo "Building Netman..."
     cd $CURRENT_DIR/space-netman
+    check-master-branch || quit
     confirm-build-q6 && make Q6 || make
 }
 
@@ -122,12 +133,14 @@ cs1-build-watch-puppy () {
     echo "Building Watch-Puppy"
     cp $CURRENT_DIR/space-lib/shakespeare/inc/shakespeare.h $CURRENT_DIR/watch-puppy/lib/include
     cd $CURRENT_DIR/watch-puppy
+    check-master-branch || quit
     confirm-build-q6 && make buildQ6 || make buildBin
 }
 
 cs1-build-baby-cron () {
     echo "Building baby-cron"
     cd $CURRENT_DIR/baby-cron
+    check-master-branch || quit
     cp $CURRENT_DIR/space-lib/shakespeare/inc/shakespeare.h $CURRENT_DIR/baby-cron/lib/include
     mkdir -p ./bin
     confirm-build-q6 && make buildQ6 || make buildBin
@@ -136,6 +149,7 @@ cs1-build-baby-cron () {
 cs1-build-space-updater () {
     echo "Building space-updater"
     cd $CURRENT_DIR/space-updater
+    check-master-branch || quit
     mkdir -p ./bin
     confirm-build-q6 && make buildQ6 || make buildPC
 }
@@ -143,6 +157,7 @@ cs1-build-space-updater () {
 cs1-build-space-updater-api () {
     echo "Building space-updater-api"
     cd $CURRENT_DIR/space-updater-api
+    check-master-branch || quit
     mkdir -p ./bin
     confirm-build-q6 && make buildQ6 || make buildPC
 }

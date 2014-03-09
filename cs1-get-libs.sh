@@ -18,6 +18,15 @@ else
   build_environment=$1
 fi
 
+check-master-branch () {
+    branch_name="$(git symbolic-ref --short -q HEAD)"
+    echo "Currently on branch: $branch_name"
+    if [ "$branch_name" != "master" ]; then 
+        confirm "This repo is on the '$branch_name' branch, are you sure you wish to continue?" && return 0 || return 1
+    fi
+    return 0
+}
+
 confirm-build-q6 () {    
     case $build_environment in
       "Q6") 
@@ -36,8 +45,9 @@ setup-netman () {
 }
 
 build-shakespeare () {
-  echo '\n Building shakespeare...\n'
+  echo 'Building shakespeare...'
   cd $CS1/space-lib/shakespeare
+  check-master-branch || exit 1
   mkdir -p $CS1/space-lib/shakespeare/lib
   echo "cd: \c"
   pwd
@@ -48,8 +58,9 @@ build-shakespeare () {
 
 build-helium () {
   # Builds libhe100.a 
-  echo '\n Building HE-100 Library...\n'
+  echo 'Building HE-100 Library...'
   cd $CS1/HE100-lib/C
+  check-master-branch || exit 1
   mkdir -p $CS1/HE100-lib/C/lib
   echo "cd: \c" 
   pwd
@@ -62,9 +73,9 @@ build-helium () {
 
 build-timer () {
   # Timer library
-  echo '\n Building timer Library...\n'
-  cd $NETMAN_DIR
+  echo 'Building timer Library...'
   cd $CS1/space-timer-lib 
+  check-master-branch || exit 1
   mkdir -p $CS1/space-timer-lib/lib
   echo "cd: \c" 
   pwd
@@ -75,16 +86,22 @@ build-timer () {
 
 build-commander () {
   # namedpipe & commander
-  echo '\n Building Namedpipes and commander...\n'
+  echo 'Building Namedpipes and commander libs...'
   cd $CS1/space-commander
+  check-master-branch || exit 1
   mkdir -p $CS1/space-commander/lib
   mkdir -p $CS1/space-commander/bin
   echo "cd: \c" 
   pwd
   cp include/Net2Com.h $NETMAN_DIR/lib/include
   cp include/NamedPipe.h $NETMAN_DIR/lib/include
+  
+  # TODO
+  echo "Redundant?!" # check netman build deps
   confirm-build-q6 && make buildQ6 || make buildBin
   cp bin/space-commander* $NETMAN_DIR/bin
+  # /TODO
+
   confirm-build-q6 && make staticlibsQ6.tar || make staticlibs.tar
 
   cp staticlibs.tar $NETMAN_DIR/lib
