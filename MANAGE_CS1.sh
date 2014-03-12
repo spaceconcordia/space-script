@@ -69,7 +69,7 @@ check-projects () {
 }
 
 check-microblaze () { # should not be in SysReqs, allow PC building without
-  check-package microblazeel-xilinx-linux-gnu-c++
+    check-package microblazeel-xilinx-linux-gnu-c++
 }
 
 ensure-system-requirements () {
@@ -106,6 +106,11 @@ confirm () {
 
 cs1-install-mbcc () {
    cd $CURRENT_DIR/Microblaze && sh xsc-devkit-installer-lit.sh
+}
+
+cs1-install-gtest () {
+    wget -c "https://googletest.googlecode.com/files/gtest-1.7.0.zip" -O gtest-1.7.0.zip
+    unzip gtest-1.7.0.zip && rm gtest-1.7.0.zip;
 }
 
 cs1-clone-all () {
@@ -273,17 +278,16 @@ done;
 
 confirm "Build project for PC?" && buildPC=0;
 check-microblaze || confirm "Install Microblaze environment?" && cs1-install-mbcc
-check-microblaze && confirm "Build project for Q6?" && buildQ6=0
+check-microblaze && confirm "Build project for Q7?" && buildQ6=0
+[ -d "gtest" ] || confirm "Install Google Test Framework?" && cs1-install-gtest
 
-echo "buildPC: $buildPC"
-if [ $buildPC -eq 0 ]; then
-    echo "buildPC: $buildPC"
+if [ $buildPC ]; then
     if [ -d "space-script" ]; then
         cs1-build-pc
     fi;
 fi;
 # space script directory is required for other scripts
-if [ $buildQ6 -eq 0 ]; then
+if [ $buildQ6 ]; then
     if [ -d "space-script" ]; then
         cs1-build-q6
     fi;
