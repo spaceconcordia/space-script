@@ -110,7 +110,7 @@ cs1-install-mbcc () {
 
 cs1-install-gtest () {
     wget -c "https://googletest.googlecode.com/files/gtest-1.7.0.zip" -O gtest-1.7.0.zip
-    unzip gtest-1.7.0.zip && rm gtest-1.7.0.zip;
+    unzip gtest-1.7.0.zip && rm gtest-1.7.0.zip
 }
 
 cs1-clone-all () {
@@ -279,7 +279,9 @@ done;
 confirm "Build project for PC?" && buildPC=0;
 check-microblaze || confirm "Install Microblaze environment?" && cs1-install-mbcc
 check-microblaze && confirm "Build project for Q7?" && buildQ6=0
-[ -d "gtest" ] || confirm "Install Google Test Framework?" && cs1-install-gtest
+if [ ! -d "gtest-1.7.0" ]; then
+   confirm "Install Google Test Framework?" && cs1-install-gtest
+fi
 
 if [ $buildPC ]; then
     if [ -d "space-script" ]; then
