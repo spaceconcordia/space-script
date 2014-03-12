@@ -1,7 +1,7 @@
 #!/bin/sh
 if [ $1 ] && [ $2 ] ; then
-    attime = $1
-    script = $2
+    attime=$1
+    script=$2
 else
     read attime
     read script

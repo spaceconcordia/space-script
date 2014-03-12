@@ -1,6 +1,9 @@
 #!/bin/bash
 if [ -z "$BASH_VERSION" ]; then exec bash "$0" "$@"; fi;
 
+red='\e[0;31m'
+NC='\e[0m' # No Color
+
 #http://snipplr.com/view/63919/
 #API="https://api.github.com"
 #GITHUBLIST=`curl --silent -u $USER:$PASS ${API}/orgs/${ORG}/repos -q | grep name | awk -F': "' '{print $2}' | sed -e 's/",//g'`
@@ -16,7 +19,8 @@ CURRENT_DIR=$(dirname "$READ_DIR")
 set -e
 
 quit () {
-  echo "Exiting gracefully..."
+  echo -e "${red}Exiting gracefully...${NC}"
+  echo 
   exit 1
 }
 
@@ -57,6 +61,7 @@ check-projects () {
   for item in ${RepoList[*]};
   do
     if [ ! -d "$item" ]; then
+      echo "$item repository is missing..."
       projects_bool=1
     fi
   done;
@@ -100,7 +105,7 @@ confirm () {
 }
 
 cs1-install-mbcc () {
-   confirm "Install Microblaze environment?" && cd $CURRENT_DIR/Microblaze && sh xsc-devkit-installer-lit.sh
+   cd $CURRENT_DIR/Microblaze && sh xsc-devkit-installer-lit.sh
 }
 
 cs1-clone-all () {
@@ -118,7 +123,7 @@ cs1-update () {
 
 cs1-build-commander () {
     #COMMANDER
-    echo "Building Commander..."
+    echo -e "${red}Building Commander...${NC}"
     cd $CURRENT_DIR/space-commander
     check-master-branch || quit
     confirm-build-q6 && make buildQ6 || make buildBin
@@ -166,10 +171,11 @@ cs1-build-space-updater-api () {
 
 cs1-build-pc () {
     build_environment="PC"
+    echo "Building for $build_environment..."
 
     #DEPENDENCIES
     cd $CURRENT_DIR/space-script
-    printf "sh get-libs-PC.sh\n"
+    printf "sh cs1-libs.sh\n"
     sh cs1-get-libs.sh PC
 
     cs1-build-commander PC
@@ -198,7 +204,7 @@ cs1-build-q6 () {
 
     #DEPENDENCIES
     cd $CURRENT_DIR/space-script
-    printf "sh get-libs-Q6.sh\n"
+    printf "sh cs1-libs.sh\n"
     sh cs1-get-libs.sh Q6
 
     cs1-build-commander Q6
@@ -238,7 +244,7 @@ for item in ${RepoList[*]}
         CHANGED=$(git diff-index --name-only HEAD --)
         if [ -n "$CHANGED" ]; then
             echo "---"
-            printf "%s has local changes\n" $item
+            echo -e "${red}$item has local changes...${NC}"
             git status
         fi;
         cd $CURRENT_DIR
@@ -265,17 +271,19 @@ do
     fi;
 done;
 
-check-microblaze || cs1-install-mbcc
 confirm "Build project for PC?" && buildPC=0;
-check-microblaze && confirm "Build project for Q6?" && buildQ6=0;
+check-microblaze || confirm "Install Microblaze environment?" && cs1-install-mbcc
+check-microblaze && confirm "Build project for Q6?" && buildQ6=0
 
-if [ $buildPC ]; then
+echo "buildPC: $buildPC"
+if [ $buildPC -eq 0 ]; then
+    echo "buildPC: $buildPC"
     if [ -d "space-script" ]; then
         cs1-build-pc
     fi;
 fi;
 # space script directory is required for other scripts
-if [ $buildQ6 ]; then
+if [ $buildQ6 -eq 0 ]; then
     if [ -d "space-script" ]; then
         cs1-build-q6
     fi;

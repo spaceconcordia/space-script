@@ -1,8 +1,14 @@
 #!/bin/bash
 if [ -z "$BASH_VERSION" ]; then exec bash "$0" "$@"; fi;
 
-declare -a SysReqs=('g++' 'gcc' 'microblazeel-xilinx-linux-gnu-c++' 'microblazeel-xilinx-linux-gnu-cc')
-for item in ${SysReqs[*]}; do command -v $item >/dev/null 2>&1 || { echo >&2 "I require $item but it's not installed.  Aborting."; exit 1; }; done
+declare -a PCReqs=('g++' 'gcc')
+declare -a Q6Reqs=('microblazeel-xilinx-linux-gnu-c++' 'microblazeel-xilinx-linux-gnu-cc')
+
+if [ "$1" = "Q6" ]; then
+    for item in ${Q6Reqs[*]}; do command -v $item >/dev/null 2>&1 || { echo >&2 "I require $item but it's not installed.  Aborting."; exit 1; }; done
+else
+    for item in ${PCReqs[*]}; do command -v $item >/dev/null 2>&1 || { echo >&2 "I require $item but it's not installed.  Aborting."; exit 1; }; done
+fi; 
 
 set -e # exit on errors or failed steps
 
@@ -25,6 +31,18 @@ check-master-branch () {
         confirm "This repo is on the '$branch_name' branch, are you sure you wish to continue?" && return 0 || return 1
     fi
     return 0
+}
+
+confirm () {
+    read -r -p "${1:-[y/N]} [y/N] " response
+    case $response in
+        [yY][eE][sS]|[yY])
+            true
+            ;;
+        *)
+            false
+            ;;
+    esac
 }
 
 confirm-build-q6 () {    
