@@ -18,7 +18,7 @@
 
 function usage(){
         echo "Usage : tgzWizard appName [-s sizeInBytes]"
-        echo "                          [-u]"
+        echo "                          [-u] [-l logDirectory] [-t tgzDirectory]"
 }
 
 if [ $# -eq 0 ]; then
