@@ -72,3 +72,6 @@ TEST(TgzWizardTestGroup, testTgzWizard){
     }
 }
 
+TEST(TgzWizardTestGroup, testExtractErrorWarning){
+    FAIL("TODO");
+}

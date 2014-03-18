@@ -2,7 +2,8 @@
 #**********************************************************************************************************************
 # AUTHORS : Space Concordia 2014, Joseph
 #
-# PURPOSE : 
+# PURPOSE : Creates a tgz package and splits it in smaller part. 
+#   N.B. add all valid apps in the validApps array below!!!!! The name has to match the file name (ex : Watych-Puppy -> Watch-Puppy20140101.log)
 #
 # ARGUMENTS : 
 #       -$1    Mandatory - Application (ex. "Watch-Puppy" -> Watch-Puppy*log) - Should match the log filename 
@@ -31,6 +32,11 @@ fi
 # Q6 : /home
 #
 PATH_ROOT="/home/jamg85/space"
+
+#
+#
+#
+ERR_WARN_PATTERN="(ERROR|WARNING)"
 
 #
 # Add all valid application to the array (the ones that are used in the log filename (ex. "Watch-Puppy")
@@ -147,33 +153,35 @@ function finish() {
 
 trap finish EXIT
 
+#
+# Extract the ERROR and WARNING
+#
+if [ $PATTERN == "Error-Warning" ]; then
+    for file in $LOG_DIR/*.log ; do
+        echo "egrep '$PATTERN' $file >> $FILENAME`date +%Y%m%d`.log"
+        egrep $ERR_WARN_PATTERN $file >> $FILENAME`date +%Y%m%d`.log
+    done
+fi
 
 #
-#
+#-------------------
 # Perform!
+#-------------------
 #
-
 echo "cd $LOG_DIR"
 cd $LOG_DIR
 
-if [ $PATTERN != "Error-Warning" ]; then
+echo "tar zcvf $BIG_TGZ $PATTERN*.log"
+tar zcvf $BIG_TGZ $PATTERN*.log             || { echo "[ERROR] tar failed"; exit 1; }
 
-    echo "tar zcvf $BIG_TGZ $PATTERN*.log"
-    tar zcvf $BIG_TGZ $PATTERN*.log             || { echo "[ERROR] tar failed"; exit 1; }
+echo "cd $TGZ_DIR"
+cd $TGZ_DIR                       || { echo "[ERROR] cd failed"; exit 1; }
 
-    echo "cd $TGZ_DIR"
-    cd $TGZ_DIR                       || { echo "[ERROR] cd failed"; exit 1; }
+echo "split -b $PART_SIZE $BIG_TGZ $PATTERN`(date +%Y%m%d)`$EXT"
+split -b $PART_SIZE $BIG_TGZ $PATTERN$EXT   || { echo "[ERROR} split failed"; exit 1; }
 
-    echo "split -b $PART_SIZE $BIG_TGZ $PATTERN$EXT"
-    split -b $PART_SIZE $BIG_TGZ $PATTERN$EXT   || { echo "[ERROR} split failed"; exit 1; }
-
-    echo "rm $LOG_DIR/$PATTERN*"
-    rm $LOG_DIR/$PATTERN* 
-
-else
-    echo "TODO"
-
-fi
+echo "rm $LOG_DIR/$PATTERN*"
+rm $LOG_DIR/$PATTERN* 
 
 
 exit 0;
