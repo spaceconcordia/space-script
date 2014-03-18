@@ -63,15 +63,34 @@ TEST(TgzWizardTestGroup, testTgzWizard){
         printf(untarCmd);
         system(untarCmd); 
         
-        struct stat strSt;
-        stat(testfiles, &strSt);
+        struct stat srcSt;
+        stat(testfiles, &srcSt);
         struct stat destSt;
         stat(logs, &destSt);
 
-        CHECK(strSt.st_size == destSt.st_size);
+        CHECK(srcSt.st_size == destSt.st_size);
     }
 }
 
 TEST(TgzWizardTestGroup, testExtractErrorWarning){
-    FAIL("TODO");
+    int pid = fork();
+    int status = 0;
+    const char* app = "Error-Warning";
+    char untarCmd[CMD_BUFFER] = {0};
+    sprintf(untarCmd, "cat %s/%s*.tgz* | tar zx -C %s", tgz, app, logs);
+
+    if (pid == 0){  // child process
+        printf("[CHILD]");
+        printf("%s %s %s %s %s %s", tgzWizard, app, "-l", logs, "-t", tgz);
+        execl(tgzWizard, tgzWizard, app, "-l", logs, "-t", tgz, (char*)NULL);
+    }else{
+        wait(&status); 
+        CHECK(0 == status);
+
+        printf(untarCmd);
+        system(untarCmd); 
+        FAIL("TODO");
+        // check that :: grep '(ERROR|WARNING)' errFile | wc -l   ==   meme grep allOtherFiles | wc -l
+        
+    }
 }

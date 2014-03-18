@@ -157,10 +157,14 @@ trap finish EXIT
 # Extract the ERROR and WARNING
 #
 if [ $PATTERN == "Error-Warning" ]; then
+    FILENAME=$PATTERN`date +%Y%m%d`.log
     for file in $LOG_DIR/*.log ; do
-        echo "egrep '$PATTERN' $file >> $FILENAME`date +%Y%m%d`.log"
-        egrep $ERR_WARN_PATTERN $file >> $FILENAME`date +%Y%m%d`.log
+        #echo "egrep '$ERR_WARN_PATTERN' $file >> $FILENAME"
+        egrep $ERR_WARN_PATTERN $file >> $FILENAME || { echo "continue..."; }
     done
+
+    mv $FILENAME $LOG_DIR
+
 fi
 
 #
@@ -178,7 +182,7 @@ echo "cd $TGZ_DIR"
 cd $TGZ_DIR                       || { echo "[ERROR] cd failed"; exit 1; }
 
 echo "split -b $PART_SIZE $BIG_TGZ $PATTERN`(date +%Y%m%d)`$EXT"
-split -b $PART_SIZE $BIG_TGZ $PATTERN$EXT   || { echo "[ERROR} split failed"; exit 1; }
+split -b $PART_SIZE $BIG_TGZ $PATTERN`(date +%Y%m%d)`$EXT  || { echo "[ERROR} split failed"; exit 1; }
 
 echo "rm $LOG_DIR/$PATTERN*"
 rm $LOG_DIR/$PATTERN* 
