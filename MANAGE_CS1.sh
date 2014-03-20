@@ -13,7 +13,7 @@ declare -a SysReqs=('git' 'g++' 'gcc' 'dpkg')
 declare -a Tools=('tmux' 'screen' 'minicom')
 declare -a RepoList=('acs' 'baby-cron' 'ground-commander' 'HE100-lib' 'mail_arc' 'space-commander' 'space-lib' 'space-jobs' 'space-netman' 'space-script' 'space-tools' 'space-timer-lib' 'space-updater' 'space-updater-api' 'SRT')
 READ_DIR=$(readlink -f "$0")
-CURRENT_DIR=$(dirname "$READ_DIR")
+CS1_DIR=$(dirname "$READ_DIR")
 
 #EXIT ON ERROR
 set -e
@@ -105,12 +105,24 @@ confirm () {
 }
 
 cs1-install-mbcc () {
-   cd $CURRENT_DIR/Microblaze && sh xsc-devkit-installer-lit.sh
+   cd $CS1_DIR/Microblaze && sh xsc-devkit-installer-lit.sh
 }
 
-cs1-install-gtest () {
-    wget -c "https://googletest.googlecode.com/files/gtest-1.7.0.zip" -O gtest-1.7.0.zip
-    unzip gtest-1.7.0.zip && rm gtest-1.7.0.zip
+cs1-install-test-env () {
+    if [ ! -d "gtest-1.7.0" ]; then
+        wget -c "https://googletest.googlecode.com/files/gtest-1.7.0.zip" -O gtest-1.7.0.zip
+        unzip gtest-1.7.0.zip && rm gtest-1.7.0.zip
+    fi
+    if [ ! -d "cpputest" ]; then
+        git clone git://github.com/cpputest/cpputest.git
+        cd cpputest
+        ./configure
+        make
+        make -f Makefile_CppUTestExt 
+        cp -r include/* $CS1_DIR/space-commander/include/
+        cp lib/libCppUTest.a $CS1_DIR/space-commander/lib/
+        cp lib/libCppUTestExt.a $CS1_DIR/space-commander/lib/
+    fi
 }
 
 cs1-clone-all () {
@@ -123,44 +135,44 @@ cs1-update () {
     branch_name="$(git symbolic-ref --short -q HEAD)"
     printf "git pull origin $branch_name #%s\n" $1;
     git pull origin $branch_name
-    cd $CURRENT_DIR
+    cd $CS1_DIR
 }
 
 cs1-build-commander () {
     #COMMANDER
     echo -e "${red}Building Commander...${NC}"
-    cd $CURRENT_DIR/space-commander
+    cd $CS1_DIR/space-commander
     check-master-branch || quit
     confirm-build-q6 && make buildQ6 || make buildBin
 }
 
 cs1-build-netman () {
     echo "Building Netman..."
-    cd $CURRENT_DIR/space-netman
+    cd $CS1_DIR/space-netman
     check-master-branch || quit
     confirm-build-q6 && make Q6 || make
 }
 
 cs1-build-watch-puppy () {
     echo "Building Watch-Puppy"
-    cp $CURRENT_DIR/space-lib/shakespeare/inc/shakespeare.h $CURRENT_DIR/watch-puppy/lib/include
-    cd $CURRENT_DIR/watch-puppy
+    cp $CS1_DIR/space-lib/shakespeare/inc/shakespeare.h $CS1_DIR/watch-puppy/lib/include
+    cd $CS1_DIR/watch-puppy
     check-master-branch || quit
     confirm-build-q6 && make buildQ6 || make buildBin
 }
 
 cs1-build-baby-cron () {
     echo "Building baby-cron"
-    cd $CURRENT_DIR/baby-cron
+    cd $CS1_DIR/baby-cron
     check-master-branch || quit
-    cp $CURRENT_DIR/space-lib/shakespeare/inc/shakespeare.h $CURRENT_DIR/baby-cron/lib/include
+    cp $CS1_DIR/space-lib/shakespeare/inc/shakespeare.h $CS1_DIR/baby-cron/lib/include
     mkdir -p ./bin
     confirm-build-q6 && make buildQ6 || make buildBin
 }
 
 cs1-build-space-updater () {
     echo "Building space-updater"
-    cd $CURRENT_DIR/space-updater
+    cd $CS1_DIR/space-updater
     check-master-branch || quit
     mkdir -p ./bin
     confirm-build-q6 && make buildQ6 || make buildPC
@@ -168,7 +180,7 @@ cs1-build-space-updater () {
 
 cs1-build-space-updater-api () {
     echo "Building space-updater-api"
-    cd $CURRENT_DIR/space-updater-api
+    cd $CS1_DIR/space-updater-api
     check-master-branch || quit
     mkdir -p ./bin
     confirm-build-q6 && make buildQ6 || make buildPC
@@ -179,7 +191,7 @@ cs1-build-pc () {
     echo "Building for $build_environment..."
 
     #DEPENDENCIES
-    cd $CURRENT_DIR/space-script
+    cd $CS1_DIR/space-script
     printf "sh cs1-libs.sh\n"
     sh cs1-get-libs.sh PC
 
@@ -191,24 +203,24 @@ cs1-build-pc () {
     cs1-build-baby-cron PC
 
     #COLLECT FILES
-    mkdir -p $CURRENT_DIR/BUILD/PC
-    cp $CURRENT_DIR/space-commander/bin/space-commander $CURRENT_DIR/BUILD/PC/
-    cp $CURRENT_DIR/space-netman/bin/gnd $CURRENT_DIR/BUILD/PC/
-    cp $CURRENT_DIR/space-netman/bin/sat $CURRENT_DIR/BUILD/PC/
-    cp $CURRENT_DIR/watch-puppy/bin/watch-puppy $CURRENT_DIR/BUILD/PC/
-    cp $CURRENT_DIR/space-updater-api/bin/UpdaterServer $CURRENT_DIR/BUILD/PC/
-    cp $CURRENT_DIR/space-updater/bin/PC-Updater $CURRENT_DIR/BUILD/PC/
-    cp $CURRENT_DIR/baby-cron/bin/baby-cron $CURRENT_DIR/BUILD/PC/
+    mkdir -p $CS1_DIR/BUILD/PC
+    cp $CS1_DIR/space-commander/bin/space-commander $CS1_DIR/BUILD/PC/
+    cp $CS1_DIR/space-netman/bin/gnd $CS1_DIR/BUILD/PC/
+    cp $CS1_DIR/space-netman/bin/sat $CS1_DIR/BUILD/PC/
+    cp $CS1_DIR/watch-puppy/bin/watch-puppy $CS1_DIR/BUILD/PC/
+    cp $CS1_DIR/space-updater-api/bin/UpdaterServer $CS1_DIR/BUILD/PC/
+    cp $CS1_DIR/space-updater/bin/PC-Updater $CS1_DIR/BUILD/PC/
+    cp $CS1_DIR/baby-cron/bin/baby-cron $CS1_DIR/BUILD/PC/
 
-    cd $CURRENT_DIR
-    echo 'Binaries left in $CURRENT_DIR/BUILD/PC'
+    cd $CS1_DIR
+    echo 'Binaries left in $CS1_DIR/BUILD/PC'
 }
 
 cs1-build-q6 () {
     build_environment="Q6"
 
     #DEPENDENCIES
-    cd $CURRENT_DIR/space-script
+    cd $CS1_DIR/space-script
     printf "sh cs1-libs.sh\n"
     sh cs1-get-libs.sh Q6
 
@@ -220,27 +232,27 @@ cs1-build-q6 () {
     cs1-build-baby-cron Q6
 
     #COLLECT FILES
-    mkdir -p $CURRENT_DIR/BUILD/Q6
-    cp $CURRENT_DIR/space-commander/bin/space-commanderQ6 $CURRENT_DIR/BUILD/Q6/
-    cp $CURRENT_DIR/space-netman/bin/gnd-mbcc $CURRENT_DIR/BUILD/Q6/
-    cp $CURRENT_DIR/space-netman/bin/sat-mbcc $CURRENT_DIR/BUILD/Q6/sat
-    cp $CURRENT_DIR/watch-puppy/bin/watch-puppy $CURRENT_DIR/BUILD/Q6/
-    cp $CURRENT_DIR/space-updater-api/bin/UpdaterServer-Q6 $CURRENT_DIR/BUILD/Q6/
-    cp $CURRENT_DIR/space-updater/bin/Updater-Q6 $CURRENT_DIR/BUILD/Q6/
-    cp $CURRENT_DIR/baby-cron/bin/baby-cron $CURRENT_DIR/BUILD/Q6/
-    cp $CURRENT_DIR/space-script/Q6-rsync.sh $CURRENT_DIR/BUILD/Q6/
-    cd $CURRENT_DIR/BUILD/Q6/
+    mkdir -p $CS1_DIR/BUILD/Q6
+    cp $CS1_DIR/space-commander/bin/space-commanderQ6 $CS1_DIR/BUILD/Q6/
+    cp $CS1_DIR/space-netman/bin/gnd-mbcc $CS1_DIR/BUILD/Q6/
+    cp $CS1_DIR/space-netman/bin/sat-mbcc $CS1_DIR/BUILD/Q6/sat
+    cp $CS1_DIR/watch-puppy/bin/watch-puppy $CS1_DIR/BUILD/Q6/
+    cp $CS1_DIR/space-updater-api/bin/UpdaterServer-Q6 $CS1_DIR/BUILD/Q6/
+    cp $CS1_DIR/space-updater/bin/Updater-Q6 $CS1_DIR/BUILD/Q6/
+    cp $CS1_DIR/baby-cron/bin/baby-cron $CS1_DIR/BUILD/Q6/
+    cp $CS1_DIR/space-script/Q6-rsync.sh $CS1_DIR/BUILD/Q6/
+    cd $CS1_DIR/BUILD/Q6/
     tar -cvf $(date --iso)-Q6.tar.gz Q6-rsync.sh sat-mbcc watch-puppy baby-cron space-commanderQ6 UpdaterServer-Q6 Updater-Q6
-    cd $CURRENT_DIR
-    echo 'Binaries left in $CURRENT_DIR/BUILD/Q6'
-    echo "$(date --iso)-Q6.tar.gz left in $CURRENT_DIR/BUILD/Q6, transfer it to Q6, tar -xvf it, and run Q6-rsync.sh"
+    cd $CS1_DIR
+    echo 'Binaries left in $CS1_DIR/BUILD/Q6'
+    echo "$(date --iso)-Q6.tar.gz left in $CS1_DIR/BUILD/Q6, transfer it to Q6, tar -xvf it, and run Q6-rsync.sh"
 }
 [ -d .git ] && echo "You are in a git directory, please copy this file to a new directory where you plan to build the project!" && quit
 ensure-system-requirements
 offer-space-tools
 
 echo "Repo size: ${#RepoList[*]}"
-echo "Current Dir: $CURRENT_DIR"
+echo "Current Dir: $CS1_DIR"
 
 for item in ${RepoList[*]}
     do
@@ -252,7 +264,7 @@ for item in ${RepoList[*]}
             echo -e "${red}$item has local changes...${NC}"
             git status
         fi;
-        cd $CURRENT_DIR
+        cd $CS1_DIR
     fi;
 done;
 
@@ -279,8 +291,8 @@ done;
 confirm "Build project for PC?" && buildPC=0;
 check-microblaze || confirm "Install Microblaze environment?" && cs1-install-mbcc
 check-microblaze && confirm "Build project for Q7?" && buildQ6=0
-if [ ! -d "gtest-1.7.0" ]; then
-   confirm "Install Google Test Framework?" && cs1-install-gtest
+if [ ! -d "gtest-1.7.0" -o ! -d "cpputest" ]; then
+   confirm "Install Test Environment?" && cs1-install-test-env
 fi
 
 if [ $buildPC ]; then
