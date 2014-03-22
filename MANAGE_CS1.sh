@@ -20,8 +20,20 @@ set -e
 
 quit () {
   echo -e "${red}Exiting gracefully...${NC}"
-  echo 
   exit 1
+}
+
+self-update () {
+  if [ -f "./space-script/MANAGE_CS1.sh" ]; then
+    cd ./space-script/
+    git-check "." || confirm "An update for this script may be available. Proceed?" && update=0
+    [ $update -eq 0 ] && git pull && rsync -vz --update MANAGE_CS1.sh ../MANAGE_CS1.sh
+    cd $CS1_DIR
+  fi
+}
+
+git-check () {
+  return $(git --git-dir=$1/.git diff-index --quiet HEAD)
 }
 
 install-packages () {
@@ -105,7 +117,8 @@ confirm () {
 }
 
 cs1-install-mbcc () {
-   cd $CS1_DIR/Microblaze && sh xsc-devkit-installer-lit.sh
+  echo "Microblaze install not supported yet... See admin for details"
+  #cd $CS1_DIR/Microblaze && sh xsc-devkit-installer-lit.sh
 }
 
 cs1-install-test-env () {
@@ -250,6 +263,7 @@ cs1-build-q6 () {
 [ -d .git ] && echo "You are in a git directory, please copy this file to a new directory where you plan to build the project!" && quit
 ensure-system-requirements
 offer-space-tools
+self-update
 
 echo "Repo size: ${#RepoList[*]}"
 echo "Current Dir: $CS1_DIR"
@@ -290,7 +304,8 @@ done;
 
 confirm "Build project for PC?" && buildPC=0;
 check-microblaze || confirm "Install Microblaze environment?" && cs1-install-mbcc
-check-microblaze && confirm "Build project for Q7?" && buildQ6=0
+#check-microblaze || echo "Microblaze is not installed, ask someone how to install it"
+check-microblaze && confirm "Build project for Q6?" && buildQ6=0
 if [ ! -d "gtest-1.7.0" -o ! -d "cpputest" ]; then
    confirm "Install Test Environment?" && cs1-install-test-env
 fi
