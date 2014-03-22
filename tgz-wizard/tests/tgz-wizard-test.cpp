@@ -53,8 +53,8 @@ TEST(TgzWizardTestGroup, testTgzWizard){
 
     if (pid == 0){  // child process
         #ifdef DEBUG
-        printf("[CHILD]");
-        printf("%s %s %s %s %s %s", tgzWizard, app, "-l", logs, "-t", tgz);
+            printf("[CHILD]");
+            printf("%s %s %s %s %s %s", tgzWizard, app, "-l", logs, "-t", tgz);
         #endif
 
         execl(tgzWizard, tgzWizard, app, "-l", logs, "-t", tgz, (char*)NULL);
@@ -62,8 +62,10 @@ TEST(TgzWizardTestGroup, testTgzWizard){
         wait(&status); 
         CHECK(0 == status);
 
-        printf(untarCmd);
-        system(untarCmd);       // untar int /logs
+        #ifdef DEBUG
+            printf(untarCmd);
+        #endif
+        system(untarCmd);       // untar in /logs
         
 
         int sizeSrc = getDirSize(testfiles);
