@@ -26,14 +26,20 @@ quit () {
 self-update () {
   if [ -f "./space-script/MANAGE_CS1.sh" ]; then
     cd ./space-script/
-    git-check "." || confirm "An update for this script may be available. Proceed?" && update=0
-    [ $update -eq 0 ] && git pull && rsync -vz --update MANAGE_CS1.sh ../MANAGE_CS1.sh
+    if git-check "."; then
+      if confirm "An update for this script may be available. Proceed?"; then
+        echo "UPDATING ..."
+        git pull && rsync -vz --update MANAGE_CS1.sh ../MANAGE_CS1.sh
+      fi
+    fi
     cd $CS1_DIR
   fi
 }
 
 git-check () {
-  return $(git --git-dir=$1/.git diff-index --quiet HEAD)
+  echo "Checking repo"
+  git --git-dir=$1/.git diff-index --quiet HEAD
+  #return $(git --git-dir=$1/.git rev-list HEAD...origin/master --count)
 }
 
 install-packages () {
@@ -51,7 +57,7 @@ check-installed () {
       echo >&2 "$item is not installed..."
       return_value=1
     }; done
-    return 0
+    return $return_value
 }
 
 check-package () {
@@ -62,7 +68,7 @@ check-master-branch () {
     [ $1 ] && gdirectory="--git-dir=$1/.git"
     branch_name="$(git ${gdirectory} symbolic-ref --short -q HEAD)"
     echo "Currently on branch: $branch_name"
-    if [ "$branch_name" != "master" ]; then 
+    if [ "$branch_name" != "master" ]; then
         confirm "This repo is on the '$branch_name' branch, are you sure you wish to continue?" && return 0 || return 1
     fi
     return 0
