@@ -162,6 +162,7 @@ cs1-build-commander () {
     echo -e "${red}Building Commander...${NC}"
     cd $CS1_DIR/space-commander
     check-master-branch || quit
+    mkdir -p ./bin ./lib ./include
     confirm-build-q6 && make buildQ6 || make buildBin
 }
 
@@ -169,39 +170,43 @@ cs1-build-netman () {
     echo "Building Netman..."
     cd $CS1_DIR/space-netman
     check-master-branch || quit
+    mkdir -p ./bin ./lib ./include
     confirm-build-q6 && make Q6 || make
 }
 
 cs1-build-watch-puppy () {
-    echo "Building Watch-Puppy"
-    cp $CS1_DIR/space-lib/shakespeare/inc/shakespeare.h $CS1_DIR/watch-puppy/lib/include
+    echo "Building Watch-Puppy..."
     cd $CS1_DIR/watch-puppy
+    mkdir -p ./bin ./lib/include ./include
+    cp $CS1_DIR/space-lib/shakespeare/inc/shakespeare.h $CS1_DIR/watch-puppy/include/
+    cp $CS1_DIR/space-lib/shakespeare/lib/libshakespeare* $CS1_DIR/watch-puppy/lib/
     check-master-branch || quit
     confirm-build-q6 && make buildQ6 || make buildBin
 }
 
 cs1-build-baby-cron () {
-    echo "Building baby-cron"
+    echo "Building baby-cron..."
     cd $CS1_DIR/baby-cron
     check-master-branch || quit
-    cp $CS1_DIR/space-lib/shakespeare/inc/shakespeare.h $CS1_DIR/baby-cron/lib/include
-    mkdir -p ./bin
+    mkdir -p ./bin ./lib ./include
+    cp $CS1_DIR/space-lib/shakespeare/inc/shakespeare.h $CS1_DIR/baby-cron/include/
+    cp $CS1_DIR/space-lib/shakespeare/lib/libshakespeare* $CS1_DIR/baby-cron/lib/
     confirm-build-q6 && make buildQ6 || make buildBin
 }
 
 cs1-build-space-updater () {
-    echo "Building space-updater"
+    echo "Building space-updater..."
     cd $CS1_DIR/space-updater
     check-master-branch || quit
-    mkdir -p ./bin
+    mkdir -p ./bin ./lib ./include
     confirm-build-q6 && make buildQ6 || make buildPC
 }
 
 cs1-build-space-updater-api () {
-    echo "Building space-updater-api"
+    echo "Building space-updater-api..."
     cd $CS1_DIR/space-updater-api
     check-master-branch || quit
-    mkdir -p ./bin
+    mkdir -p ./bin ./lib ./include
     confirm-build-q6 && make buildQ6 || make buildPC
 }
 
