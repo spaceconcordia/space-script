@@ -11,7 +11,7 @@ NC='\e[0m' # No Color
 project_name='https://github.com/spaceconcordia/'
 declare -a SysReqs=('git' 'g++' 'gcc' 'dpkg')
 declare -a Tools=('tmux' 'screen' 'minicom')
-declare -a RepoList=('acs' 'baby-cron' 'ground-commander' 'HE100-lib' 'mail_arc' 'space-commander' 'space-lib' 'space-jobs' 'space-netman' 'space-script' 'space-tools' 'space-timer-lib' 'space-updater' 'space-updater-api' 'SRT')
+declare -a RepoList=('acs' 'baby-cron' 'ground-commander' 'HE100-lib' 'mail_arc' 'space-commander' 'space-lib' 'space-jobs' 'space-netman' 'space-script' 'space-tools' 'space-timer-lib' 'space-updater' 'space-updater-api' 'SRT' 'watch-puppy')
 READ_DIR=$(readlink -f "$0")
 CS1_DIR=$(dirname "$READ_DIR")
 
@@ -122,6 +122,7 @@ cs1-install-test-env () {
         cp -r include/* $CS1_DIR/space-commander/include/
         cp lib/libCppUTest.a $CS1_DIR/space-commander/lib/
         cp lib/libCppUTestExt.a $CS1_DIR/space-commander/lib/
+        cd $CS1_dir
     fi
 }
 
@@ -155,8 +156,10 @@ cs1-build-netman () {
 
 cs1-build-watch-puppy () {
     echo "Building Watch-Puppy"
-    cp $CS1_DIR/space-lib/shakespeare/inc/shakespeare.h $CS1_DIR/watch-puppy/lib/include
     cd $CS1_DIR/watch-puppy
+    mkdir -p $CS1_DIR/watch-puppy/lib/include
+    mkdir -p $CS1_DIR/watch-puppy/bin
+    cp $CS1_DIR/space-lib/shakespeare/inc/shakespeare.h $CS1_DIR/watch-puppy/lib/include
     check-master-branch || quit
     confirm-build-q6 && make buildQ6 || make buildBin
 }
@@ -167,6 +170,14 @@ cs1-build-baby-cron () {
     check-master-branch || quit
     cp $CS1_DIR/space-lib/shakespeare/inc/shakespeare.h $CS1_DIR/baby-cron/lib/include
     mkdir -p ./bin
+    confirm-build-q6 && make buildQ6 || make buildBin
+}
+
+cs1-build-job-runner () {
+    echo "Building job-runner"
+    cd $CS1_DIR/space-jobs/job-runner
+    check-master-branch || quit
+    mkdir -p ./bin ./lib ./inc
     confirm-build-q6 && make buildQ6 || make buildBin
 }
 
@@ -211,6 +222,7 @@ cs1-build-pc () {
     cp $CS1_DIR/space-updater-api/bin/UpdaterServer $CS1_DIR/BUILD/PC/
     cp $CS1_DIR/space-updater/bin/PC-Updater $CS1_DIR/BUILD/PC/
     cp $CS1_DIR/baby-cron/bin/baby-cron $CS1_DIR/BUILD/PC/
+    cp $CS1_DIR/space-jobs/job-runner/bin/job-runner.x $CS1_DIR/BUILD/PC/
 
     cd $CS1_DIR
     echo 'Binaries left in $CS1_DIR/BUILD/PC'
@@ -240,6 +252,7 @@ cs1-build-q6 () {
     cp $CS1_DIR/space-updater-api/bin/UpdaterServer-Q6 $CS1_DIR/BUILD/Q6/
     cp $CS1_DIR/space-updater/bin/Updater-Q6 $CS1_DIR/BUILD/Q6/
     cp $CS1_DIR/baby-cron/bin/baby-cron $CS1_DIR/BUILD/Q6/
+    cp $CS1_DIR/space-jobs/job-runner/bin/job-runner-mbcc.x $CS1_DIR/BUILD/Q6/
     cp $CS1_DIR/space-script/Q6-rsync.sh $CS1_DIR/BUILD/Q6/
     cd $CS1_DIR/BUILD/Q6/
     tar -cvf $(date --iso)-Q6.tar.gz Q6-rsync.sh sat-mbcc watch-puppy baby-cron space-commanderQ6 UpdaterServer-Q6 Updater-Q6
