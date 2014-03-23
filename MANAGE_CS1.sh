@@ -20,8 +20,26 @@ set -e
 
 quit () {
   echo -e "${red}Exiting gracefully...${NC}"
-  echo 
   exit 1
+}
+
+self-update () {
+  if [ -f "./space-script/MANAGE_CS1.sh" ]; then
+    cd ./space-script/
+    if git-check "."; then
+      if confirm "An update for this script may be available. Proceed?"; then
+        echo "UPDATING ..."
+        git pull && rsync -vz --update MANAGE_CS1.sh ../MANAGE_CS1.sh
+      fi
+    fi
+    cd $CS1_DIR
+  fi
+}
+
+git-check () {
+  echo "Checking repo"
+  git --git-dir=$1/.git diff-index --quiet HEAD
+  #return $(git --git-dir=$1/.git rev-list HEAD...origin/master --count)
 }
 
 install-packages () {
@@ -39,7 +57,7 @@ check-installed () {
       echo >&2 "$item is not installed..."
       return_value=1
     }; done
-    return 0
+    return $return_value
 }
 
 check-package () {
@@ -50,7 +68,7 @@ check-master-branch () {
     [ $1 ] && gdirectory="--git-dir=$1/.git"
     branch_name="$(git ${gdirectory} symbolic-ref --short -q HEAD)"
     echo "Currently on branch: $branch_name"
-    if [ "$branch_name" != "master" ]; then 
+    if [ "$branch_name" != "master" ]; then
         confirm "This repo is on the '$branch_name' branch, are you sure you wish to continue?" && return 0 || return 1
     fi
     return 0
@@ -105,7 +123,8 @@ confirm () {
 }
 
 cs1-install-mbcc () {
-   cd $CS1_DIR/Microblaze && sh xsc-devkit-installer-lit.sh
+  echo "Microblaze install not supported yet... See admin for details"
+  #cd $CS1_DIR/Microblaze && sh xsc-devkit-installer-lit.sh
 }
 
 cs1-install-test-env () {
@@ -144,6 +163,7 @@ cs1-build-commander () {
     echo -e "${red}Building Commander...${NC}"
     cd $CS1_DIR/space-commander
     check-master-branch || quit
+    mkdir -p ./bin ./lib ./include
     confirm-build-q6 && make buildQ6 || make buildBin
 }
 
@@ -151,25 +171,27 @@ cs1-build-netman () {
     echo "Building Netman..."
     cd $CS1_DIR/space-netman
     check-master-branch || quit
+    mkdir -p ./bin ./lib ./include
     confirm-build-q6 && make Q6 || make
 }
 
 cs1-build-watch-puppy () {
-    echo "Building Watch-Puppy"
+    echo "Building Watch-Puppy..."
     cd $CS1_DIR/watch-puppy
-    mkdir -p $CS1_DIR/watch-puppy/lib/include
-    mkdir -p $CS1_DIR/watch-puppy/bin
-    cp $CS1_DIR/space-lib/shakespeare/inc/shakespeare.h $CS1_DIR/watch-puppy/lib/include
+    mkdir -p ./bin ./lib/include ./include
+    cp $CS1_DIR/space-lib/shakespeare/inc/shakespeare.h $CS1_DIR/watch-puppy/include/
+    cp $CS1_DIR/space-lib/shakespeare/lib/libshakespeare* $CS1_DIR/watch-puppy/lib/
     check-master-branch || quit
     confirm-build-q6 && make buildQ6 || make buildBin
 }
 
 cs1-build-baby-cron () {
-    echo "Building baby-cron"
+    echo "Building baby-cron..."
     cd $CS1_DIR/baby-cron
     check-master-branch || quit
-    cp $CS1_DIR/space-lib/shakespeare/inc/shakespeare.h $CS1_DIR/baby-cron/lib/include
-    mkdir -p ./bin
+    mkdir -p ./bin ./lib ./include
+    cp $CS1_DIR/space-lib/shakespeare/inc/shakespeare.h $CS1_DIR/baby-cron/include/
+    cp $CS1_DIR/space-lib/shakespeare/lib/libshakespeare* $CS1_DIR/baby-cron/lib/
     confirm-build-q6 && make buildQ6 || make buildBin
 }
 
@@ -182,18 +204,18 @@ cs1-build-job-runner () {
 }
 
 cs1-build-space-updater () {
-    echo "Building space-updater"
+    echo "Building space-updater..."
     cd $CS1_DIR/space-updater
     check-master-branch || quit
-    mkdir -p ./bin
+    mkdir -p ./bin ./lib ./include
     confirm-build-q6 && make buildQ6 || make buildPC
 }
 
 cs1-build-space-updater-api () {
-    echo "Building space-updater-api"
+    echo "Building space-updater-api..."
     cd $CS1_DIR/space-updater-api
     check-master-branch || quit
-    mkdir -p ./bin
+    mkdir -p ./bin ./lib ./include
     confirm-build-q6 && make buildQ6 || make buildPC
 }
 
@@ -263,6 +285,7 @@ cs1-build-q6 () {
 [ -d .git ] && echo "You are in a git directory, please copy this file to a new directory where you plan to build the project!" && quit
 ensure-system-requirements
 offer-space-tools
+self-update
 
 echo "Repo size: ${#RepoList[*]}"
 echo "Current Dir: $CS1_DIR"
@@ -303,7 +326,8 @@ done;
 
 confirm "Build project for PC?" && buildPC=0;
 check-microblaze || confirm "Install Microblaze environment?" && cs1-install-mbcc
-check-microblaze && confirm "Build project for Q7?" && buildQ6=0
+#check-microblaze || echo "Microblaze is not installed, ask someone how to install it"
+check-microblaze && confirm "Build project for Q6?" && buildQ6=0
 if [ ! -d "gtest-1.7.0" -o ! -d "cpputest" ]; then
    confirm "Install Test Environment?" && cs1-install-test-env
 fi

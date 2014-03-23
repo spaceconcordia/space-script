@@ -12,6 +12,7 @@
 #include <sys/wait.h>
 #include <string>
 #include <fileIO.h>
+#include "dirUtl.h"
 using namespace std;
 //************************************************************
 //************************************************************
@@ -37,9 +38,7 @@ TEST_GROUP(TgzWizardTestGroup)
         remove(tgz);
     }
 };
-//----------------------------------------------
-//  StartUpdate 
-//----------------------------------------------
+
 TEST(TgzWizardTestGroup, testTgzWizard){
     int pid = fork();
     int status = 0;
@@ -53,22 +52,26 @@ TEST(TgzWizardTestGroup, testTgzWizard){
     }
 
     if (pid == 0){  // child process
-        printf("[CHILD]");
-        printf("%s %s %s %s %s %s", tgzWizard, app, "-l", logs, "-t", tgz);
+        #ifdef DEBUG
+            printf("[CHILD]");
+            printf("%s %s %s %s %s %s", tgzWizard, app, "-l", logs, "-t", tgz);
+        #endif
+
         execl(tgzWizard, tgzWizard, app, "-l", logs, "-t", tgz, (char*)NULL);
     }else{
         wait(&status); 
         CHECK(0 == status);
 
-        printf(untarCmd);
-        system(untarCmd); 
+        #ifdef DEBUG
+            printf(untarCmd);
+        #endif
+        system(untarCmd);       // untar in /logs
         
-        struct stat srcSt;
-        stat(testfiles, &srcSt);
-        struct stat destSt;
-        stat(logs, &destSt);
 
-        CHECK(srcSt.st_size == destSt.st_size);
+        int sizeSrc = getDirSize(testfiles);
+        int sizeDest = getDirSize(logs);
+
+        CHECK(sizeDest == sizeSrc);
     }
 }
 
@@ -93,4 +96,43 @@ TEST(TgzWizardTestGroup, testExtractErrorWarning){
         // check that :: grep '(ERROR|WARNING)' errFile | wc -l   ==   meme grep allOtherFiles | wc -l
         
     }
+}
+
+
+
+
+TEST_GROUP(DirUtlTestGroup)
+{
+    void setup(){
+    }
+    void teardown(){
+    }
+};
+
+
+TEST(DirUtlTestGroup, testGetDirSize_SizeIsRight){
+    int size = getDirSize(testfiles);    
+    char duCmd[CMD_BUFFER] = {0};
+    sprintf(duCmd, "du -b %s", testfiles);
+
+    #ifdef DEBUG
+        printf("size of %s : %d\n", testfiles, size);
+    #endif
+
+    char cmdOut[CMD_BUFFER] = {0};
+    FILE *cmd = popen(duCmd,"r");
+
+    while (fgets(cmdOut, sizeof(cmdOut), cmd) != 0) {
+        /*...*/
+    }
+   
+    int sizeWithDuCmd = atoi(cmdOut); 
+    
+    pclose(cmd);
+    
+    #ifdef DEBUG
+        printf("%d == %d\n", size, sizeWithDuCmd);
+    #endif
+    CHECK(size == sizeWithDuCmd);
+
 }
