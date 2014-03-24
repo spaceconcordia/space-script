@@ -26,7 +26,7 @@ quit () {
 self-update () {
   if [ -f "./space-script/MANAGE_CS1.sh" ]; then
     cd ./space-script/
-    if git-check "."; then
+    if ! git-check "."; then
       if confirm "An update for this script may be available. Proceed?"; then
         echo "UPDATING ..."
         git pull && rsync -vz --update MANAGE_CS1.sh ../MANAGE_CS1.sh
@@ -138,10 +138,9 @@ cs1-install-test-env () {
         ./configure
         make
         make -f Makefile_CppUTestExt 
-        cp -r include/* $CS1_DIR/space-commander/include/
-        cp lib/libCppUTest.a $CS1_DIR/space-commander/lib/
-        cp lib/libCppUTestExt.a $CS1_DIR/space-commander/lib/
-        cd $CS1_dir
+        #cp -r include/* $CS1_DIR/space-commander/include/
+        #cp lib/libCppUTest.a $CS1_DIR/space-commander/lib/
+        #cp lib/libCppUTestExt.a $CS1_DIR/space-commander/lib/
     fi
 }
 
