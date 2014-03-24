@@ -11,7 +11,7 @@ NC='\e[0m' # No Color
 project_name='https://github.com/spaceconcordia/'
 declare -a SysReqs=('git' 'g++' 'gcc' 'dpkg')
 declare -a Tools=('tmux' 'screen' 'minicom')
-declare -a RepoList=('acs' 'baby-cron' 'ground-commander' 'HE100-lib' 'mail_arc' 'space-commander' 'space-lib' 'space-jobs' 'space-netman' 'space-script' 'space-tools' 'space-timer-lib' 'space-updater' 'space-updater-api' 'SRT')
+declare -a RepoList=('acs' 'baby-cron' 'ground-commander' 'HE100-lib' 'mail_arc' 'space-commander' 'space-lib' 'space-jobs' 'space-netman' 'space-script' 'space-tools' 'space-timer-lib' 'space-updater' 'space-updater-api' 'SRT' 'watch-puppy')
 READ_DIR=$(readlink -f "$0")
 CS1_DIR=$(dirname "$READ_DIR")
 
@@ -26,7 +26,7 @@ quit () {
 self-update () {
   if [ -f "./space-script/MANAGE_CS1.sh" ]; then
     cd ./space-script/
-    if git-check "."; then
+    if ! git-check "."; then
       if confirm "An update for this script may be available. Proceed?"; then
         echo "UPDATING ..."
         git pull && rsync -vz --update MANAGE_CS1.sh ../MANAGE_CS1.sh
