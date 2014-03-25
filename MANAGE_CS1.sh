@@ -69,7 +69,7 @@ check-master-branch () {
     branch_name="$(git ${gdirectory} symbolic-ref --short -q HEAD)"
     echo "Currently on branch: $branch_name"
     if [ "$branch_name" != "master" ]; then
-        confirm "This repo is on the '$branch_name' branch, are you sure you wish to continue?" && return 0 || return 1
+        confirm "Repository $1 is on the '$branch_name' branch, are you sure you wish to continue?" && return 0 || return 1
     fi
     return 0
 }
@@ -167,7 +167,7 @@ cs1-build-commander () {
 }
 
 cs1-build-netman () {
-    echo "Building Netman..."
+    echo -e "${red}Building Netman...${NC}"
     cd $CS1_DIR/space-netman
     check-master-branch || quit
     mkdir -p ./bin ./lib ./include
@@ -175,7 +175,7 @@ cs1-build-netman () {
 }
 
 cs1-build-watch-puppy () {
-    echo "Building Watch-Puppy..."
+    echo -e "${red}Building Watch-Puppy...${NC}"
     cd $CS1_DIR/watch-puppy
     mkdir -p ./bin ./lib/include ./include
     cp $CS1_DIR/space-lib/shakespeare/inc/shakespeare.h $CS1_DIR/watch-puppy/include/
@@ -185,7 +185,7 @@ cs1-build-watch-puppy () {
 }
 
 cs1-build-baby-cron () {
-    echo "Building baby-cron..."
+    echo -e "${red}Building Baby-Cron...${NC}"
     cd $CS1_DIR/baby-cron
     check-master-branch || quit
     mkdir -p ./bin ./lib ./include
@@ -195,7 +195,7 @@ cs1-build-baby-cron () {
 }
 
 cs1-build-job-runner () {
-    echo "Building job-runner"
+    echo -e "${red}Building Job-Runner...${NC}"
     cd $CS1_DIR/space-jobs/job-runner
     check-master-branch || quit
     mkdir -p ./bin ./lib ./inc
@@ -203,7 +203,7 @@ cs1-build-job-runner () {
 }
 
 cs1-build-space-updater () {
-    echo "Building space-updater..."
+    echo -e "${red}Building Space-Updater...${NC}"
     cd $CS1_DIR/space-updater
     check-master-branch || quit
     mkdir -p ./bin ./lib ./include
@@ -211,7 +211,7 @@ cs1-build-space-updater () {
 }
 
 cs1-build-space-updater-api () {
-    echo "Building space-updater-api..."
+    echo -e "${red}Building Space-Updater-API...${NC}"
     cd $CS1_DIR/space-updater-api
     check-master-branch || quit
     mkdir -p ./bin ./lib ./include
@@ -229,6 +229,7 @@ cs1-build-pc () {
 
     cs1-build-commander PC
     cs1-build-netman PC
+    #cs1-build-job-runner PC
     cs1-build-watch-puppy PC
     cs1-build-space-updater PC
     cs1-build-space-updater-api PC
@@ -239,11 +240,11 @@ cs1-build-pc () {
     cp $CS1_DIR/space-commander/bin/space-commander $CS1_DIR/BUILD/PC/
     cp $CS1_DIR/space-netman/bin/gnd $CS1_DIR/BUILD/PC/
     cp $CS1_DIR/space-netman/bin/sat $CS1_DIR/BUILD/PC/
+    #cp $CS1_DIR/space-jobs/job-runner/bin/job-runner $CS1_DIR/BUILD/PC/
     cp $CS1_DIR/watch-puppy/bin/watch-puppy $CS1_DIR/BUILD/PC/
     cp $CS1_DIR/space-updater-api/bin/UpdaterServer $CS1_DIR/BUILD/PC/
     cp $CS1_DIR/space-updater/bin/PC-Updater $CS1_DIR/BUILD/PC/
     cp $CS1_DIR/baby-cron/bin/baby-cron $CS1_DIR/BUILD/PC/
-    cp $CS1_DIR/space-jobs/job-runner/bin/job-runner.x $CS1_DIR/BUILD/PC/
 
     cd $CS1_DIR
     echo 'Binaries left in $CS1_DIR/BUILD/PC'
@@ -259,6 +260,7 @@ cs1-build-q6 () {
 
     cs1-build-commander Q6
     cs1-build-netman Q6
+    #cs1-build-job-runner Q6
     cs1-build-watch-puppy Q6
     cs1-build-space-updater Q6
     cs1-build-space-updater-api Q6
@@ -269,11 +271,11 @@ cs1-build-q6 () {
     cp $CS1_DIR/space-commander/bin/space-commanderQ6 $CS1_DIR/BUILD/Q6/
     cp $CS1_DIR/space-netman/bin/gnd-mbcc $CS1_DIR/BUILD/Q6/
     cp $CS1_DIR/space-netman/bin/sat-mbcc $CS1_DIR/BUILD/Q6/sat
+    #cp $CS1_DIR/space-jobs/job-runner/bin/job-runner-mbcc $CS1_DIR/BUILD/Q6/
     cp $CS1_DIR/watch-puppy/bin/watch-puppy $CS1_DIR/BUILD/Q6/
     cp $CS1_DIR/space-updater-api/bin/UpdaterServer-Q6 $CS1_DIR/BUILD/Q6/
     cp $CS1_DIR/space-updater/bin/Updater-Q6 $CS1_DIR/BUILD/Q6/
     cp $CS1_DIR/baby-cron/bin/baby-cron $CS1_DIR/BUILD/Q6/
-    cp $CS1_DIR/space-jobs/job-runner/bin/job-runner-mbcc.x $CS1_DIR/BUILD/Q6/
     cp $CS1_DIR/space-script/Q6-rsync.sh $CS1_DIR/BUILD/Q6/
     cd $CS1_DIR/BUILD/Q6/
     tar -cvf $(date --iso)-Q6.tar.gz Q6-rsync.sh sat-mbcc watch-puppy baby-cron space-commanderQ6 UpdaterServer-Q6 Updater-Q6
