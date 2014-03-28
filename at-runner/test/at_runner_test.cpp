@@ -13,7 +13,8 @@ class At_Runner_Test : public ::testing::Test
 /* bad test almost guaranteed to pass */
 TEST_F(At_Runner_Test, AddJob)
 {
-    int result = addJob("201503212330","touch testfile");
+    //int result = addJob("201503212330","/usr/bin/touch testfile");
+    int result = addJob("201403272019","/bin/echo $(date --iso) >> test.log");
     ASSERT_EQ(
         0,
         result 

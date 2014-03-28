@@ -17,7 +17,8 @@
  */
 
 #define CMD_BUFFER_LEN 190
-#define AT_RUNNER "/home/spaceconcordia/CONSAT1/space-script/at-runner/at-runner.sh"
+#define AT_RUNNER "/media/Data/Development/Space/CONSAT1/space-script/at-runner/at-runner.sh"
+//#define AT_RUNNER "/home/spaceconcordia/CONSAT1/space-script/at-runner/at-runner.sh"
 
 #include <stdlib.h>
 #include <string>
