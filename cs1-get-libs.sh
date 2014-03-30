@@ -15,6 +15,14 @@ set -e # exit on errors or failed steps
 cd ..
 CS1=$(pwd)
 NETMAN_DIR="$CS1/space-netman"
+SHAKESPEARE_DIR="$CS1/space-lib/shakespeare"
+HELIUM_DIR="$CS1/HE100-lib/C"
+TIMER_DIR="$CS1/space-timer-lib"
+COMMANDER_DIR="$CS1/space-commander"
+WATCHPUPPY_DIR="$CS1/watch-puppy"
+BABYCRON_DIR="$CS1/baby-cron"
+JOBRUNNER_DIR="$CS1/space-jobs/job-runner"
+
 echo "CS1 Dir: $CS1"
 
 if [ "$#" -ne 1 ]; then
@@ -64,52 +72,63 @@ setup-netman () {
 
 build-shakespeare () {
   echo 'Building shakespeare...'
-  cd $CS1/space-lib/shakespeare
+  cd $SHAKESPEARE_DIR
   check-master-branch || exit 1
-  mkdir -p $CS1/space-lib/shakespeare/lib
+  mkdir -p $SHAKESPEARE_DIR/lib
   echo "cd: \c"
   pwd
-  cp inc/shakespeare.h $NETMAN_DIR/lib/include
+  cp inc/shakespeare.h $NETMAN_DIR/lib/include/
+  cp inc/shakespeare.h $HELIUM_DIR/inc/
+  cp inc/shakespeare.h $TIMER_DIR/inc/
+  cp inc/shakespeare.h $COMMANDER_DIR/include/
+  cp inc/shakespeare.h $WATCHPUPPY_DIR/lib/include/
+  cp inc/shakespeare.h $BABYCRON_DIR/include/
+  cp inc/shakespeare.h $JOBRUNNER_DIR/inc/
+
   confirm-build-q6 && sh mbcc-compile-lib-static.sh || sh x86-compile-lib-static.sh
-  cp lib/libshakespeare.a $NETMAN_DIR/lib
+
+  cp lib/libshakespeare* $NETMAN_DIR/lib/
+  cp lib/libshakespeare* $HELIUM_DIR/lib/
+  cp lib/libshakespeare* $TIMER_DIR/lib/
+  cp lib/libshakespeare* $COMMANDER_DIR/lib/
+  cp lib/libshakespeare* $WATCHPUPPY_DIR/lib/
+  cp lib/libshakespeare* $BABYCRON_DIR/lib/
+  cp lib/libshakespeare* $JOBRUNNER_DIR/lib/
 }
 
 build-helium () {
-  # Builds libhe100.a 
   echo 'Building HE-100 Library...'
-  cd $CS1/HE100-lib/C
+  cd $HELIUM_DIR
   check-master-branch || exit 1
   mkdir -p $CS1/HE100-lib/C/lib
   echo "cd: \c" 
   pwd
-  confirm-build-q6 && sh mbcc-compile-lib-static-cpp.sh || sh x86-compile-lib-static-cpp.sh
-  cp lib/libhe100* $NETMAN_DIR/lib
-  cp inc/SC_he100.h $NETMAN_DIR/lib/include
-  cd $NETMAN_DIR/lib 
-  #mv libhe100* $NETMAN_DIR/lib # why this line
+  cp $COMMANDER_DIR/include/Net2Com.h $HELIUM_DIR/inc/
+  cp $COMMANDER_DIR/include/NamedPipe.h $HELIUM_DIR/inc/  confirm-build-q6 && sh mbcc-compile-lib-static-cpp.sh || sh x86-compile-lib-static-cpp.sh
+  cp lib/libhe100* $NETMAN_DIR/lib/
+  cp inc/SC_he100.h $NETMAN_DIR/lib/include/
 }
 
 build-timer () {
-  # Timer library
   echo 'Building timer Library...'
-  cd $CS1/space-timer-lib 
+  cd $TIMER_DIR
   check-master-branch || exit 1
   mkdir -p $CS1/space-timer-lib/lib
-  echo "cd: \c" 
+  echo "cd: \c"
   pwd
   confirm-build-q6 && sh mbcc-compile-lib-static-cpp.sh || sh x86-compile-lib-static-cpp.sh
   cp lib/libtimer* $NETMAN_DIR/lib
+  cp lib/libtimer* $HELIUM_DIR/lib
   cp inc/timer.h $NETMAN_DIR/lib/include
 }
 
 build-commander () {
-  # namedpipe & commander
   echo 'Building Namedpipes and commander libs...'
-  cd $CS1/space-commander
+  cd $COMMANDER_DIR
   check-master-branch || exit 1
   mkdir -p $CS1/space-commander/lib
   mkdir -p $CS1/space-commander/bin
-  echo "cd: \c" 
+  echo "cd: \c"
   pwd
   cp include/Net2Com.h $NETMAN_DIR/lib/include
   cp include/NamedPipe.h $NETMAN_DIR/lib/include
@@ -128,11 +147,11 @@ build-commander () {
   rm staticlibs.tar
 }
 
-setup-netman
+#setup-netman
 build-shakespeare
-build-helium
 build-timer
-build-commander
+build-helium
+#build-commander
 
 cd $NETMAN_DIR/lib
 ls -al
