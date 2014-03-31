@@ -202,8 +202,8 @@ cs1-build-netman () {
 cs1-build-watch-puppy () {
     echo -e "${green}Building Watch-Puppy...${NC}"
     cd $CS1_DIR/watch-puppy
-    mkdir -p ./bin ./lib/include ./include
-    cp $CS1_DIR/space-lib/shakespeare/inc/shakespeare.h $CS1_DIR/watch-puppy/include/
+    mkdir -p ./bin ./lib/include
+    cp $CS1_DIR/space-lib/shakespeare/inc/shakespeare.h $CS1_DIR/watch-puppy/inc/
     cp $CS1_DIR/space-lib/shakespeare/lib/libshakespeare* $CS1_DIR/watch-puppy/lib/
     check-master-branch || fail "Cannot build project without"
     confirm-build-q6 && make buildQ6 || make buildBin
