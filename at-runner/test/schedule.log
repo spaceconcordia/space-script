@@ -1,1 +1,7 @@
-warning: commands will be executed using /bin/sh Cannot open input file touch: No such file or directory touch
+warning: commands will be executed using /bin/sh job 6 at Sat Mar 21 23:30:00 2015 /usr/bin/touch
+warning: commands will be executed using /bin/sh Cannot open input file /usr/bin/echo: No such file or directory /usr/bin/echo
+warning: commands will be executed using /bin/sh job 8 at Sat Mar 21 23:30:00 2015 /bin/echo
+warning: commands will be executed using /bin/sh job 9 at Thu Mar 27 20:19:00 2014 /bin/echo
+job 27 at Thu Mar 27 20:19:00 2014 /bin/echo 2014-03-28
+job 28 at Thu Mar 27 20:19:00 2014 /bin/echo 2014-03-28
+job 29 at Thu Mar 27 20:19:00 2014 /bin/echo 2014-03-28
