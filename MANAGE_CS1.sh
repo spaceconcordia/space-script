@@ -381,6 +381,7 @@ cs1-build-q6 () {
     cp $CS1_DIR/space-script/Q6-rsync.sh $CS1_DIR/BUILD/Q6/
 
     cp $CS1_DIR/space-script/system-test.sh $CS1_DIR/BUILD/Q6/
+    cp $CS1_DIR/space-script/Q6_helium100.sh $CS1_DIR/BUILD/Q6/
     cp $CS1_DIR/space-script/at-runner/at-runner.sh $CS1_DIR/BUILD/Q6/
     
     cp $CS1_DIR/space-script/boot-drivers/ad799x.sh $CS1_DIR/BUILD/Q6/
