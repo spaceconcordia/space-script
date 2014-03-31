@@ -93,5 +93,3 @@ echo -n -e \\xFF > /home/pipes/Inet-w-com-r
 echo -n -e \\x01 > /home/pipes/Inet-w-com-r
 echo -n -e \\x21 > /home/pipes/Dnet-w-com-r
 echo -n -e \\xFF > /home/pipes/Inet-w-com-r
-
-
