@@ -137,6 +137,7 @@ confirm () {
 }
 
 cs1-install-mbcc () {
+  offer-space-tools
   echo "Microblaze install not supported yet... See admin for details"
   #cd $CS1_DIR/Microblaze && sh xsc-devkit-installer-lit.sh
 }
@@ -251,7 +252,7 @@ cs1-build-shakespeare () {
   cp inc/shakespeare.h $HELIUM_DIR/inc/
   cp inc/shakespeare.h $TIMER_DIR/inc/
   cp inc/shakespeare.h $COMMANDER_DIR/include/
-  cp inc/shakespeare.h $WATCHPUPPY_DIR/lib/include/
+  cp inc/shakespeare.h $WATCHPUPPY_DIR/inc/
   cp inc/shakespeare.h $BABYCRON_DIR/include/
   cp inc/shakespeare.h $JOBRUNNER_DIR/inc/
 
@@ -299,7 +300,7 @@ cs1-build-timer () {
 }
 
 ensure-directories () {
-  declare -a REQDIR_LIST=("$NETMAN_DIR/lib/include/" "$HELIUM_DIR/inc/" "$TIMER_DIR/inc/" "$BABYCRON_DIR/include/" "$JOBRUNNER_DIR/inc/" "$COMMANDER_DIR/include/" "$WATCHPUPPY_DIR/lib/include/" "$HELIUM_DIR/lib/" "$TIMER_DIR/lib/" "$COMMANDER_DIR/lib/" "$WATCHPUPPY_DIR/lib/" "$BABYCRON_DIR/lib/" "$BABYCRON_DIR/lib/" "$JOBRUNNER_DIR/lib/" "" "$NETMAN_DIR/lib/include" "$NETMAN_DIR/bin" )
+  declare -a REQDIR_LIST=("$NETMAN_DIR/lib/include/" "$HELIUM_DIR/inc/" "$TIMER_DIR/inc/" "$BABYCRON_DIR/include/" "$JOBRUNNER_DIR/inc/" "$COMMANDER_DIR/include/" "$WATCHPUPPY_DIR/lib/include/" "$HELIUM_DIR/lib/" "$TIMER_DIR/lib/" "$COMMANDER_DIR/lib/" "$WATCHPUPPY_DIR/lib/" "$WATCHPUPPY_DIR/inc/" "$BABYCRON_DIR/lib/" "$BABYCRON_DIR/lib/" "$JOBRUNNER_DIR/lib/" "$NETMAN_DIR/lib/include" "$NETMAN_DIR/bin")
   for item in ${REQDIR_LIST[*]}; do 
     mkdir -p $item
     #[ ! -d $item ] && fail "$item does not exist and/or was not created properly"
@@ -341,7 +342,7 @@ cs1-build-pc () {
     cp $CS1_DIR/baby-cron/bin/baby-cron $CS1_DIR/BUILD/PC/
 
     cd $CS1_DIR
-    echo 'Binaries left in $CS1_DIR/BUILD/PC'
+    echo -e "${purple}Binaries left in $CS1_DIR/BUILD/PC${NC}"
 }
 
 cs1-build-q6 () {
@@ -396,7 +397,6 @@ cs1-build-q6 () {
 
 [ -d .git ] && fail "You are in a git directory, please copy this file to a new directory where you plan to build the project!"
 ensure-system-requirements
-offer-space-tools
 self-update
 
 echo "Repo size: ${#RepoList[*]}"
