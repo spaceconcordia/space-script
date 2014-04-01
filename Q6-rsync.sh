@@ -28,21 +28,27 @@ mkdir -p /home/apps/current/space-netman
 #cp Updater-Q6 /home/apps/current/updater
 #cp sat /home/apps/current/space-netman/sat
 
+# copy device drivers
+# rsync -av --remove-source-files ad799x.ko /path/to/driver/location
+# rsync -av --remove-source-files hmc5843.ko
+#rtc-ds3232.ko
+#ina2xx.ko
+
 rsync -av --remove-source-files space-commanderQ6 $exec_dir/space-commander/space-commander
 rsync -av --remove-source-files watch-puppy $exec_dir/watch-puppy/watch-puppy
 rsync -av --remove-source-files baby-cron $exec_dir/baby-cron/baby-cron
-rsync -av --remove-source-files sat-mbcc $exec_dir/space-netman/sat
+rsync -av --remove-source-files sat $exec_dir/space-netman/sat
 rsync -av --remove-source-files UpdaterServer-Q6 $exec_dir/space-updater-api/
 rsync -av --remove-source-files Updater-Q6 $exec_dir/space-updater/
 rsync -av --remove-source-files at-runner.sh /usr/bin/
 rsync -av --remove-source-files ad799x.sh  /etc/init.d/
-rsync -av --remove-source-files hmc5842.sh  /etc/init.d/
+rsync -av --remove-source-files hmc5843.sh  /etc/init.d/
 rsync -av --remove-source-files ina2xx.sh  /etc/init.d/
 rsync -av --remove-source-files rtc-ds3232e.sh  /etc/init.d/
 # Copy test scripts
-rsync -av --remove-source-files Q6-helium100.sh /home/test
+rsync -av --remove-source-files Q6_helium100.sh /home/test
 rsync -av --remove-source-files system-test.sh /home/test
-rsync -av --remove-source-files start.sh /home/test
+#rsync -av --remove-source-files start.sh /home/test
 rsync -av --remove-source-files AwkTest.awk /home/test
 rsync -av --remove-source-files RunAwkTest.sh /home/test
 

@@ -391,12 +391,12 @@ cs1-build-q6 () {
     cp $SPACESCRIPT_DIR/at-runner/at-runner.sh $CS1_DIR/BUILD/Q6/
 
     cp $SPACESCRIPT_DIR/boot-drivers/ad799x.sh $CS1_DIR/BUILD/Q6/
-    cp $SPACESCRIPT_DIR/boot-drivers/hmc5842.sh $CS1_DIR/BUILD/Q6/
+    cp $SPACESCRIPT_DIR/boot-drivers/hmc5843.sh $CS1_DIR/BUILD/Q6/
     cp $SPACESCRIPT_DIR/boot-drivers/ina2xx.sh $CS1_DIR/BUILD/Q6/
     cp $SPACESCRIPT_DIR/boot-drivers/rtc-ds3232e.sh $CS1_DIR/BUILD/Q6/
 
     cd $CS1_DIR/BUILD/Q6/
-    tar -cvf $(date --iso)-Q6.tar.gz Q6-rsync.sh sat watch-puppy baby-cron space-commanderQ6 UpdaterServer-Q6 Updater-Q6
+    tar -cvf $(date --iso)-Q6.tar.gz Q6-rsync.sh sat at-runner.sh watch-puppy baby-cron space-commanderQ6 UpdaterServer-Q6 Updater-Q6 ad799x.sh hmc5842.sh ina2xx.sh rtc-ds3232e.sh system-test.sh
     cd $CS1_DIR
     echo 'Binaries left in $CS1_DIR/BUILD/Q6'
     echo -e "${purple}$(date --iso)-Q6.tar.gz left in $CS1_DIR/BUILD/Q6, transfer it to Q6, tar -xvf it, and run Q6-rsync.sh${NC}"

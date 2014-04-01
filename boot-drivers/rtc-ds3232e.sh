@@ -1,6 +1,6 @@
 #! /bin/sh
-if lsmod | grep "$MODULE" &> /dev/null ; then
-    echo "$MODULE is loaded!"
+if lsmod | grep rtc-ds3232 &> /dev/null ; then
+    echo "rtc-ds3232 is loaded!"
     exit 0
 else
     # Realtime clock

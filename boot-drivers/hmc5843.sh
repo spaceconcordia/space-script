@@ -1,6 +1,6 @@
 #! /bin/sh
 if lsmod | grep "hmc5842" &> /dev/null ; then
-    echo "$MODULE is loaded!"
+    echo "hmc5842 is already loaded!"
     exit 0
 else
     modprobe hmc5843
