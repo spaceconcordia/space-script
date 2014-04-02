@@ -374,29 +374,33 @@ cs1-build-q6 () {
     cs1-build-baby-cron Q6
 
     #COLLECT FILES
-    mkdir -p $CS1_DIR/BUILD/Q6
+    SCRIPT_FOLDER="$CS1_DIR/BUILD/Q6/scripts/"
+    BINARY_FOLDER="$CS1_DIR/BUILD/Q6/binaries/"
+    mkdir -p "$SCRIPT_FOLDER"
+    mkdir -p "$BINARY_FOLDER"
     ls
-    cp $COMMANDER_DIR/bin/space-commanderQ6 $CS1_DIR/BUILD/Q6/
-    cp $NETMAN_DIR/bin/gnd-mbcc $CS1_DIR/BUILD/Q6/
-    cp $NETMAN_DIR/bin/sat-mbcc $CS1_DIR/BUILD/Q6/sat
+    cp $COMMANDER_DIR/bin/space-commanderQ6 $BINARY_FOLER/
+    cp $NETMAN_DIR/bin/gnd-mbcc $BINARY_FOLER/
+    cp $NETMAN_DIR/bin/sat-mbcc $BINARY_FOLER/sat
     #cp $CS1_DIR/space-jobs/job-runner/bin/job-runner-mbcc $CS1_DIR/BUILD/Q6/
-    cp $WATCHPUPPY_DIR/bin/watch-puppy $CS1_DIR/BUILD/Q6/
-    cp $CS1_DIR/space-updater-api/bin/UpdaterServer-Q6 $CS1_DIR/BUILD/Q6/
-    cp $CS1_DIR/space-updater/bin/Updater-Q6 $CS1_DIR/BUILD/Q6/
-    cp $BABYCRON_DIR/bin/baby-cron $CS1_DIR/BUILD/Q6/
-    cp $SPACESCRIPT_DIR/Q6-rsync.sh $CS1_DIR/BUILD/Q6/
+    cp $WATCHPUPPY_DIR/bin/watch-puppy $BINARY_FOLER/
+    cp $CS1_DIR/space-updater-api/bin/UpdaterServer-Q6 $BINARY_FOLER/
+    cp $CS1_DIR/space-updater/bin/Updater-Q6 $BINARY_FOLER/
+    cp $BABYCRON_DIR/bin/baby-cron $BINARY_FOLER/
+    cp $SPACESCRIPT_DIR/Q6-rsync.sh $BINARY_FOLER/
 
-    cp $SPACESCRIPT_DIR/system-test.sh $CS1_DIR/BUILD/Q6/
-    cp $SPACESCRIPT_DIR/Q6_helium100.sh $CS1_DIR/BUILD/Q6/
-    cp $SPACESCRIPT_DIR/at-runner/at-runner.sh $CS1_DIR/BUILD/Q6/
+    cp $SPACESCRIPT_DIR/system-test.sh $SCRIPT_FOLER/
+    cp $SPACESCRIPT_DIR/Q6_helium100.sh $SCRIPT_FOLER/    
+    cp $SPACESCRIPT_DIR/at-runner/at-runner.sh $SCRIPT_FOLER/
 
-    cp $SPACESCRIPT_DIR/boot-drivers/ad799x.sh $CS1_DIR/BUILD/Q6/
-    cp $SPACESCRIPT_DIR/boot-drivers/hmc5843.sh $CS1_DIR/BUILD/Q6/
-    cp $SPACESCRIPT_DIR/boot-drivers/ina2xx.sh $CS1_DIR/BUILD/Q6/
-    cp $SPACESCRIPT_DIR/boot-drivers/rtc-ds3232e.sh $CS1_DIR/BUILD/Q6/
+    cp $SPACESCRIPT_DIR/boot-drivers/ad799x.sh $SCRIPT_FOLER/
+    cp $SPACESCRIPT_DIR/boot-drivers/hmc5843.sh $SCRIPT_FOLER/
+    cp $SPACESCRIPT_DIR/boot-drivers/ina2xx.sh $SCRIPT_FOLER/
+    cp $SPACESCRIPT_DIR/boot-drivers/rtc-ds3232e.sh $SCRIPT_FOLER/
 
     cd $CS1_DIR/BUILD/Q6/
-    tar -cvf $(date --iso)-Q6.tar.gz Q6-rsync.sh sat at-runner.sh watch-puppy baby-cron space-commanderQ6 UpdaterServer-Q6 Updater-Q6 ad799x.sh hmc5842.sh ina2xx.sh rtc-ds3232e.sh system-test.sh
+    #tar -cvf $(date --iso)-Q6.tar.gz Q6-rsync.sh sat at-runner.sh watch-puppy baby-cron space-commanderQ6 UpdaterServer-Q6 Updater-Q6 ad799x.sh hmc5842.sh ina2xx.sh rtc-ds3232e.sh system-test.sh
+    tar -cvf $(date --iso)-Q6.tar.gz $SCRIPT_FOLER/* $BINARY_FOLER/*
     cd $CS1_DIR
     echo 'Binaries left in $CS1_DIR/BUILD/Q6'
     echo -e "${purple}$(date --iso)-Q6.tar.gz left in $CS1_DIR/BUILD/Q6, transfer it to Q6, tar -xvf it, and run Q6-rsync.sh${NC}"
