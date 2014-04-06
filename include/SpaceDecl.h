@@ -21,5 +21,6 @@
 #define CS1_PIPES           "/home/pipes"
 #define CS1_WATCH_PUPPY_PID "/home/pids/watch-puppy.pid"
 
+#define CS1_MAX_PATH_LENGTH 150
 
 #endif
