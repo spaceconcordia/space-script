@@ -80,7 +80,8 @@ check-package () {
 
 check-master-branch () {
     [ $1 ] && gdirectory="--git-dir=$1/.git"
-    branch_name="$(git ${gdirectory} symbolic-ref --short -q HEAD)"
+    #branch_name="$(git ${gdirectory} symbolic-ref --short -q HEAD)" # short not available on all versions? temporary hack below.
+    branch_name="$(git ${gdirectory} symbolic-ref -q HEAD | sed 's|refs\/heads\/||g' )" 
     echo "Currently on branch: $branch_name"
     if [ "$branch_name" != "master" ]; then
         confirm "Repository $1 is on the '$branch_name' branch, are you sure you wish to continue?" && return 0 || return 1
