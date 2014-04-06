@@ -5,11 +5,10 @@
 
 usage () { 
   echo "Usage: at-runner.sh [time]" 
-  echo "e.g. at-runner.sh 201403231723 test.sh at-runner.sh" 
+  echo "e.g. at-runner.sh 201403231723 test.sh --export text.csv" 
 }
 
 quit () {
-  echo "Exiting gracefully..."
   exit 0
 }
 
@@ -17,17 +16,17 @@ quitbad () {
   exit 1
 }
 
-if [ $1 ] && [ $2 ] ; then
+if [ ! $# -eq 0 ] ; then
     attime=$1
-    script=$2
+    shift
+    for arg in $@; do command="$command $arg"; done
 else
     usage 
     quitbad
 fi;
 
-# sed or awk or grep to strip out warning: commands will be executed using /bin/sh
-output="$( at -t $attime -f $script 2>&1) $script"
-stupidwarning="warning\: commands will be executed using \/bin\/sh "
-echo $output > schedule.log
-#echo "sed -e "s/$stupidwarning//g" $output >> schedule.log"
-#sed -e "s/$stupidwarning//g" $output > schedule.log
+# [-t] time in iso format
+# [tail -n +2] remove the following message: "warning: commands will be executed using /bin/sh"
+output="$( echo $command | /usr/bin/at -t $attime 2>&1 | tail -n +2) $command"
+echo $output >> schedule.log
+quit

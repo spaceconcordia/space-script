@@ -1,0 +1,3 @@
+*.o
+*.a
+at_runner_test
