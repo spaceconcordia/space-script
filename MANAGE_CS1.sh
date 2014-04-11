@@ -16,6 +16,7 @@ CS1_DIR=$(dirname "$READ_DIR")
 NETMAN_DIR="$CS1_DIR/space-netman"
 SHAKESPEARE_DIR="$CS1_DIR/space-lib/shakespeare"
 HELIUM_DIR="$CS1_DIR/HE100-lib/C"
+CHECKSUM_DIR="$CS1_DIR/space-lib/checksum"
 TIMER_DIR="$CS1_DIR/space-timer-lib"
 COMMANDER_DIR="$CS1_DIR/space-commander"
 WATCHPUPPY_DIR="$CS1_DIR/watch-puppy"
@@ -240,6 +241,21 @@ cs1-build-helium () {
   cp $HELIUM_DIR/inc/SC_he100.h $NETMAN_DIR/lib/include/;
 }
 
+cs1-build-fletcher () {
+  echo -e "${green}Building Fletcher Checksum Library...${NC}"
+  cd $CHECKSUM_DIR
+  check-master-branch || fail "Cannot build project without"
+  mkdir -p $CHECKSUM_DIR/lib
+  confirm-build-q6 && sh mbcc-compile-lib-static.sh || sh x86-compile-lib-static.sh
+  cp $CHECKSUM_DIR/lib/libfletcher* $NETMAN_DIR/lib/;
+  cp $CHECKSUM_DIR/lib/libfletcher* $HELIUM_DIR/lib/;
+  cp $CHECKSUM_DIR/lib/libfletcher* $COMMANDER_DIR/lib/;
+  cp $CHECKSUM_DIR/inc/fletcher.h $NETMAN_DIR/lib/include/;
+  cp $CHECKSUM_DIR/inc/fletcher.h $HELIUM_DIR/inc/;
+  cp $CHECKSUM_DIR/inc/fletcher.h $COMMANDER_DIR/include/;
+
+}
+
 cs1-build-job-runner () {
     echo -e "${green}Building Job-Runner...${NC}"
     cd $CS1_DIR/space-jobs/job-runner
@@ -259,7 +275,7 @@ cs1-build-jobs () {
       #cp $SHAKESPEARE_DIR/inc/shakespeare.h include/
       #cp $SHAKESPEARE_DIR/lib/libshakespeare* lib/
       confirm-build-q6 && make buildQ6 || make buildBin
-      cp bin/* $UPLOAD_FOLDER/
+      cp bin/* $UPLOAD_FOLDER/jobs/
       cd $JOBS_DIR
     done
 }
@@ -325,7 +341,7 @@ cs1-build-timer () {
 }
 
 ensure-directories () {
-  declare -a REQDIR_LIST=("$NETMAN_DIR/lib/include/" "$HELIUM_DIR/inc/" "$TIMER_DIR/inc/" "$BABYCRON_DIR/include/" "$JOBRUNNER_DIR/inc/" "$COMMANDER_DIR/include/" "$WATCHPUPPY_DIR/lib/include/" "$HELIUM_DIR/lib/" "$TIMER_DIR/lib/" "$COMMANDER_DIR/lib/" "$WATCHPUPPY_DIR/lib/" "$WATCHPUPPY_DIR/inc/" "$BABYCRON_DIR/lib/" "$BABYCRON_DIR/lib/" "$JOBRUNNER_DIR/lib/" "$NETMAN_DIR/lib/include" "$NETMAN_DIR/bin" "$UPLOAD_FOLDER")
+  declare -a REQDIR_LIST=("$NETMAN_DIR/lib/include/" "$HELIUM_DIR/inc/" "$TIMER_DIR/inc/" "$BABYCRON_DIR/include/" "$JOBRUNNER_DIR/inc/" "$COMMANDER_DIR/include/" "$WATCHPUPPY_DIR/lib/include/" "$HELIUM_DIR/lib/" "$TIMER_DIR/lib/" "$COMMANDER_DIR/lib/" "$WATCHPUPPY_DIR/lib/" "$WATCHPUPPY_DIR/inc/" "$BABYCRON_DIR/lib/" "$BABYCRON_DIR/lib/" "$JOBRUNNER_DIR/lib/" "$NETMAN_DIR/lib/include" "$NETMAN_DIR/bin" "$UPLOAD_FOLDER/jobs")
   for item in ${REQDIR_LIST[*]}; do
     mkdir -p $item
     #[ ! -d $item ] && fail "$item does not exist and/or was not created properly"
@@ -340,6 +356,7 @@ cs1-build-pc () {
     #libraries
     cs1-build-timer PC
     cs1-build-shakespeare PC
+    cs1-build-fletcher PC
     cs1-build-helium PC
 
     #executables
@@ -374,6 +391,7 @@ cs1-build-q6 () {
     #libraries
     cs1-build-timer Q6
     cs1-build-shakespeare Q6
+    cs1-build-fletcher Q6
     cs1-build-helium Q6
 
     #executables

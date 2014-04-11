@@ -46,6 +46,9 @@ rsync -av --remove-source-files Updater-Q6 $exec_dir/space-updater/
 rsync -av --remove-source-files at-runner.sh /usr/bin/
 rsync -av --remove-source-files job-runner-mbcc /usr/bin/
 
+# copy config files
+rsync -av --remove-source-files profile /etc/profile
+
 # copy jobs
 rsync -av --remove-source-files jobs/ /home/apps/current/jobs/
 
