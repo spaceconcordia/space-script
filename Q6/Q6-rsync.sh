@@ -47,8 +47,7 @@ rsync -av --remove-source-files at-runner.sh /usr/bin/
 rsync -av --remove-source-files job-runner-mbcc /usr/bin/
 
 # copy jobs
-rsync -av --remove-source-files read-pwr-ina219 /home/apps/current/jobs/
-rsync -av --remove-source-files read-pwr-ad7998 /home/apps/current/jobs/
+rsync -av --remove-source-files jobs/ /home/apps/current/jobs/
 
 # copy driver start scripts
 rsync -av --remove-source-files ad799x.sh /etc/init.d/
