@@ -313,7 +313,7 @@ cs1-build-space-updater () {
     cd $CS1_DIR/space-updater
     check-master-branch || fail "Cannot build project without"
     mkdir -p ./bin ./lib ./include
-    confirm-build-q6 && make buildQ6 || make buildPC
+    confirm-build-q6 && make buildQ6 || make buildBin
 }
 
 cs1-build-space-updater-api () {
@@ -321,7 +321,7 @@ cs1-build-space-updater-api () {
     cd $CS1_DIR/space-updater-api
     check-master-branch || fail "Cannot build project without"
     mkdir -p ./bin ./lib ./include
-    confirm-build-q6 && make buildQ6 || make buildPC
+    confirm-build-q6 && make buildQ6 || make buildBin
 }
 
 cs1-build-timer () {
@@ -408,7 +408,7 @@ cs1-build-q6 () {
     
     ls $CS1_DIR/BUILD/Q6
     cp $COMMANDER_DIR/bin/space-commanderQ6 $UPLOAD_FOLDER/
-    cp $NETMAN_DIR/bin/gnd-mbcc $UPLOAD_FOLDER/
+    cp $NETMAN_DIR/bin/gnd-mbcc $UPLOAD_FOLDER/../
     cp $NETMAN_DIR/bin/sat-mbcc $UPLOAD_FOLDER/sat
     cp $CS1_DIR/space-jobs/job-runner/bin/job-runner-mbcc $UPLOAD_FOLDER/
     cp $WATCHPUPPY_DIR/bin/watch-puppy $UPLOAD_FOLDER/

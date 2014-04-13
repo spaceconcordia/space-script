@@ -4,6 +4,7 @@ if lsmod | grep "hmc5843" &> /dev/null ; then
     echo 0x1e > /sys/bus/i2c/devices/i2c-1/delete_device
     sed -i "s|HMC5843PATH=.*|HMC5843PATH='unset'|g" /etc/profile
     modprobe -r hmc5843 
+    exit 0
   else
     echo "hmc5842 is already loaded!"
     exit 0  
