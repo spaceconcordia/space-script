@@ -8,7 +8,6 @@ if lsmod | grep "ad799x" &> /dev/null ; then
     echo 0x23 > /sys/bus/i2c/devices/i2c-1/delete_device
     sed -i "s|AD7998x23PATH=.*|AD7998x23PATH='unset'|g" /etc/profile
     modprobe -r ad799x 
-    exit 0
   else
     echo "ad799x is already loaded"
     exit 0; # driver is loaded
@@ -29,5 +28,4 @@ else
         sed -i "s|AD7998x23PATH=.*|AD7998x23PATH='$driverpath'|g" /etc/profile
       fi
     fi
-    exit 1 # not sure if loaded
 fi   

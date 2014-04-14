@@ -1,0 +1,70 @@
+#!/bin/sh
+
+echo "********************************************************************************"
+echo "*** rcS: Starting"
+
+export CONSOLETYPE=serial
+
+# Start all init scripts in /etc/init.d
+# executing them in numerical order.
+
+for i in 0 1 2 3 4 5 6 7 8 9 ; do
+  for j in 0 1 2 3 4 5 6 7 8 9 ; do
+    p=0
+    for f in /etc/init.d/P$i$j* ;do
+       [ ! -f "$f" ] && continue
+       [ -f /etc/init.d/S*$f ] && continue
+       p=1
+       echo "[P] $i$j $f"
+       $f start &
+    done
+    if [ $p = 1 ]; then
+      echo "[W] $i$j WAIT"
+      wait
+    fi
+    for f in /etc/init.d/S$i$j* ;do
+       # Ignore dangling symlinks (if any).
+       [ ! -f "$f" ] && continue
+
+       case "$f" in
+         *.sh)
+           # Source shell script for speed.
+           echo "[S] $i$j $f"
+           (
+             trap - INT QUIT TSTP
+             set start
+             . $f
+           )
+           ;;
+         *)
+           # No sh extension, so fork subprocess.
+           echo "[S] $i$j $f"
+           $f start
+           ;;
+       esac
+     done
+     for f in /etc/init.d/I$i$j* ;do
+       # Ignore dangling symlinks (if any).
+       [ ! -f "$f" ] && continue
+
+       case "$f" in
+         *.sh)
+           # Source shell script for speed.
+           echo "[S] $i$j $f"
+           (
+             trap - INT QUIT TSTP
+             set start
+             . $f
+           )
+           ;;
+         *)
+           # No sh extension, so fork subprocess.
+           echo "[S] $i$j $f"
+           $f start
+           ;;
+       esac
+     done
+   done
+done
+
+# vim:set sw=2 ts=2 expandtab tw=80 cc=80 filetype=sh:

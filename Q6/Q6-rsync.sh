@@ -3,6 +3,8 @@
 set -e
 exec_dir="/home/apps/current"
 
+writeprotect off
+
 # creates directory structure
 mkdir -p /home/apps
 mkdir -p /home/apps/current
@@ -53,10 +55,11 @@ rsync -av --remove-source-files profile /etc/profile
 rsync -av --remove-source-files jobs/ /home/apps/current/jobs/
 
 # copy driver start scripts
-rsync -av --remove-source-files ad799x.sh /etc/init.d/
-rsync -av --remove-source-files hmc5843.sh /etc/init.d/
-rsync -av --remove-source-files ina2xx.sh /etc/init.d/
-rsync -av --remove-source-files rtc-ds3232e.sh /etc/init.d/
+rsync -av --remove-source-files rcS /etc/init.d/
+rsync -av --remove-source-files I01ad799x.sh /etc/init.d/
+rsync -av --remove-source-files I02hmc5843.sh /etc/init.d/
+rsync -av --remove-source-files I03ina2xx.sh /etc/init.d/
+rsync -av --remove-source-files I04rtc-ds3232e.sh /etc/init.d/
 
 # Copy test scripts
 rsync -av --remove-source-files Q6_helium100.sh /home/test/
@@ -69,3 +72,6 @@ rsync -av --remove-source-files RunAwkTest.sh /home/test/
 #rsync -av --remove-source-files Q6-rsync.sh  /usr/bin/
 echo "Self destructing..."
 rm Q6-rsync.sh
+
+sync
+writeprotect on
