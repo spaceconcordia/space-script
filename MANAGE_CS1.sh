@@ -49,7 +49,7 @@ self-update () {
       if confirm "An update for this script may be available. Proceed?"; then
         if check-master-branch ; then
           echo -e "${green}UPDATING ...${NC}"
-          cs1-update $SPACESCRIPT_DIR && rsync -vz --update MANAGE_CS1.sh $CS1_DIR/MANAGE_CS1.sh
+          cs1-update $SPACESCRIPT_DIR && rsync -avz --update $SPACESCRIPT_DIR/MANAGE_CS1.sh $CS1_DIR/MANAGE_CS1.sh
         fi
       fi
     fi
@@ -198,7 +198,8 @@ cs1-build-commander () {
     [ -f staticlibs.tar ] && tar -xf staticlibs.tar
     [ -f staticlibsQ6.tar ] && tar -xf staticlibsQ6.tar
     rm staticlibs*.tar
-    
+
+    # TODO     
     #cp staticlibs*.tar $SPACE_LIB/
     #cd $SPACE_LIB/
     #[ -f staticlibs.tar ] && tar -xf staticlibs.tar
@@ -244,7 +245,7 @@ cs1-build-helium () {
   mkdir -p $CS1_DIR/HE100-lib/C/lib
   echo "cd: \c"
   pwd
-  cp $HELIUM_DIR/inc/SC_he100.h $SPACE_INCLUDE/ # let's only copy here
+  # cp $HELIUM_DIR/inc/SC_he100.h $SPACE_INCLUDE/ # let's only copy here
   cp $COMMANDER_DIR/include/Net2Com.h $HELIUM_DIR/inc/ # depcrecated
   cp $COMMANDER_DIR/include/NamedPipe.h $HELIUM_DIR/inc/ # deprecated
 
@@ -433,10 +434,7 @@ cs1-build-q6 () {
     cp $SPACESCRIPT_DIR/Q6/* $UPLOAD_FOLDER/
     cp $SPACESCRIPT_DIR/at-runner/at-runner.sh $UPLOAD_FOLDER/
 
-    cp $SPACESCRIPT_DIR/boot-drivers/ad799x.sh $UPLOAD_FOLDER/
-    cp $SPACESCRIPT_DIR/boot-drivers/hmc5843.sh $UPLOAD_FOLDER/
-    cp $SPACESCRIPT_DIR/boot-drivers/ina2xx.sh $UPLOAD_FOLDER/
-    cp $SPACESCRIPT_DIR/boot-drivers/rtc-ds3232e.sh $UPLOAD_FOLDER/
+    cp $SPACESCRIPT_DIR/boot-drivers/*.sh $UPLOAD_FOLDER/
     
     chmod +x $UPLOAD_FOLDER/*
     cd $UPLOAD_FOLDER
