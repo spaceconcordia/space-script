@@ -14,7 +14,9 @@ declare -a RepoList=('acs' 'baby-cron' 'ground-commander' 'HE100-lib' 'mail_arc'
 READ_DIR=$(readlink -f "$0")
 CS1_DIR=$(dirname "$READ_DIR")
 NETMAN_DIR="$CS1_DIR/space-netman"
-SHAKESPEARE_DIR="$CS1_DIR/space-lib/shakespeare"
+SPACE_LIB="$CS1_DIR/space-lib"
+SPACE_INCLUDE="$SPACE_LIB/include"
+SHAKESPEARE_DIR="$SPACE_LIB/shakespeare"
 HELIUM_DIR="$CS1_DIR/HE100-lib/C"
 CHECKSUM_DIR="$CS1_DIR/space-lib/checksum"
 TIMER_DIR="$CS1_DIR/space-timer-lib"
@@ -186,7 +188,9 @@ cs1-build-commander () {
     check-master-branch || fail "Cannot build project without"
     mkdir -p ./bin ./lib ./include
     confirm-build-q6 && make buildQ6 || make buildBin
-    
+    #cp $COMMANDER_DIR/include/Net2Com.h $SPACE_INCLUDE/
+    #cp $COMMANDER_DIR/include/NamedPipe.h $SPACE_INCLUDE/
+
     # provide deps for NETMAN
     confirm-build-q6 && make staticlibsQ6.tar || make staticlibs.tar
     cp staticlibs*.tar $NETMAN_DIR/lib/
@@ -194,6 +198,12 @@ cs1-build-commander () {
     [ -f staticlibs.tar ] && tar -xf staticlibs.tar
     [ -f staticlibsQ6.tar ] && tar -xf staticlibsQ6.tar
     rm staticlibs*.tar
+    
+    #cp staticlibs*.tar $SPACE_LIB/
+    #cd $SPACE_LIB/
+    #[ -f staticlibs.tar ] && tar -xf staticlibs.tar
+    #[ -f staticlibsQ6.tar ] && tar -xf staticlibsQ6.tar
+    #rm staticlibs*.tar
 }
 
 cs1-build-netman () {
@@ -234,11 +244,15 @@ cs1-build-helium () {
   mkdir -p $CS1_DIR/HE100-lib/C/lib
   echo "cd: \c"
   pwd
-  cp $COMMANDER_DIR/include/Net2Com.h $HELIUM_DIR/inc/;
-  cp $COMMANDER_DIR/include/NamedPipe.h $HELIUM_DIR/inc/;
+  cp $HELIUM_DIR/inc/SC_he100.h $SPACE_INCLUDE/ # let's only copy here
+  cp $COMMANDER_DIR/include/Net2Com.h $HELIUM_DIR/inc/ # depcrecated
+  cp $COMMANDER_DIR/include/NamedPipe.h $HELIUM_DIR/inc/ # deprecated
+
   confirm-build-q6 && sh mbcc-compile-lib-static-cpp.sh || sh x86-compile-lib-static-cpp.sh
-  cp $HELIUM_DIR/lib/libhe100* $NETMAN_DIR/lib/;
-  cp $HELIUM_DIR/inc/SC_he100.h $NETMAN_DIR/lib/include/;
+  
+  cp $HELIUM_DIR/inc/SC_he100.h $SPACE_LIB/ # let's only copy here
+  cp $HELIUM_DIR/lib/libhe100* $NETMAN_DIR/lib/ # deprecated
+  cp $HELIUM_DIR/inc/SC_he100.h $NETMAN_DIR/lib/include/ # deprecated
 }
 
 cs1-build-fletcher () {
