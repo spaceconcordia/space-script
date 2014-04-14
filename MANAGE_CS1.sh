@@ -175,7 +175,7 @@ cs1-clone-all () {
 
 cs1-update () {
     cd $1
-    branch_name="$(git symbolic-ref --short -q HEAD)"
+    branch_name="$(git symbolic-ref -q HEAD | sed 's|refs\/heads\/||g'  )"
     echo -e "${green}Updating $1 on branch $branch_name ${NC}"
     echo "git pull origin $branch_name #$1"
     git pull origin $branch_name
@@ -348,12 +348,12 @@ cs1-build-timer () {
   echo "cd: \c"
   pwd
   confirm-build-q6 && sh mbcc-compile-lib-static-cpp.sh || sh x86-compile-lib-static-cpp.sh
-  cp lib/libtimer* $NETMAN_DIR/lib
-  cp lib/libtimer* $HELIUM_DIR/lib
-  #cp lib/libtimer* $JOBRUNNER_DIR/lib
-  cp inc/timer.h $NETMAN_DIR/lib/include
-  cp inc/timer.h $HELIUM_DIR/inc
-  #cp inc/timer.h $JOBRUNNER_DIR/inc
+  cp lib/libtimer* $NETMAN_DIR/lib/
+  cp lib/libtimer* $HELIUM_DIR/lib/
+  cp lib/libtimer* $JOBRUNNER_DIR/lib/
+  cp inc/timer.h $NETMAN_DIR/lib/include/
+  cp inc/timer.h $HELIUM_DIR/inc/
+  cp inc/timer.h $JOBRUNNER_DIR/inc/
 }
 
 ensure-directories () {
