@@ -2,7 +2,7 @@
 # https://unix.stackexchange.com/questions/98038/restrictions-of-etc-profile-in-gnome
 if lsmod | grep rtc-ds3232 &> /dev/null ; then
   if [ "$1" == "-r" ]; then
-    echo 0x23 > /sys/bus/i2c/devices/i2c-1/delete_device
+    echo 0x68 > /sys/bus/i2c/devices/i2c-1/delete_device
     sed -i "s|RTCDS3232PATH=.*|RTCDS3232PATH='unset'|g" /etc/profile        
     modprobe -r rtc-ds3232
     exit 0
