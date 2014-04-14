@@ -14,7 +14,9 @@ class At_Runner_Test : public ::testing::Test
 TEST_F(At_Runner_Test, AddJob)
 {
     //int result = addJob("201503212330","/usr/bin/touch testfile");
-    int result = addJob("201403272019","/bin/echo $(date --iso) >> test.log");
+    char date_time[13] = "201404082328";
+    char task[48] = "/bin/echo $(date --iso) >> /media/Data/test.log";
+    int result = addJob(date_time,task);
     ASSERT_EQ(
         0,
         result 
