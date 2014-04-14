@@ -1,0 +1,41 @@
+# ~/.bashrc: executed by bash(1) for non-login interactive shells.
+
+export PATH=\
+/bin:\
+/sbin:\
+/usr/bin:\
+/usr/sbin:\
+/usr/local/bin
+
+# If running interactively, then:
+if [ "$PS1" ]; then
+
+    export PS1="[\u@\h \W]\\$ "
+
+    export USER=`id -un`
+    export LOGNAME=$USER
+    export HOSTNAME=`/bin/hostname`
+    export HISTSIZE=1000
+    export HISTFILESIZE=1000
+    export PAGER='/bin/more '
+    export EDITOR='/bin/vi'
+    export INPUTRC=/etc/inputrc
+    export DMALLOC_OPTIONS=debug=0x34f47d83,inter=100,log=logfile
+    export AD7998x21PATH='unset'
+    export AD7998x22PATH='unset'
+    export AD7998x23PATH='unset'
+    export HMC5843PATH='unset'
+    export INA2XXPATH='unset'
+    export RTCDS3232PATH='unset'
+    
+    ### Some aliases
+    alias cls='clear'
+    alias df='df -h'
+    if [ -f /etc/sysconfig/pa3 ]; then
+        . /etc/sysconfig/pa3
+        if [ -n "$PA3_CMD" ]; then
+                alias pa3="$PA3_CMD"
+        fi
+    fi
+
+fi;

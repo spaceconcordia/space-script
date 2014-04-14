@@ -14,14 +14,19 @@ declare -a RepoList=('acs' 'baby-cron' 'ground-commander' 'HE100-lib' 'mail_arc'
 READ_DIR=$(readlink -f "$0")
 CS1_DIR=$(dirname "$READ_DIR")
 NETMAN_DIR="$CS1_DIR/space-netman"
-SHAKESPEARE_DIR="$CS1_DIR/space-lib/shakespeare"
+SPACE_LIB="$CS1_DIR/space-lib"
+SPACE_INCLUDE="$SPACE_LIB/include"
+SHAKESPEARE_DIR="$SPACE_LIB/shakespeare"
 HELIUM_DIR="$CS1_DIR/HE100-lib/C"
+CHECKSUM_DIR="$CS1_DIR/space-lib/checksum"
 TIMER_DIR="$CS1_DIR/space-timer-lib"
 COMMANDER_DIR="$CS1_DIR/space-commander"
 WATCHPUPPY_DIR="$CS1_DIR/watch-puppy"
 BABYCRON_DIR="$CS1_DIR/baby-cron"
 JOBRUNNER_DIR="$CS1_DIR/space-jobs/job-runner"
+JOBS_DIR="$CS1_DIR/space-jobs"
 SPACESCRIPT_DIR="$CS1_DIR/space-script"
+UPLOAD_FOLDER="$CS1_DIR/BUILD/Q6/uploads"
 
 build_environment=PC
 
@@ -44,7 +49,7 @@ self-update () {
       if confirm "An update for this script may be available. Proceed?"; then
         if check-master-branch ; then
           echo -e "${green}UPDATING ...${NC}"
-          cs1-update $SPACESCRIPT_DIR && rsync -vz --update MANAGE_CS1.sh $CS1_DIR/MANAGE_CS1.sh
+          cs1-update $SPACESCRIPT_DIR && rsync -avz --update $SPACESCRIPT_DIR/MANAGE_CS1.sh $CS1_DIR/MANAGE_CS1.sh
         fi
       fi
     fi
@@ -184,7 +189,9 @@ cs1-build-commander () {
     check-master-branch || fail "Cannot build project without"
     mkdir -p ./bin ./lib ./include
     confirm-build-q6 && make buildQ6 || make buildBin
-    
+    #cp $COMMANDER_DIR/include/Net2Com.h $SPACE_INCLUDE/
+    #cp $COMMANDER_DIR/include/NamedPipe.h $SPACE_INCLUDE/
+
     # provide deps for NETMAN
     confirm-build-q6 && make staticlibsQ6.tar || make staticlibs.tar
     cp staticlibs*.tar $NETMAN_DIR/lib/
@@ -192,6 +199,13 @@ cs1-build-commander () {
     [ -f staticlibs.tar ] && tar -xf staticlibs.tar
     [ -f staticlibsQ6.tar ] && tar -xf staticlibsQ6.tar
     rm staticlibs*.tar
+
+    # TODO     
+    #cp staticlibs*.tar $SPACE_LIB/
+    #cd $SPACE_LIB/
+    #[ -f staticlibs.tar ] && tar -xf staticlibs.tar
+    #[ -f staticlibsQ6.tar ] && tar -xf staticlibsQ6.tar
+    #rm staticlibs*.tar
 }
 
 cs1-build-netman () {
@@ -232,11 +246,30 @@ cs1-build-helium () {
   mkdir -p $CS1_DIR/HE100-lib/C/lib
   echo "cd: \c"
   pwd
-  cp $COMMANDER_DIR/include/Net2Com.h $HELIUM_DIR/inc/;
-  cp $COMMANDER_DIR/include/NamedPipe.h $HELIUM_DIR/inc/;
+  # cp $HELIUM_DIR/inc/SC_he100.h $SPACE_INCLUDE/ # let's only copy here
+  cp $COMMANDER_DIR/include/Net2Com.h $HELIUM_DIR/inc/ # depcrecated
+  cp $COMMANDER_DIR/include/NamedPipe.h $HELIUM_DIR/inc/ # deprecated
+
   confirm-build-q6 && sh mbcc-compile-lib-static-cpp.sh || sh x86-compile-lib-static-cpp.sh
-  cp $HELIUM_DIR/lib/libhe100* $NETMAN_DIR/lib/;
-  cp $HELIUM_DIR/inc/SC_he100.h $NETMAN_DIR/lib/include/;
+  
+  cp $HELIUM_DIR/inc/SC_he100.h $SPACE_LIB/ # let's only copy here
+  cp $HELIUM_DIR/lib/libhe100* $NETMAN_DIR/lib/ # deprecated
+  cp $HELIUM_DIR/inc/SC_he100.h $NETMAN_DIR/lib/include/ # deprecated
+}
+
+cs1-build-fletcher () {
+  echo -e "${green}Building Fletcher Checksum Library...${NC}"
+  cd $CHECKSUM_DIR
+  check-master-branch || fail "Cannot build project without"
+  mkdir -p $CHECKSUM_DIR/lib
+  confirm-build-q6 && sh mbcc-compile-lib-static.sh || sh x86-compile-lib-static.sh
+  cp $CHECKSUM_DIR/lib/libfletcher* $NETMAN_DIR/lib/;
+  cp $CHECKSUM_DIR/lib/libfletcher* $HELIUM_DIR/lib/;
+  cp $CHECKSUM_DIR/lib/libfletcher* $COMMANDER_DIR/lib/;
+  cp $CHECKSUM_DIR/inc/fletcher.h $NETMAN_DIR/lib/include/;
+  cp $CHECKSUM_DIR/inc/fletcher.h $HELIUM_DIR/inc/;
+  cp $CHECKSUM_DIR/inc/fletcher.h $COMMANDER_DIR/include/;
+
 }
 
 cs1-build-job-runner () {
@@ -245,6 +278,22 @@ cs1-build-job-runner () {
     check-master-branch || fail "Cannot build project without"
     mkdir -p ./bin ./lib ./inc
     confirm-build-q6 && make buildQ6 || make buildBin
+}
+
+cs1-build-jobs () {
+    echo -e "${green}Building Jobs...${NC}"
+    declare -a JOBS_LIST=('read-pwr-ad7998' 'read-pwr-ina219' 'MagReading' 'disable-AHRM' 'enable-AHRM' 'SolarPanelTemperature_Sensor')
+    cd $JOBS_DIR
+    check-master-branch || fail "Cannot build project without"
+    for item in ${JOBS_LIST[*]}; do
+      cd $item 
+      mkdir -p ./bin ./lib ./inc ./include
+      #cp $SHAKESPEARE_DIR/inc/shakespeare.h include/
+      #cp $SHAKESPEARE_DIR/lib/libshakespeare* lib/
+      confirm-build-q6 && make buildQ6 || make buildBin
+      cp bin/* $UPLOAD_FOLDER/jobs/
+      cd $JOBS_DIR
+    done
 }
 
 cs1-build-shakespeare () {
@@ -261,6 +310,7 @@ cs1-build-shakespeare () {
   cp inc/shakespeare.h $WATCHPUPPY_DIR/inc/
   cp inc/shakespeare.h $BABYCRON_DIR/include/
   cp inc/shakespeare.h $JOBRUNNER_DIR/inc/
+  cp inc/shakespeare.h $JOBS_DIR/read-pwr-ad7998/inc/
 
   confirm-build-q6 && sh mbcc-compile-lib-static.sh || sh x86-compile-lib-static.sh
 
@@ -271,6 +321,7 @@ cs1-build-shakespeare () {
   cp lib/libshakespeare* $WATCHPUPPY_DIR/lib/
   cp lib/libshakespeare* $BABYCRON_DIR/lib/
   cp lib/libshakespeare* $JOBRUNNER_DIR/lib/
+  cp lib/libshakespeare* $JOBS_DIR/read-pwr-ad7998/lib/
 }
 
 cs1-build-space-updater () {
@@ -278,7 +329,7 @@ cs1-build-space-updater () {
     cd $CS1_DIR/space-updater
     check-master-branch || fail "Cannot build project without"
     mkdir -p ./bin ./lib ./include
-    confirm-build-q6 && make buildQ6 || make buildPC
+    confirm-build-q6 && make buildQ6 || make buildBin
 }
 
 cs1-build-space-updater-api () {
@@ -286,7 +337,7 @@ cs1-build-space-updater-api () {
     cd $CS1_DIR/space-updater-api
     check-master-branch || fail "Cannot build project without"
     mkdir -p ./bin ./lib ./include
-    confirm-build-q6 && make buildQ6 || make buildPC
+    confirm-build-q6 && make buildQ6 || make buildBin
 }
 
 cs1-build-timer () {
@@ -306,7 +357,7 @@ cs1-build-timer () {
 }
 
 ensure-directories () {
-  declare -a REQDIR_LIST=("$NETMAN_DIR/lib/include/" "$HELIUM_DIR/inc/" "$TIMER_DIR/inc/" "$BABYCRON_DIR/include/" "$JOBRUNNER_DIR/inc/" "$COMMANDER_DIR/include/" "$WATCHPUPPY_DIR/lib/include/" "$HELIUM_DIR/lib/" "$TIMER_DIR/lib/" "$COMMANDER_DIR/lib/" "$WATCHPUPPY_DIR/lib/" "$WATCHPUPPY_DIR/inc/" "$BABYCRON_DIR/lib/" "$BABYCRON_DIR/lib/" "$JOBRUNNER_DIR/lib/" "$NETMAN_DIR/lib/include" "$NETMAN_DIR/bin")
+  declare -a REQDIR_LIST=("$NETMAN_DIR/lib/include/" "$HELIUM_DIR/inc/" "$TIMER_DIR/inc/" "$BABYCRON_DIR/include/" "$JOBRUNNER_DIR/inc/" "$COMMANDER_DIR/include/" "$WATCHPUPPY_DIR/lib/include/" "$HELIUM_DIR/lib/" "$TIMER_DIR/lib/" "$COMMANDER_DIR/lib/" "$WATCHPUPPY_DIR/lib/" "$WATCHPUPPY_DIR/inc/" "$BABYCRON_DIR/lib/" "$BABYCRON_DIR/lib/" "$JOBRUNNER_DIR/lib/" "$NETMAN_DIR/lib/include" "$NETMAN_DIR/bin" "$UPLOAD_FOLDER/jobs")
   for item in ${REQDIR_LIST[*]}; do
     mkdir -p $item
     #[ ! -d $item ] && fail "$item does not exist and/or was not created properly"
@@ -318,19 +369,16 @@ cs1-build-pc () {
     echo -e "${green}Building for $build_environment...${NC}"
     ensure-directories
 
-    #DEPENDENCIES
-    #cd $CS1_DIR/space-script
-    #printf "sh cs1-libs.sh\n"
-    #sh cs1-get-libs.sh PC
-
     #libraries
     cs1-build-timer PC
     cs1-build-shakespeare PC
+    cs1-build-fletcher PC
     cs1-build-helium PC
 
+    #executables
     cs1-build-commander PC
     cs1-build-netman PC
-    #cs1-build-job-runner PC
+    cs1-build-job-runner PC
     cs1-build-watch-puppy PC
     cs1-build-space-updater PC
     cs1-build-space-updater-api PC
@@ -356,52 +404,44 @@ cs1-build-q6 () {
     echo -e "${green}Building for $build_environment...${NC}"
     ensure-directories
 
-    #DEPENDENCIES
-    #cd $CS1_DIR/space-script
-    #printf "sh cs1-libs.sh\n"
-    #sh cs1-get-libs.sh Q6
-
     #libraries
     cs1-build-timer Q6
     cs1-build-shakespeare Q6
+    cs1-build-fletcher Q6
     cs1-build-helium Q6
 
+    #executables
     cs1-build-commander Q6
     cs1-build-netman Q6
-    #cs1-build-job-runner Q6
+    cs1-build-job-runner Q6
+    cs1-build-jobs Q6
     cs1-build-watch-puppy Q6
     cs1-build-space-updater Q6
     cs1-build-space-updater-api Q6
     cs1-build-baby-cron Q6
 
     #COLLECT FILES
-    SCRIPT_FOLDER="$CS1_DIR/BUILD/Q6/scripts/"
-    BINARY_FOLDER="$CS1_DIR/BUILD/Q6/binaries/"
-    mkdir -p "$SCRIPT_FOLDER"
-    mkdir -p "$BINARY_FOLDER"
+    
+    ls $CS1_DIR/BUILD/Q6
+    cp $COMMANDER_DIR/bin/space-commanderQ6 $UPLOAD_FOLDER/
+    cp $NETMAN_DIR/bin/gnd-mbcc $UPLOAD_FOLDER/../
+    cp $NETMAN_DIR/bin/sat-mbcc $UPLOAD_FOLDER/sat
+    cp $CS1_DIR/space-jobs/job-runner/bin/job-runner-mbcc $UPLOAD_FOLDER/
+    cp $WATCHPUPPY_DIR/bin/watch-puppy $UPLOAD_FOLDER/
+    cp $CS1_DIR/space-updater-api/bin/UpdaterServer-Q6 $UPLOAD_FOLDER/
+    cp $CS1_DIR/space-updater/bin/Updater-Q6 $UPLOAD_FOLDER/
+    cp $BABYCRON_DIR/bin/baby-cron $UPLOAD_FOLDER/
+
+    cp $SPACESCRIPT_DIR/Q6/* $UPLOAD_FOLDER/
+    cp $SPACESCRIPT_DIR/at-runner/at-runner.sh $UPLOAD_FOLDER/
+
+    cp $SPACESCRIPT_DIR/boot-drivers/*.sh $UPLOAD_FOLDER/
+    
+    chmod +x $UPLOAD_FOLDER/*
+    cd $UPLOAD_FOLDER
+    tar -cvf $(date --iso)-Q6.tar.gz * 
+    mv $(date --iso)-Q6.tar.gz ../
     ls
-    cp $COMMANDER_DIR/bin/space-commanderQ6 $BINARY_FOLER/
-    cp $NETMAN_DIR/bin/gnd-mbcc $BINARY_FOLER/
-    cp $NETMAN_DIR/bin/sat-mbcc $BINARY_FOLER/sat
-    #cp $CS1_DIR/space-jobs/job-runner/bin/job-runner-mbcc $CS1_DIR/BUILD/Q6/
-    cp $WATCHPUPPY_DIR/bin/watch-puppy $BINARY_FOLER/
-    cp $CS1_DIR/space-updater-api/bin/UpdaterServer-Q6 $BINARY_FOLER/
-    cp $CS1_DIR/space-updater/bin/Updater-Q6 $BINARY_FOLER/
-    cp $BABYCRON_DIR/bin/baby-cron $BINARY_FOLER/
-    cp $SPACESCRIPT_DIR/Q6-rsync.sh $BINARY_FOLER/
-
-    cp $SPACESCRIPT_DIR/system-test.sh $SCRIPT_FOLER/
-    cp $SPACESCRIPT_DIR/Q6_helium100.sh $SCRIPT_FOLER/    
-    cp $SPACESCRIPT_DIR/at-runner/at-runner.sh $SCRIPT_FOLER/
-
-    cp $SPACESCRIPT_DIR/boot-drivers/ad799x.sh $SCRIPT_FOLER/
-    cp $SPACESCRIPT_DIR/boot-drivers/hmc5843.sh $SCRIPT_FOLER/
-    cp $SPACESCRIPT_DIR/boot-drivers/ina2xx.sh $SCRIPT_FOLER/
-    cp $SPACESCRIPT_DIR/boot-drivers/rtc-ds3232e.sh $SCRIPT_FOLER/
-
-    cd $CS1_DIR/BUILD/Q6/
-    #tar -cvf $(date --iso)-Q6.tar.gz Q6-rsync.sh sat at-runner.sh watch-puppy baby-cron space-commanderQ6 UpdaterServer-Q6 Updater-Q6 ad799x.sh hmc5842.sh ina2xx.sh rtc-ds3232e.sh system-test.sh
-    tar -cvf $(date --iso)-Q6.tar.gz $SCRIPT_FOLER/* $BINARY_FOLER/*
     cd $CS1_DIR
     echo 'Binaries left in $CS1_DIR/BUILD/Q6'
     echo -e "${purple}$(date --iso)-Q6.tar.gz left in $CS1_DIR/BUILD/Q6, transfer it to Q6, tar -xvf it, and run Q6-rsync.sh${NC}"
