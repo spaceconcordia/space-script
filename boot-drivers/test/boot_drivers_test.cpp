@@ -10,9 +10,13 @@ class Boot_Drivers_Test : public ::testing::Test
 TEST_F(Boot_Drivers_Test, Load_rtc-ds3232e)
 {
     int result = system("sh /etc/init.d/rtc-ds3232e.sh");
-    ASSERT_EQ(
-        0,
-        result 
+    char * driver_path;
+    driver_path = getenv("RTCDS3232PATH");
+    char * failed_path;
+    failed_path = "unset";
+    ASSERT_NEQ(
+        failed_path,
+        driver_path
     );
 }
 

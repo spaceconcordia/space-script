@@ -14,8 +14,11 @@ declare -a RepoList=('acs' 'baby-cron' 'ground-commander' 'HE100-lib' 'mail_arc'
 READ_DIR=$(readlink -f "$0")
 CS1_DIR=$(dirname "$READ_DIR")
 NETMAN_DIR="$CS1_DIR/space-netman"
-SHAKESPEARE_DIR="$CS1_DIR/space-lib/shakespeare"
+SPACE_LIB="$CS1_DIR/space-lib"
+SPACE_INCLUDE="$SPACE_LIB/include"
+SHAKESPEARE_DIR="$SPACE_LIB/shakespeare"
 HELIUM_DIR="$CS1_DIR/HE100-lib/C"
+CHECKSUM_DIR="$CS1_DIR/space-lib/checksum"
 TIMER_DIR="$CS1_DIR/space-timer-lib"
 COMMANDER_DIR="$CS1_DIR/space-commander"
 WATCHPUPPY_DIR="$CS1_DIR/watch-puppy"
@@ -46,7 +49,7 @@ self-update () {
       if confirm "An update for this script may be available. Proceed?"; then
         if check-master-branch ; then
           echo -e "${green}UPDATING ...${NC}"
-          cs1-update $SPACESCRIPT_DIR && rsync -vz --update MANAGE_CS1.sh $CS1_DIR/MANAGE_CS1.sh
+          cs1-update $SPACESCRIPT_DIR && rsync -avz --update $SPACESCRIPT_DIR/MANAGE_CS1.sh $CS1_DIR/MANAGE_CS1.sh
         fi
       fi
     fi
@@ -84,7 +87,8 @@ check-package () {
 
 check-master-branch () {
     [ $1 ] && gdirectory="--git-dir=$1/.git"
-    branch_name="$(git ${gdirectory} symbolic-ref --short -q HEAD)"
+    #branch_name="$(git ${gdirectory} symbolic-ref --short -q HEAD)" # short not available on all versions? temporary hack below.
+    branch_name="$(git ${gdirectory} symbolic-ref -q HEAD | sed 's|refs\/heads\/||g' )" 
     echo "Currently on branch: $branch_name"
     if [ "$branch_name" != "master" ]; then
         confirm "Repository $1 is on the '$branch_name' branch, are you sure you wish to continue?" && return 0 || return 1
@@ -171,7 +175,7 @@ cs1-clone-all () {
 
 cs1-update () {
     cd $1
-    branch_name="$(git symbolic-ref --short -q HEAD)"
+    branch_name="$(git symbolic-ref -q HEAD | sed 's|refs\/heads\/||g'  )"
     echo -e "${green}Updating $1 on branch $branch_name ${NC}"
     echo "git pull origin $branch_name #$1"
     git pull origin $branch_name
@@ -185,7 +189,9 @@ cs1-build-commander () {
     check-master-branch || fail "Cannot build project without"
     mkdir -p ./bin ./lib ./include
     confirm-build-q6 && make buildQ6 || make buildBin
-    
+    #cp $COMMANDER_DIR/include/Net2Com.h $SPACE_INCLUDE/
+    #cp $COMMANDER_DIR/include/NamedPipe.h $SPACE_INCLUDE/
+
     # provide deps for NETMAN
     confirm-build-q6 && make staticlibsQ6.tar || make staticlibs.tar
     cp staticlibs*.tar $NETMAN_DIR/lib/
@@ -193,6 +199,13 @@ cs1-build-commander () {
     [ -f staticlibs.tar ] && tar -xf staticlibs.tar
     [ -f staticlibsQ6.tar ] && tar -xf staticlibsQ6.tar
     rm staticlibs*.tar
+
+    # TODO     
+    #cp staticlibs*.tar $SPACE_LIB/
+    #cd $SPACE_LIB/
+    #[ -f staticlibs.tar ] && tar -xf staticlibs.tar
+    #[ -f staticlibsQ6.tar ] && tar -xf staticlibsQ6.tar
+    #rm staticlibs*.tar
 }
 
 cs1-build-netman () {
@@ -233,11 +246,30 @@ cs1-build-helium () {
   mkdir -p $CS1_DIR/HE100-lib/C/lib
   echo "cd: \c"
   pwd
-  cp $COMMANDER_DIR/include/Net2Com.h $HELIUM_DIR/inc/;
-  cp $COMMANDER_DIR/include/NamedPipe.h $HELIUM_DIR/inc/;
+  # cp $HELIUM_DIR/inc/SC_he100.h $SPACE_INCLUDE/ # let's only copy here
+  cp $COMMANDER_DIR/include/Net2Com.h $HELIUM_DIR/inc/ # depcrecated
+  cp $COMMANDER_DIR/include/NamedPipe.h $HELIUM_DIR/inc/ # deprecated
+
   confirm-build-q6 && sh mbcc-compile-lib-static-cpp.sh || sh x86-compile-lib-static-cpp.sh
-  cp $HELIUM_DIR/lib/libhe100* $NETMAN_DIR/lib/;
-  cp $HELIUM_DIR/inc/SC_he100.h $NETMAN_DIR/lib/include/;
+  
+  cp $HELIUM_DIR/inc/SC_he100.h $SPACE_LIB/ # let's only copy here
+  cp $HELIUM_DIR/lib/libhe100* $NETMAN_DIR/lib/ # deprecated
+  cp $HELIUM_DIR/inc/SC_he100.h $NETMAN_DIR/lib/include/ # deprecated
+}
+
+cs1-build-fletcher () {
+  echo -e "${green}Building Fletcher Checksum Library...${NC}"
+  cd $CHECKSUM_DIR
+  check-master-branch || fail "Cannot build project without"
+  mkdir -p $CHECKSUM_DIR/lib
+  confirm-build-q6 && sh mbcc-compile-lib-static.sh || sh x86-compile-lib-static.sh
+  cp $CHECKSUM_DIR/lib/libfletcher* $NETMAN_DIR/lib/;
+  cp $CHECKSUM_DIR/lib/libfletcher* $HELIUM_DIR/lib/;
+  cp $CHECKSUM_DIR/lib/libfletcher* $COMMANDER_DIR/lib/;
+  cp $CHECKSUM_DIR/inc/fletcher.h $NETMAN_DIR/lib/include/;
+  cp $CHECKSUM_DIR/inc/fletcher.h $HELIUM_DIR/inc/;
+  cp $CHECKSUM_DIR/inc/fletcher.h $COMMANDER_DIR/include/;
+
 }
 
 cs1-build-job-runner () {
@@ -259,7 +291,7 @@ cs1-build-jobs () {
       #cp $SHAKESPEARE_DIR/inc/shakespeare.h include/
       #cp $SHAKESPEARE_DIR/lib/libshakespeare* lib/
       confirm-build-q6 && make buildQ6 || make buildBin
-      cp bin/* $UPLOAD_FOLDER/
+      cp bin/* $UPLOAD_FOLDER/jobs/
       cd $JOBS_DIR
     done
 }
@@ -297,7 +329,7 @@ cs1-build-space-updater () {
     cd $CS1_DIR/space-updater
     check-master-branch || fail "Cannot build project without"
     mkdir -p ./bin ./lib ./include
-    confirm-build-q6 && make buildQ6 || make buildPC
+    confirm-build-q6 && make buildQ6 || make buildBin
 }
 
 cs1-build-space-updater-api () {
@@ -305,7 +337,7 @@ cs1-build-space-updater-api () {
     cd $CS1_DIR/space-updater-api
     check-master-branch || fail "Cannot build project without"
     mkdir -p ./bin ./lib ./include
-    confirm-build-q6 && make buildQ6 || make buildPC
+    confirm-build-q6 && make buildQ6 || make buildBin
 }
 
 cs1-build-timer () {
@@ -316,16 +348,16 @@ cs1-build-timer () {
   echo "cd: \c"
   pwd
   confirm-build-q6 && sh mbcc-compile-lib-static-cpp.sh || sh x86-compile-lib-static-cpp.sh
-  cp lib/libtimer* $NETMAN_DIR/lib
-  cp lib/libtimer* $HELIUM_DIR/lib
-  #cp lib/libtimer* $JOBRUNNER_DIR/lib
-  cp inc/timer.h $NETMAN_DIR/lib/include
-  cp inc/timer.h $HELIUM_DIR/inc
-  #cp inc/timer.h $JOBRUNNER_DIR/inc
+  cp lib/libtimer* $NETMAN_DIR/lib/
+  cp lib/libtimer* $HELIUM_DIR/lib/
+  cp lib/libtimer* $JOBRUNNER_DIR/lib/
+  cp inc/timer.h $NETMAN_DIR/lib/include/
+  cp inc/timer.h $HELIUM_DIR/inc/
+  cp inc/timer.h $JOBRUNNER_DIR/inc/
 }
 
 ensure-directories () {
-  declare -a REQDIR_LIST=("$NETMAN_DIR/lib/include/" "$HELIUM_DIR/inc/" "$TIMER_DIR/inc/" "$BABYCRON_DIR/include/" "$JOBRUNNER_DIR/inc/" "$COMMANDER_DIR/include/" "$WATCHPUPPY_DIR/lib/include/" "$HELIUM_DIR/lib/" "$TIMER_DIR/lib/" "$COMMANDER_DIR/lib/" "$WATCHPUPPY_DIR/lib/" "$WATCHPUPPY_DIR/inc/" "$BABYCRON_DIR/lib/" "$BABYCRON_DIR/lib/" "$JOBRUNNER_DIR/lib/" "$NETMAN_DIR/lib/include" "$NETMAN_DIR/bin" "$UPLOAD_FOLDER")
+  declare -a REQDIR_LIST=("$NETMAN_DIR/lib/include/" "$HELIUM_DIR/inc/" "$TIMER_DIR/inc/" "$BABYCRON_DIR/include/" "$JOBRUNNER_DIR/inc/" "$COMMANDER_DIR/include/" "$WATCHPUPPY_DIR/lib/include/" "$HELIUM_DIR/lib/" "$TIMER_DIR/lib/" "$COMMANDER_DIR/lib/" "$WATCHPUPPY_DIR/lib/" "$WATCHPUPPY_DIR/inc/" "$BABYCRON_DIR/lib/" "$BABYCRON_DIR/lib/" "$JOBRUNNER_DIR/lib/" "$NETMAN_DIR/lib/include" "$NETMAN_DIR/bin" "$UPLOAD_FOLDER/jobs")
   for item in ${REQDIR_LIST[*]}; do
     mkdir -p $item
     #[ ! -d $item ] && fail "$item does not exist and/or was not created properly"
@@ -340,6 +372,7 @@ cs1-build-pc () {
     #libraries
     cs1-build-timer PC
     cs1-build-shakespeare PC
+    cs1-build-fletcher PC
     cs1-build-helium PC
 
     #executables
@@ -374,6 +407,7 @@ cs1-build-q6 () {
     #libraries
     cs1-build-timer Q6
     cs1-build-shakespeare Q6
+    cs1-build-fletcher Q6
     cs1-build-helium Q6
 
     #executables
@@ -390,7 +424,7 @@ cs1-build-q6 () {
     
     ls $CS1_DIR/BUILD/Q6
     cp $COMMANDER_DIR/bin/space-commanderQ6 $UPLOAD_FOLDER/
-    cp $NETMAN_DIR/bin/gnd-mbcc $UPLOAD_FOLDER/
+    cp $NETMAN_DIR/bin/gnd-mbcc $UPLOAD_FOLDER/../
     cp $NETMAN_DIR/bin/sat-mbcc $UPLOAD_FOLDER/sat
     cp $CS1_DIR/space-jobs/job-runner/bin/job-runner-mbcc $UPLOAD_FOLDER/
     cp $WATCHPUPPY_DIR/bin/watch-puppy $UPLOAD_FOLDER/
@@ -401,10 +435,7 @@ cs1-build-q6 () {
     cp $SPACESCRIPT_DIR/Q6/* $UPLOAD_FOLDER/
     cp $SPACESCRIPT_DIR/at-runner/at-runner.sh $UPLOAD_FOLDER/
 
-    cp $SPACESCRIPT_DIR/boot-drivers/ad799x.sh $UPLOAD_FOLDER/
-    cp $SPACESCRIPT_DIR/boot-drivers/hmc5843.sh $UPLOAD_FOLDER/
-    cp $SPACESCRIPT_DIR/boot-drivers/ina2xx.sh $UPLOAD_FOLDER/
-    cp $SPACESCRIPT_DIR/boot-drivers/rtc-ds3232e.sh $UPLOAD_FOLDER/
+    cp $SPACESCRIPT_DIR/boot-drivers/*.sh $UPLOAD_FOLDER/
     
     chmod +x $UPLOAD_FOLDER/*
     cd $UPLOAD_FOLDER
