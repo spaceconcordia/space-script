@@ -23,7 +23,7 @@ using namespace std;
 const char* testfiles = "./tests/testfiles";        // sample log files, don't delete!
 const char* logs = "./tests/test-logs";
 const char* tgz = "./tests/test-tgz";
-const char* tgzWizard = "./tgzWizard.sh";
+const char* tgzWizard = "./tgzWizard";
 TEST_GROUP(TgzWizardTestGroup)
 {
     void setup(){
@@ -39,12 +39,19 @@ TEST_GROUP(TgzWizardTestGroup)
     }
 };
 
-TEST(TgzWizardTestGroup, testTgzWizard){
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*
+* NAME : TgzWizardTestGroup, testTgzWizard
+* 
+* PURPOSE : 
+*
+*-----------------------------------------------------------------------------*/
+TEST(TgzWizardTestGroup, tarOneFile_defaultOpt){
     int pid = fork();
     int status = 0;
-    const char* app = "Watch-Puppy";
+    const char* filename = "Updater20140101";
     char untarCmd[CMD_BUFFER] = {0};
-    sprintf(untarCmd, "cat %s/%s*.tgz* | tar zx -C %s", tgz, app, logs);
+    sprintf(untarCmd, "cat %s/%s.0.tgz* | tar zx -C %s", tgz, filename, logs);
 
     if (pid < 0){
         FAIL("fork() has failed");
@@ -54,10 +61,10 @@ TEST(TgzWizardTestGroup, testTgzWizard){
     if (pid == 0){  // child process
         #ifdef DEBUG
             printf("[CHILD]");
-            printf("%s %s %s %s %s %s", tgzWizard, app, "-l", logs, "-t", tgz);
+            printf("%s %s %s %s %s %s %s", tgzWizard, "-f", filename, "-l", logs, "-t", tgz);
         #endif
 
-        execl(tgzWizard, tgzWizard, app, "-l", logs, "-t", tgz, (char*)NULL);
+        execl(tgzWizard, tgzWizard, "-f", filename, "-l", logs, "-t", tgz, (char*)NULL);
     }else{
         wait(&status); 
         CHECK(0 == status);
@@ -67,15 +74,21 @@ TEST(TgzWizardTestGroup, testTgzWizard){
         #endif
         system(untarCmd);       // untar in /logs
         
+#define PATH_BUF 100
+        char file1[PATH_BUF] = {'\0'};
+        char file2[PATH_BUF] = {'\0'};
 
-        int sizeSrc = getDirSize(testfiles);
-        int sizeDest = getDirSize(logs);
+        snprintf(file1, PATH_BUF, "%s/%s.log", testfiles, filename);
+        snprintf(file2, PATH_BUF, "%s/%s.log", logs, filename);
 
-        CHECK(sizeDest == sizeSrc);
+        CHECK(diff(file1, file2));
     }
 }
 
 TEST(TgzWizardTestGroup, testExtractErrorWarning){
+    FAIL("TODO");
+    return;
+
     int pid = fork();
     int status = 0;
     const char* app = "Error-Warning";
@@ -90,9 +103,8 @@ TEST(TgzWizardTestGroup, testExtractErrorWarning){
         wait(&status); 
         CHECK(0 == status);
 
-        printf(untarCmd);
+        printf("%s", untarCmd);
         system(untarCmd); 
-        FAIL("TODO");
         // check that :: grep '(ERROR|WARNING)' errFile | wc -l   ==   meme grep allOtherFiles | wc -l
         
     }
@@ -101,6 +113,13 @@ TEST(TgzWizardTestGroup, testExtractErrorWarning){
 
 
 
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*
+* NAME : DirUtlTestGroup
+* 
+* PURPOSE : test the utility functions in dirUtl.h 
+*
+*-----------------------------------------------------------------------------*/
 TEST_GROUP(DirUtlTestGroup)
 {
     void setup(){
@@ -109,6 +128,37 @@ TEST_GROUP(DirUtlTestGroup)
     }
 };
 
+TEST(DirUtlTestGroup, testDiff_filesAreIdentical_returnsTrue){
+    const char* data = "asdfsadf;lkj1243;lkjsdf";
+
+    FILE* file1 = fopen("a.txt", "w+");    
+    fprintf(file1, "%s", data);
+    fclose(file1);
+
+    FILE* file2 = fopen("b.txt", "w+");
+    fprintf(file2, "%s", data);
+    fclose(file2);
+
+    CHECK(diff("a.txt", "b.txt"));
+}
+
+TEST(DirUtlTestGroup, testDiff_filesAreNOTIdentical_returnsFalse){
+    const char* data = "asdfsadf;lkj1243;lkjsdf";
+
+    FILE* file1 = fopen("a.txt", "w+");    
+    fprintf(file1, "%s", data);
+    fclose(file1);
+
+    FILE* file2 = fopen("b.txt", "w+");
+    fprintf(file2, "%s", "BAD DATA!");
+    fclose(file2);
+
+
+    CHECK(!diff("a.txt", "b.txt"));
+
+    remove("a.txt"); 
+    remove("b.txt");
+}
 
 TEST(DirUtlTestGroup, testGetDirSize_SizeIsRight){
     int size = getDirSize(testfiles);    

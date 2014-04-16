@@ -13,31 +13,26 @@ MICROCFLAGS=-mcpu=v8.40.b -mxl-barrel-shift -mxl-multiply-high -mxl-pattern-comp
 INCLUDE = -I$(UPDATER_PATH)/include -I./include
 
 
-
 #
 # 	Compilation for CppUTest
 #
 
-test : init fileIO.o dirUtl.o AllTests
+test : bin/fileIO.o bin/dirUtl.o bin/AllTests
 
-fileIO.o: $(UPDATER_PATH)/src/fileIO.cpp $(UPDATER_PATH)/include/fileIO.h
-	$(CXX) $(INCLUDE) -c $< -o ./bin/$@
+bin/fileIO.o: $(UPDATER_PATH)/src/fileIO.cpp $(UPDATER_PATH)/include/fileIO.h
+	$(CXX) $(INCLUDE) -c $< -o $@
 
-dirUtl.o: src/dirUtl.cpp include/dirUtl.h
-	$(CXX) $(INCLUDE) -c $< -o ./bin/$@
+bin/dirUtl.o: src/dirUtl.cpp include/dirUtl.h
+	$(CXX) $(INCLUDE) -c $< -o $@
 
-AllTests: tests/AllTests.cpp tests/tgz-wizard-test.cpp ./bin/fileIO.o ./bin/dirUtl.o
-	$(CXX) $(CFLAGS) $(CPPFLAGS) $(CXXFLAGS) $(INCLUDE) -o AllTests $^ $(LD_LIBRARIES)
-
-init :
-	mkdir -p "./bin"
+bin/AllTests: tests/AllTests.cpp tests/tgz-wizard-test.cpp bin/fileIO.o bin/dirUtl.o
+	$(CXX) $(CFLAGS) $(CPPFLAGS) $(CXXFLAGS) $(INCLUDE) -o $@ $^ $(LD_LIBRARIES) ###-DDEBUG  need more output?
+	
 
 #
 # CleanUp
 #
 clean :
-	rm -f *.o *~ ./bin/*.o
+	rm -f *~ ./bin/*
 
-cleanAll:
-	rm -f *.o *~ ./bin/*.o
-	rm -f AllTests PC-Updater Updater-Q6
+
