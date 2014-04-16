@@ -230,7 +230,7 @@ fi
 # 
 # TITLE : extract_lines 
 #
-# PUPOSE : creates a compresses archive of approximately TGZ_MAX_SIZE.
+# PUPOSE : creates and compresses archive of approximately TGZ_MAX_SIZE.
 #           1. the lines are extracted from SOURCE >> EXTRACT_TMP
 #           2. the lines are removed from SOURCE
 #           3. an archive is created, containing EXTRACT_TMP 
