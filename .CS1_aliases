@@ -1,0 +1,28 @@
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+# Space Concordia - Joseph 2014
+# 
+# PURPOSE : Define some usefull aliases
+#  
+#  - Add this script in your home directory ~/.CS1_aliases
+#  - and the following 3 lines in your ~/.bashrc 
+#       if [ -f ~/.CS1_aliases ]; then
+#           . ~/.CS1_aliases
+#       fi
+#------------------------------------------------------------------------------
+
+GIT_HOME="~/space/git"          ### the folder that contains all CS1 projects
+
+CS1_APPS="/home/apps"
+CS1_LOGS="/home/logs"
+CS1_PIDS="/home/pids"
+CS1_PIPES="/home/pipes"
+CS1_TGZ="/home/tgz"
+
+alias csl="cd $CS1_LOGS"
+alias csa="cd $CS1_APPS"
+alias cspids="cd $CS1_PIDS"
+alias cspipes="cd $CS1_PIDS"
+alias cst="cd $CS1_TGZ"
+
+alias cs1="cd $GIT_HOME"
+alias cscom="cd $GIT_HOME/space-commander"
