@@ -1,0 +1,9 @@
+tgzWizard-v2.sh : 
+
+    Description :
+      - Operates on 1 log file at a time.
+      - Extracts the first n lines from the file, removes those lines from the log file.
+      - If the log file has no more line, deletes it.
+      - Creates a TGZ file containing the previousily extracted data and splits it into parts if needed.
+      
+      - should be run on all files present in the CS1_LOGS directory (schedule!)
