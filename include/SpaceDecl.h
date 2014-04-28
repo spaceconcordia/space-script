@@ -15,7 +15,7 @@
 #include <limits.h>
 
 
-#ifndef CS1_UTEST           /* add -DCS1_UTEST to the ENV flag in the makefile to active the test environment */
+#ifndef CS1_UTEST           /* add -DCS1_UTEST to the ENV flag in the makefile to activate the test environment */
 
 #define CS1_APPS            "/home/apps"
 #define CS1_LOGS            "/home/logs"
@@ -26,8 +26,8 @@
 
 #else
 /*
-* For unit testing, we prefer not using the real path, instead create directory on the fly.
-* define CS1_UTEST before including SpaceDecl.h and create/remove test directories in setup()/teardown() 
+* For unit testing, we prefer not to use the real paths, instead create/populate directories on the fly.
+* Define -DCS1_UTEST in makefile and create/remove test directories in setup()/teardown() 
 */
 #define CS1_APPS            "./apps"
 #define CS1_LOGS            "./logs"
