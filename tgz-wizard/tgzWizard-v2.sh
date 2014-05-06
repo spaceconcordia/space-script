@@ -271,7 +271,7 @@ function extract_lines(){
 
 extract_lines
 
-split -b $PART_SIZE $TGZ_DIR/$DEST $TGZ_DIR/$DEST || { echo "[ERROR} split failed"; exit 1; }
+split -b $PART_SIZE $TGZ_DIR/$DEST $TGZ_DIR/$DEST || { echo "[ERROR] split failed"; exit 1; }
 rm $TGZ_DIR/$DEST
 
 
