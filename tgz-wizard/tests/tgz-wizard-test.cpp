@@ -12,26 +12,34 @@
 #include <sys/wait.h>
 #include <string>
 #include <fileIO.h>
+
 #include "dirUtl.h"
+
 using namespace std;
+
 //************************************************************
 //************************************************************
 //              TgzWizardTestGroup
 //************************************************************
 //************************************************************
 #define CMD_BUFFER 400
+
 const char* testfiles = "./tests/testfiles";        // sample log files, don't delete!
 const char* logs = "./tests/test-logs";
 const char* tgz = "./tests/test-tgz";
 const char* tgzWizard = "./tgzWizard";
+
 TEST_GROUP(TgzWizardTestGroup)
 {
-    void setup(){
+    void setup()
+    {
         mkdir(logs, 0775);
         mkdir(tgz, 0775);
         CopyDirRecursively(testfiles, logs);
     }
-    void teardown(){
+
+    void teardown()
+    {
         DeleteDirectoryContent(logs);
         DeleteDirectoryContent(tgz);
         remove(logs);
@@ -41,12 +49,13 @@ TEST_GROUP(TgzWizardTestGroup)
 
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 *
-* NAME : TgzWizardTestGroup, testTgzWizard
-* 
-* PURPOSE : 
+* GROUP : TgzWizardTestGroup 
 *
+* NAME : tarOneFile_defaultOpt
+* 
 *-----------------------------------------------------------------------------*/
-TEST(TgzWizardTestGroup, tarOneFile_defaultOpt){
+TEST(TgzWizardTestGroup, tarOneFile_defaultOpt)
+{
     int pid = fork();
     int status = 0;
     const char* filename = "Updater20140101";
@@ -65,7 +74,7 @@ TEST(TgzWizardTestGroup, tarOneFile_defaultOpt){
         #endif
 
         execl(tgzWizard, tgzWizard, "-f", filename, "-l", logs, "-t", tgz, (char*)NULL);
-    }else{
+    } else {
         wait(&status); 
         CHECK(0 == status);
 
@@ -85,7 +94,15 @@ TEST(TgzWizardTestGroup, tarOneFile_defaultOpt){
     }
 }
 
-TEST(TgzWizardTestGroup, testExtractErrorWarning){
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*
+* GROUP : TgzWizardTestGroup 
+*
+* NAME : 
+* 
+*-----------------------------------------------------------------------------*/
+TEST(TgzWizardTestGroup, testExtractErrorWarning)
+{
     FAIL("TODO");
     return;
 
@@ -99,7 +116,7 @@ TEST(TgzWizardTestGroup, testExtractErrorWarning){
         printf("[CHILD]");
         printf("%s %s %s %s %s %s", tgzWizard, app, "-l", logs, "-t", tgz);
         execl(tgzWizard, tgzWizard, app, "-l", logs, "-t", tgz, (char*)NULL);
-    }else{
+    } else {
         wait(&status); 
         CHECK(0 == status);
 
@@ -110,16 +127,11 @@ TEST(TgzWizardTestGroup, testExtractErrorWarning){
     }
 }
 
-
-
-
-/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-*
-* NAME : DirUtlTestGroup
-* 
-* PURPOSE : test the utility functions in dirUtl.h 
-*
-*-----------------------------------------------------------------------------*/
+//************************************************************
+//************************************************************
+//              DirUtlTestGroup
+//************************************************************
+//************************************************************
 TEST_GROUP(DirUtlTestGroup)
 {
     void setup(){
@@ -128,7 +140,15 @@ TEST_GROUP(DirUtlTestGroup)
     }
 };
 
-TEST(DirUtlTestGroup, testDiff_filesAreIdentical_returnsTrue){
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*
+* GROUP : DirUtlTestGroup 
+*
+* NAME : testDiff_filesAreIdentical_returnsTrue
+* 
+*-----------------------------------------------------------------------------*/
+TEST(DirUtlTestGroup, testDiff_filesAreIdentical_returnsTrue)
+{
     const char* data = "asdfsadf;lkj1243;lkjsdf";
 
     FILE* file1 = fopen("a.txt", "w+");    
@@ -140,9 +160,20 @@ TEST(DirUtlTestGroup, testDiff_filesAreIdentical_returnsTrue){
     fclose(file2);
 
     CHECK(diff("a.txt", "b.txt"));
+
+    remove("a.txt");
+    remove("b.txt");
 }
 
-TEST(DirUtlTestGroup, testDiff_filesAreNOTIdentical_returnsFalse){
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*
+* GROUP : DirUtlTestGroup 
+*
+* NAME : testDiff_filesAreNOTIdentical_returnsFalse
+* 
+*-----------------------------------------------------------------------------*/
+TEST(DirUtlTestGroup, testDiff_filesAreNOTIdentical_returnsFalse)
+{
     const char* data = "asdfsadf;lkj1243;lkjsdf";
 
     FILE* file1 = fopen("a.txt", "w+");    
@@ -160,7 +191,15 @@ TEST(DirUtlTestGroup, testDiff_filesAreNOTIdentical_returnsFalse){
     remove("b.txt");
 }
 
-TEST(DirUtlTestGroup, testGetDirSize_SizeIsRight){
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*
+* GROUP : DirUtlTestGroup 
+*
+* NAME : testGetDirSize_SizeIsRight
+* 
+*-----------------------------------------------------------------------------*/
+TEST(DirUtlTestGroup, testGetDirSize_SizeIsRight)
+{
     int size = getDirSize(testfiles);    
     char duCmd[CMD_BUFFER] = {0};
     sprintf(duCmd, "du -b %s", testfiles);
