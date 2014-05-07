@@ -50,7 +50,8 @@ int getDirSize(const char* path){
 
 bool diff(const char* file_path1, const char* file_path2){
     bool result = true;
-    char c1, c2;
+    char c1 = 0;
+    char c2 = 0;
     FILE* file1 = fopen(file_path1, "r");
     FILE* file2 = fopen(file_path2, "r");
 
