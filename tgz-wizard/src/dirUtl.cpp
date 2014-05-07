@@ -6,12 +6,15 @@
 
 static const int PATH_BUFFER_SIZE = 500;
 
-/*************************************************************************************************
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*
+* NAME : getDirSize
+*
 * PURPOSE : some helper functions to test the tgz-wizard
 *
-*
-**************************************************************************************************/
-int getDirSize(const char* path){
+*-----------------------------------------------------------------------------*/
+int getDirSize(const char* path)
+{
     int totalSize = 0;          // in bytes
     struct dirent* entry = 0;
     struct stat statbuf; 
@@ -48,7 +51,15 @@ int getDirSize(const char* path){
 }
 
 
-bool diff(const char* file_path1, const char* file_path2){
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*
+* NAME : diff 
+*
+* PURPOSE : returns true if the files are identical.
+*
+*-----------------------------------------------------------------------------*/
+bool diff(const char* file_path1, const char* file_path2)
+{
     bool result = true;
     char c1 = 0;
     char c2 = 0;
@@ -73,11 +84,9 @@ bool diff(const char* file_path1, const char* file_path2){
         }
     }
 
-
     if(!(fclose(file1) == 0 && fclose(file2) == 0)){
         fprintf(stderr, "%s%s\n", __FILE__, " Can't close the file");
     }
 
     return result;
 }
-
