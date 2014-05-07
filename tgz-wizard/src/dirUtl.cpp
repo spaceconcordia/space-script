@@ -10,7 +10,7 @@ static const int PATH_BUFFER_SIZE = 500;
 *
 * NAME : getDirSize
 *
-* PURPOSE : some helper functions to test the tgz-wizard
+* PURPOSE : returns the size of a directory in bytes.
 *
 *-----------------------------------------------------------------------------*/
 int getDirSize(const char* path)
