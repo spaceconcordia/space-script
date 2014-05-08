@@ -28,7 +28,7 @@ JOBS_DIR="$CS1_DIR/space-jobs"
 SPACESCRIPT_DIR="$CS1_DIR/space-script"
 UPLOAD_FOLDER="$CS1_DIR/BUILD/Q6/uploads"
 
-build_environment=PC
+build_environment="PC"      # GLOBAL VARIABLE
 
 #EXIT ON ERROR
 set -e
@@ -47,7 +47,7 @@ self-update () {
     cd $SPACESCRIPT_DIR
     if ! git-check "."; then
       if confirm "An update for this script may be available. Proceed?"; then
-        if check-master-branch ; then
+        if check-master-branch . ; then
           echo -e "${green}UPDATING ...${NC}"
           cs1-update $SPACESCRIPT_DIR && rsync -avz --update $SPACESCRIPT_DIR/MANAGE_CS1.sh $CS1_DIR/MANAGE_CS1.sh
         fi
@@ -58,6 +58,7 @@ self-update () {
 }
 
 git-check () {
+  [ "$#" -eq 1 ] || fail "Exactly one argument required: path"
   echo "Checking repo"
   git --git-dir=$1/.git diff-index --quiet HEAD
   #return $(git --git-dir=$1/.git rev-list HEAD...origin/master --count)
@@ -86,9 +87,8 @@ check-package () {
 }
 
 check-master-branch () {
-    [ $1 ] && gdirectory="--git-dir=$1/.git"
-    #branch_name="$(git ${gdirectory} symbolic-ref --short -q HEAD)" # short not available on all versions? temporary hack below.
-    branch_name="$(git ${gdirectory} symbolic-ref -q HEAD | sed 's|refs\/heads\/||g' )" 
+    [ $1 ] && gdirectory="--git-dir=$1/.git" || gdirectory=""
+    branch_name="$(git ${gdirectory} symbolic-ref --short -q HEAD)"
     echo "Currently on branch: $branch_name"
     if [ "$branch_name" != "master" ]; then
         confirm "Repository $1 is on the '$branch_name' branch, are you sure you wish to continue?" && return 0 || return 1
@@ -175,7 +175,7 @@ cs1-clone-all () {
 
 cs1-update () {
     cd $1
-    branch_name="$(git symbolic-ref -q HEAD | sed 's|refs\/heads\/||g'  )"
+    branch_name="$(git symbolic-ref --short -q HEAD)"
     echo -e "${green}Updating $1 on branch $branch_name ${NC}"
     echo "git pull origin $branch_name #$1"
     git pull origin $branch_name
@@ -185,7 +185,7 @@ cs1-update () {
 cs1-build-commander () {
     #COMMANDER
     echo -e "${green}Building Commander...${NC}"
-    cd $CS1_DIR/space-commander
+    cd $COMMANDER_DIR
     check-master-branch || fail "Cannot build project without"
     mkdir -p ./bin ./lib ./include
     confirm-build-q6 && make buildQ6 || make buildBin
@@ -210,7 +210,7 @@ cs1-build-commander () {
 
 cs1-build-netman () {
     echo -e "${green}Building Netman...${NC}"
-    cd $CS1_DIR/space-netman
+    cd $NETMAN_DIR
     check-master-branch || fail "Cannot build project without"
     mkdir -p ./bin ./lib ./include
     cp $COMMANDER_DIR/include/Net2Com.h $NETMAN_DIR/lib/include
@@ -221,7 +221,7 @@ cs1-build-netman () {
 
 cs1-build-watch-puppy () {
     echo -e "${green}Building Watch-Puppy...${NC}"
-    cd $CS1_DIR/watch-puppy
+    cd $WATCHPUPPY_DIR
     mkdir -p ./bin ./lib/include
     cp $CS1_DIR/space-lib/shakespeare/inc/shakespeare.h $CS1_DIR/watch-puppy/inc/
     cp $CS1_DIR/space-lib/shakespeare/lib/libshakespeare* $CS1_DIR/watch-puppy/lib/
@@ -231,7 +231,7 @@ cs1-build-watch-puppy () {
 
 cs1-build-baby-cron () {
     echo -e "${green}Building Baby-Cron...${NC}"
-    cd $CS1_DIR/baby-cron
+    cd $BABYCRON_DIR
     check-master-branch || fail "Cannot build project without"
     mkdir -p ./bin ./lib ./include
     cp $CS1_DIR/space-lib/shakespeare/inc/shakespeare.h $CS1_DIR/baby-cron/include/
@@ -274,7 +274,7 @@ cs1-build-fletcher () {
 
 cs1-build-job-runner () {
     echo -e "${green}Building Job-Runner...${NC}"
-    cd $CS1_DIR/space-jobs/job-runner
+    cd $JOBRUNNER_DIR
     check-master-branch || fail "Cannot build project without"
     mkdir -p ./bin ./lib ./inc
     confirm-build-q6 && make buildQ6 || make buildBin
@@ -348,12 +348,14 @@ cs1-build-timer () {
   echo "cd: \c"
   pwd
   confirm-build-q6 && sh mbcc-compile-lib-static-cpp.sh || sh x86-compile-lib-static-cpp.sh
-  cp lib/libtimer* $NETMAN_DIR/lib/
-  cp lib/libtimer* $HELIUM_DIR/lib/
-  cp lib/libtimer* $JOBRUNNER_DIR/lib/
-  cp inc/timer.h $NETMAN_DIR/lib/include/
-  cp inc/timer.h $HELIUM_DIR/inc/
-  cp inc/timer.h $JOBRUNNER_DIR/inc/
+  cp lib/libtimer* $NETMAN_DIR/lib
+  cp lib/libtimer* $HELIUM_DIR/lib
+  cp lib/libtimer* $JOBRUNNER_DIR/lib
+  #cp lib/libtimer* $JOBRUNNER_DIR/lib
+  cp inc/timer.h $NETMAN_DIR/lib/include
+  cp inc/timer.h $HELIUM_DIR/inc
+  cp inc/timer.h $JOBRUNNER_DIR/inc
+  #cp inc/timer.h $JOBRUNNER_DIR/inc
 }
 
 ensure-directories () {
@@ -364,87 +366,67 @@ ensure-directories () {
   done
 }
 
-cs1-build-pc () {
-    build_environment="PC"
-    echo -e "${green}Building for $build_environment...${NC}"
+cs1-build () {
+    [ "$#" -eq 0 ] && fail "No build environment specified..." 
+    build_environment="$1"
+    echo -e "${orange}Building for $build_environment...${NC}"
     ensure-directories
 
     #libraries
-    cs1-build-timer PC
-    cs1-build-shakespeare PC
-    cs1-build-fletcher PC
-    cs1-build-helium PC
+    cs1-build-timer $build_environment
+    cs1-build-shakespeare $build_environment
+    cs1-build-fletcher $build_environment
+    cs1-build-helium $build_environment
 
     #executables
-    cs1-build-commander PC
-    cs1-build-netman PC
-    cs1-build-job-runner PC
-    cs1-build-watch-puppy PC
-    cs1-build-space-updater PC
-    cs1-build-space-updater-api PC
-    cs1-build-baby-cron PC
+    cs1-build-commander $build_environment
+    cs1-build-netman $build_environment
+    cs1-build-job-runner $build_environment
+    cs1-build-jobs $build_environment
+    cs1-build-watch-puppy $build_environment
+    cs1-build-space-updater $build_environment
+    cs1-build-space-updater-api $build_environment
+    cs1-build-baby-cron $build_environment
 
     #COLLECT FILES
-    mkdir -p $CS1_DIR/BUILD/PC
-    cp $COMMANDER_DIR/bin/space-commander $CS1_DIR/BUILD/PC/
-    cp $NETMAN_DIR/bin/gnd $CS1_DIR/BUILD/PC/
-    cp $NETMAN_DIR/bin/sat $CS1_DIR/BUILD/PC/
-    #cp $CS1_DIR/space-jobs/job-runner/bin/job-runner $CS1_DIR/BUILD/PC/
-    cp $WATCHPUPPY_DIR/bin/watch-puppy $CS1_DIR/BUILD/PC/
-    cp $CS1_DIR/space-updater-api/bin/UpdaterServer $CS1_DIR/BUILD/PC/
-    cp $CS1_DIR/space-updater/bin/PC-Updater $CS1_DIR/BUILD/PC/
-    cp $BABYCRON_DIR/bin/baby-cron $CS1_DIR/BUILD/PC/
+    echo -e "${purple}Should Collect files for $build_environment ${NC}"
+    if confirm-build-q6; then  
+      ls $CS1_DIR/BUILD/Q6
+      cp $COMMANDER_DIR/bin/space-commanderQ6 $UPLOAD_FOLDER/
+      cp $NETMAN_DIR/bin/gnd-mbcc $UPLOAD_FOLDER/../
+      cp $NETMAN_DIR/bin/sat-mbcc $UPLOAD_FOLDER/sat
+      cp $CS1_DIR/space-jobs/job-runner/bin/job-runner-mbcc $UPLOAD_FOLDER/
+      cp $WATCHPUPPY_DIR/bin/watch-puppy $UPLOAD_FOLDER/
+      cp $CS1_DIR/space-updater-api/bin/UpdaterServer-Q6 $UPLOAD_FOLDER/
+      cp $CS1_DIR/space-updater/bin/Updater-Q6 $UPLOAD_FOLDER/
+      cp $BABYCRON_DIR/bin/baby-cron $UPLOAD_FOLDER/
 
-    cd $CS1_DIR
-    echo -e "${purple}Binaries left in $CS1_DIR/BUILD/PC${NC}"
-}
+      cp $SPACESCRIPT_DIR/Q6/* $UPLOAD_FOLDER/
+      cp $SPACESCRIPT_DIR/at-runner/at-runner.sh $UPLOAD_FOLDER/
 
-cs1-build-q6 () {
-    build_environment="Q6"
-    echo -e "${green}Building for $build_environment...${NC}"
-    ensure-directories
-
-    #libraries
-    cs1-build-timer Q6
-    cs1-build-shakespeare Q6
-    cs1-build-fletcher Q6
-    cs1-build-helium Q6
-
-    #executables
-    cs1-build-commander Q6
-    cs1-build-netman Q6
-    cs1-build-job-runner Q6
-    cs1-build-jobs Q6
-    cs1-build-watch-puppy Q6
-    cs1-build-space-updater Q6
-    cs1-build-space-updater-api Q6
-    cs1-build-baby-cron Q6
-
-    #COLLECT FILES
-    
-    ls $CS1_DIR/BUILD/Q6
-    cp $COMMANDER_DIR/bin/space-commanderQ6 $UPLOAD_FOLDER/
-    cp $NETMAN_DIR/bin/gnd-mbcc $UPLOAD_FOLDER/../
-    cp $NETMAN_DIR/bin/sat-mbcc $UPLOAD_FOLDER/sat
-    cp $CS1_DIR/space-jobs/job-runner/bin/job-runner-mbcc $UPLOAD_FOLDER/
-    cp $WATCHPUPPY_DIR/bin/watch-puppy $UPLOAD_FOLDER/
-    cp $CS1_DIR/space-updater-api/bin/UpdaterServer-Q6 $UPLOAD_FOLDER/
-    cp $CS1_DIR/space-updater/bin/Updater-Q6 $UPLOAD_FOLDER/
-    cp $BABYCRON_DIR/bin/baby-cron $UPLOAD_FOLDER/
-
-    cp $SPACESCRIPT_DIR/Q6/* $UPLOAD_FOLDER/
-    cp $SPACESCRIPT_DIR/at-runner/at-runner.sh $UPLOAD_FOLDER/
-
-    cp $SPACESCRIPT_DIR/boot-drivers/*.sh $UPLOAD_FOLDER/
-    
-    chmod +x $UPLOAD_FOLDER/*
-    cd $UPLOAD_FOLDER
-    tar -cvf $(date --iso)-Q6.tar.gz * 
-    mv $(date --iso)-Q6.tar.gz ../
-    ls
-    cd $CS1_DIR
-    echo 'Binaries left in $CS1_DIR/BUILD/Q6'
-    echo -e "${purple}$(date --iso)-Q6.tar.gz left in $CS1_DIR/BUILD/Q6, transfer it to Q6, tar -xvf it, and run Q6-rsync.sh${NC}"
+      cp $SPACESCRIPT_DIR/boot-drivers/*.sh $UPLOAD_FOLDER/
+      
+      chmod +x $UPLOAD_FOLDER/*
+      cd $UPLOAD_FOLDER
+      tar -cvf $(date --iso)-Q6.tar.gz * 
+      mv $(date --iso)-Q6.tar.gz ../
+      ls
+      cd $CS1_DIR
+      echo 'Binaries left in $CS1_DIR/BUILD/Q6'
+      echo -e "${purple}$(date --iso)-Q6.tar.gz left in $CS1_DIR/BUILD/Q6, transfer it to Q6, tar -xvf it, and run Q6-rsync.sh${NC}"
+    else
+      mkdir -p $CS1_DIR/BUILD/PC
+      cp $COMMANDER_DIR/bin/space-commander $CS1_DIR/BUILD/PC/
+      cp $NETMAN_DIR/bin/gnd $CS1_DIR/BUILD/PC/
+      cp $NETMAN_DIR/bin/sat $CS1_DIR/BUILD/PC/
+      #cp $CS1_DIR/space-jobs/job-runner/bin/job-runner $CS1_DIR/BUILD/PC/
+      cp $WATCHPUPPY_DIR/bin/watch-puppy $CS1_DIR/BUILD/PC/
+      cp $CS1_DIR/space-updater-api/bin/UpdaterServer $CS1_DIR/BUILD/PC/
+      cp $CS1_DIR/space-updater/bin/PC-Updater $CS1_DIR/BUILD/PC/
+      cp $BABYCRON_DIR/bin/baby-cron $CS1_DIR/BUILD/PC/    
+      cd $CS1_DIR
+      echo -e "${purple}Binaries left in $CS1_DIR/BUILD/PC${NC}"
+    fi
 }
 
 [ -d .git ] && fail "You are in a git directory, please copy this file to a new directory where you plan to build the project!"
@@ -494,13 +476,13 @@ check-microblaze && confirm "Build project for Q6?" && buildQ6=0
 
 if [ $buildPC ]; then
     if [ -d "space-script" ]; then
-        cs1-build-pc
+        cs1-build PC
     fi;
 fi;
 # space script directory is required for other scripts
 if [ $buildQ6 ]; then
     if [ -d "space-script" ]; then
-        cs1-build-q6
+        cs1-build Q6
     fi;
 fi;
 
