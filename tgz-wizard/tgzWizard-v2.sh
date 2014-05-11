@@ -17,7 +17,7 @@
 #
 #**********************************************************************************************************************
 SPACE_LIB="../../space-lib/include"
-./$SPACE_LIB/SpaceDecl.sh
+source $SPACE_LIB/SpaceDecl.sh
 
 
 function usage(){

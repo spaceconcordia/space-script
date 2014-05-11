@@ -1,0 +1,1320 @@
+1397415811:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415811:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397415831:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416093:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416094:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416114:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416166:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416166:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416186:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397415811:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415811:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397415831:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416093:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416094:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416114:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416166:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416166:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416186:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397415811:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415811:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397415831:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416093:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416094:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416114:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416166:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416166:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416186:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397415811:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415811:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397415831:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416093:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416094:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416114:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416166:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416166:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416186:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397415811:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415811:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397415831:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416093:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416094:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416114:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416166:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416166:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416186:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397415811:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415811:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397415831:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416093:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416094:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416114:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416166:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416166:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416186:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397415811:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415811:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397415831:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416093:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416094:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416114:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416166:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416166:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416186:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397415811:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415811:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397415831:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416093:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416094:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416114:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416166:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416166:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416186:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397415811:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415811:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397415831:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416093:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416094:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416114:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416166:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416166:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416186:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397415811:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415811:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415811:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415811:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415811:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415811:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415811:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415811:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415811:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415811:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415811:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415811:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415811:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415811:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415811:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415811:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415811:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415811:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415811:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415811:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415811:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415811:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415811:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415811:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415811:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415811:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415811:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415811:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415811:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415811:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415811:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415811:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415811:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415811:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415811:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415811:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397415831:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416093:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416094:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416114:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416166:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416166:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416186:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397415811:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397415831:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416093:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416094:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416114:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416166:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416166:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416186:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397415811:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397415831:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416093:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416094:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416114:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416166:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416166:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416186:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397415811:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397415831:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416093:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416094:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416114:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416166:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416166:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416186:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397415811:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397415831:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416093:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416094:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416114:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416166:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416166:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416186:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397415811:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397415831:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416093:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416094:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416114:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416166:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416166:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416186:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397415811:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397415831:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416093:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416094:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416114:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416166:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416166:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416186:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397415811:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397415831:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416093:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416094:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416114:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416166:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416166:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416186:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397415811:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397415831:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416093:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416094:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416114:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416166:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416166:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416186:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397415811:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397415831:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416093:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416094:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416114:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416166:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416166:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416186:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397415811:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397415831:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416093:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416094:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416114:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416166:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416166:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416186:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397415811:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397415831:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416093:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416094:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416114:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416166:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416166:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416186:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397415811:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397415831:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416093:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416094:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416114:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416166:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416166:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416186:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397415811:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397415831:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416093:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416094:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416114:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416166:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416166:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416186:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397415811:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397415831:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416093:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416094:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416114:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416166:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416166:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416186:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397415811:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397415831:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416093:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416094:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416114:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416166:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416166:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416186:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397415811:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397415831:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416093:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416094:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416114:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416166:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416166:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416186:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397415811:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397415831:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416093:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416094:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416114:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416166:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416166:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416186:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397415811:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397415831:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416093:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416094:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416114:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416166:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416166:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416186:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397415811:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397415831:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416093:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416094:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416114:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416166:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416166:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416186:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397415811:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397415831:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416093:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416094:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416114:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416166:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416166:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416186:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397415811:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397415831:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416093:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416094:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416114:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416166:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416166:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416186:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397415811:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397415831:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416093:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416094:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416114:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416166:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416166:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416186:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397415811:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397415831:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416093:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416094:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416114:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416166:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416166:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416186:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397415811:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397415831:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416093:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416094:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416114:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416166:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416166:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416186:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397415811:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397415831:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416093:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416094:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416114:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416166:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416166:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416186:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397415811:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397415831:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416093:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416094:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416114:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416166:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416166:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416186:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397415811:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397415831:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416093:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416094:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416114:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416166:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416166:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416186:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397415811:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397415831:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416093:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416094:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416114:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416166:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416166:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416186:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397415811:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397415831:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416093:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416094:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416114:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416166:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416166:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416186:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397415811:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397415831:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416093:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416094:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416114:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416166:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416166:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416186:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397415811:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397415831:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416093:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416094:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416114:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416166:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416166:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416186:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397415811:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397415831:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416093:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416094:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416114:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416166:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416166:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416186:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397415811:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397415831:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416093:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416094:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416114:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416166:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416166:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416186:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397415811:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397415831:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:Launching UpdaterServer
+1397415831:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416093:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416094:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416114:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416114:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
+1397416166:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416166:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1397416186:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:Launching UpdaterServer
+1397416186:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp1
