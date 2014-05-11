@@ -26,3 +26,4 @@ alias cst="cd $CS1_TGZ"
 
 alias cs1="cd $GIT_HOME"
 alias cscom="cd $GIT_HOME/space-commander"
+alias csscript="cd $GIT_HOME/space-script"
