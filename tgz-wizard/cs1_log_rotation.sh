@@ -9,7 +9,9 @@
 #
 #**********************************************************************************************************************
 SPACE_LIB="../../space-lib/include"
-source $SPACE_LIB/SpaceDecl.sh
+if [ -f $SPACE_LIB/SpaceDecl.sh ]; then
+    source $SPACE_LIB/SpaceDecl.sh
+fi
 
 
 
