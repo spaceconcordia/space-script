@@ -1,9 +1,10 @@
-//******************************************/
-//  SPACE CONCORDIA 2013
-//
-//
-//******************************************/
-#include "CppUTest/TestHarness.h"
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*
+* AUTHORS : Space Concordia 2014, Joseph 
+*
+* TITLE : tgz-wizard-test.cpp
+*
+*----------------------------------------------------------------------------*/
 #include <cstdio>
 #include <sys/stat.h>
 #include <unistd.h>
@@ -13,6 +14,7 @@
 #include <string>
 #include <fileIO.h>
 
+#include "CppUTest/TestHarness.h"
 #include "dirUtl.h"
 
 using namespace std;
