@@ -40,8 +40,8 @@ fi
 
 PATH_ROOT="/home"           ### HARDCODED ROOT PATH <===============================
 
-LOG_DIR="$PATH_ROOT/logs"   # -l log directory
-TGZ_DIR="$PATH_ROOT/tgz"    # -t tgz directory
+LOG_DIR="$CS1_LOGS"         # -l log directory
+TGZ_DIR="$CS1_TGZ"          # -t tgz directory
 TGZ_MAX_SIZE=$((1 * 1024))  # -s Default max size of the archives
 PART_SIZE=190               # -p Default part size
 NUM_LINES=50                # -n Default number of lines to extract from the log file
