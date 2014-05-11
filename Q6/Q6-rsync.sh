@@ -61,6 +61,13 @@ rsync -av --remove-source-files I02hmc5843.sh /etc/init.d/
 rsync -av --remove-source-files I03ina2xx.sh /etc/init.d/
 rsync -av --remove-source-files I04rtc-ds3232e.sh /etc/init.d/
 
+# Copy log rotation scripts
+chmod +x tgzWizard.sh
+rsync -av --remove-source-files tgzWizard.sh /usr/bin/
+chmod +x cs1_log_rotation.sh
+rsync -av --remove-source-files cs1_log_rotation.sh /usr/bin/
+rsync -av --remove-source-files SpaceDecl.sh /etc/
+
 # Copy test scripts
 rsync -av --remove-source-files Q6_helium100.sh /home/test/
 rsync -av --remove-source-files system-test.sh /home/test/

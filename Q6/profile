@@ -28,6 +28,8 @@ if [ "$PS1" ]; then
     export INA2XXPATH='unset'
     export RTCDS3232PATH='unset'
     
+    source /etc/SpaceDecl.sh
+    
     ### Some aliases
     alias cls='clear'
     alias df='df -h'

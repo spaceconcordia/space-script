@@ -263,13 +263,15 @@ cs1-build-fletcher () {
   check-master-branch || fail "Cannot build project without"
   mkdir -p $CHECKSUM_DIR/lib
   confirm-build-q6 && sh mbcc-compile-lib-static.sh || sh x86-compile-lib-static.sh
+  #cp $CHECKSUM_DIR/lib/libfletcher* $SPACE_LIB/lib/;
   cp $CHECKSUM_DIR/lib/libfletcher* $NETMAN_DIR/lib/;
   cp $CHECKSUM_DIR/lib/libfletcher* $HELIUM_DIR/lib/;
   cp $CHECKSUM_DIR/lib/libfletcher* $COMMANDER_DIR/lib/;
+  
+  #cp $CHECKSUM_DIR/inc/fletcher.h $SPACE_LIB/lib/include/;
   cp $CHECKSUM_DIR/inc/fletcher.h $NETMAN_DIR/lib/include/;
   cp $CHECKSUM_DIR/inc/fletcher.h $HELIUM_DIR/inc/;
   cp $CHECKSUM_DIR/inc/fletcher.h $COMMANDER_DIR/include/;
-
 }
 
 cs1-build-job-runner () {
@@ -400,6 +402,10 @@ cs1-build () {
       cp $CS1_DIR/space-updater-api/bin/UpdaterServer-Q6 $UPLOAD_FOLDER/
       cp $CS1_DIR/space-updater/bin/Updater-Q6 $UPLOAD_FOLDER/
       cp $BABYCRON_DIR/bin/baby-cron $UPLOAD_FOLDER/
+
+      cp $SPACESCRIPT_DIR/tgz-wizard/tgzWizard $UPLOAD_FOLDER/
+      cp $SPACESCRIPT_DIR/tgz-wizard/cs1_log_rotation.sh $UPLOAD_FOLDER/
+      cp $SPACE_LIB/include/SpaceDecl.sh $UPLOAD_FOLDER/
 
       cp $SPACESCRIPT_DIR/Q6/* $UPLOAD_FOLDER/
       cp $SPACESCRIPT_DIR/at-runner/at-runner.sh $UPLOAD_FOLDER/
