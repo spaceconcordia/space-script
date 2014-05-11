@@ -8,9 +8,10 @@
 #       if [ -f ~/.CS1_aliases ]; then
 #           . ~/.CS1_aliases
 #       fi
+#  - Modify $GIT_HOME as needed
 #------------------------------------------------------------------------------
 
-GIT_HOME="~/space/git"          ### the folder that contains all CS1 projects
+GIT_HOME="~/CONSAT1"          ### the folder that contains all CS1 projects
 
 CS1_APPS="/home/apps"
 CS1_LOGS="/home/logs"
