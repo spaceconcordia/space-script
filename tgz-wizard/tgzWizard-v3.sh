@@ -1,4 +1,4 @@
-#!/bin/sh -e
+#!/bin/bash -e
 #**********************************************************************************************************************
 # AUTHORS : Space Concordia 2014, Joseph
 #
@@ -16,14 +16,16 @@
 #       -t     tgz directory
 #
 #**********************************************************************************************************************
-source /etc/profile
-
 SPACE_LIB="../../space-lib/include"
 if [ -f $SPACE_LIB/SpaceDecl.sh ]; then
     source $SPACE_LIB/SpaceDecl.sh
+else
+    source /etc/SpaceDecl.h
 fi
 
-usage () {
+
+usage() 
+{
         echo "Usage : tgzWizard [-f filename] [-a app] [-d date]"
         echo "                  [-s sizeOfBigTgz] [-p sizeOfTgzParts] [-n numberOfLinesToExtract]"
         echo "                  [-u] [-l logDirectory] [-t tgzDirectory]"
@@ -53,9 +55,9 @@ APP=""                      # -a subsystem/app
 DATE=`date +%Y%m%d`         # -d date - default to current date 'YYYYmmdd'
 
 #
-# Add all valid application to the array (the ones that are used in the log filename (ex. "Watch-Puppy")
+# Add all valid application to the string (the ones that are used in the log filename (ex. "Watch-Puppy")
 #
-validApps="Error-Warning Baby-cron Watch-Puppy Updater Process-Updater"
+validApps="Error-Warning Baby-cron Process-Updater Updater Watch-Puppy"
 
 ERR_WARN_PATTERN="(ERROR|WARNING)"      # regex for the egrep
 EXTRACT_TMP="."                         # Temporary file path
@@ -140,8 +142,15 @@ done
 # if -a argument has been provided, validates.
 #
 if [ "$APP" != "" ]; then
-    if ( `echo $APP | grep $validApp` -eq 1 ) ; then exit 1; fi;
+    if ( `echo $APP | grep $validApp` -eq 1 ); then 
+        echo "'$APP' is not a valid application name"
+        exit 1
+    fi
 fi
+
+
+
+
 
 #####
 # build SOURCE and DEST (ex. 'Watch-Puppy20140101.log'
@@ -176,7 +185,7 @@ SOURCE="$SOURCE.log"
 # 
 # TITLE : finish
 #
-# PUPOSE : This function is executed when the script exits (success or failure)
+# PUPOSE : This is executed when the script exits (success or failure)
 #
 #------------------------------------------------------------------------------
 finish() {
@@ -214,8 +223,6 @@ fi
 extract_lines(){
     local archive_size=0
 
-###    echo "$LOG_DIR/$SOURCE" > $EXTRACT_TMP
-
     while [ $archive_size -le $TGZ_MAX_SIZE -a  `wc -l $LOG_DIR/$SOURCE | awk '{print $1}'` -gt 0 ] 
     do
 
@@ -223,7 +230,7 @@ extract_lines(){
         sed -i "1,$NUM_LINES d" $LOG_DIR/$SOURCE                        # removes  the first NUM_LINES from SOURCE
 
 
-        tar -cvf $TGZ_DIR/$DEST   $EXTRACT_TMP     1>&2                 # append to DEST
+        tar -zcvf $TGZ_DIR/$DEST   $EXTRACT_TMP     1>&2                 # append to DEST
         archive_size=`stat -c %s $TGZ_DIR/$DEST`
     done
 
