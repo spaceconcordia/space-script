@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/sh -e
 #**********************************************************************************************************************
 # AUTHORS : Space Concordia 2014, Joseph
 #
@@ -15,14 +15,9 @@ else
     source /etc/SpaceDecl.h
 fi
 
-
-
 #
 # TODO check disk usage and make room if needed (by deleting the oldest tgz files under CS1_TGZ
 #
-
-
-
 
 #
 # Runs tgzWizard of each file present under CS1_LOGS    

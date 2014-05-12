@@ -1,11 +1,17 @@
-#!/bin/bash -e
+#!/bin/sh -e
 #**********************************************************************************************************************
 # AUTHORS : Space Concordia 2014, Joseph
 #
 # PURPOSE :  Extracts lines from a specified log file, compresses in a .tgz file and split the file according to the 
 #            parameters.
-#   N.B. add all valid apps in the validApps array below!!!!! The name has to match the file name (ex : Watych-Puppy -> Watch-Puppy20140101.log)
+#   N.B. add all valid apps to the validApps string below!!!!! The name has to match the file name 
+#        (ex : Watych-Puppy -> Watch-Puppy20140101.log)
+#  
+#   N.B. This script dos NOT work with DASH! By default /bin/sh -> /bin/dash in Ubuntu, change that to
+#         /bin/sh -> /bin/bash 
 #
+#   to untar multiple parts     :   cat Watch-Puppy20010101.0.tgz* | tar jx -C dest_folder 
+# 
 # ARGUMENTS : 
 #       -f     filename
 #       -a     subsystem (ex. "Watch-Puppy") - should match the log filename
@@ -18,9 +24,9 @@
 #**********************************************************************************************************************
 SPACE_LIB="../../space-lib/include"
 if [ -f $SPACE_LIB/SpaceDecl.sh ]; then
-    source $SPACE_LIB/SpaceDecl.sh
+    source $SPACE_LIB/SpaceDecl.sh  # source PC
 else
-    source /etc/SpaceDecl.h
+    source /etc/SpaceDecl.h         # source Q6
 fi
 
 
@@ -188,7 +194,8 @@ SOURCE="$SOURCE.log"
 # PUPOSE : This is executed when the script exits (success or failure)
 #
 #------------------------------------------------------------------------------
-finish() {
+finish() 
+{
     echo "[INFO] EXIT signal trapped" 1>&2
     echo "[END]" 1>&2
 }
@@ -220,7 +227,8 @@ fi
 #           4. go to step 1 if archive size is SMALLER than TGZ_MAX_SIZE
 #
 #------------------------------------------------------------------------------
-extract_lines(){
+extract_lines()
+{
     local archive_size=0
 
     while [ $archive_size -le $TGZ_MAX_SIZE -a  `wc -l $LOG_DIR/$SOURCE | awk '{print $1}'` -gt 0 ] 
@@ -230,11 +238,13 @@ extract_lines(){
         sed -i "1,$NUM_LINES d" $LOG_DIR/$SOURCE                        # removes  the first NUM_LINES from SOURCE
 
 
-        tar -zcvf $TGZ_DIR/$DEST   $EXTRACT_TMP     1>&2                 # append to DEST
+        tar -jcvf $TGZ_DIR/$DEST   $EXTRACT_TMP     1>&2                 # append to DEST
         archive_size=`stat -c %s $TGZ_DIR/$DEST`
     done
 
-    rm $EXTRACT_TMP 
+    if [ -f $EXTRACT_TMP ]; then
+        rm $EXTRACT_TMP || { echo "[ERROR] $0:$LINENO - rm $EXTRACT_TMP failed"; }
+    fi
 
     if [ `wc -l $LOG_DIR/$SOURCE | awk '{print $1}'` -eq 0 ]; then 
         rm $LOG_DIR/$SOURCE
@@ -248,12 +258,12 @@ extract_lines(){
 #-------------------
 #
 
-
-
 extract_lines
 
-split -b $PART_SIZE $TGZ_DIR/$DEST $TGZ_DIR/$DEST || { echo "[ERROR] split failed"; exit 1; }
-rm $TGZ_DIR/$DEST
+if [ -f $TGZ_DIR/$DEST ]; then
+    split -b $PART_SIZE $TGZ_DIR/$DEST $TGZ_DIR/$DEST || { echo "[ERROR] $0:$LINENO - split failed"; exit 1; }
+    rm $TGZ_DIR/$DEST
+fi
 
 
 

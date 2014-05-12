@@ -62,7 +62,7 @@ TEST(TgzWizardTestGroup, tarOneFile_defaultOpt)
     int status = 0;
     const char* filename = "Updater20140101";
     char untarCmd[CMD_BUFFER] = {0};
-    sprintf(untarCmd, "cat %s/%s.0.tgz* | tar zx -C %s", tgz, filename, logs);
+    sprintf(untarCmd, "cat %s/%s.0.tgz* | tar jx -C %s", tgz, filename, logs);
 
     if (pid < 0){
         FAIL("fork() has failed");
@@ -112,7 +112,7 @@ TEST(TgzWizardTestGroup, testExtractErrorWarning)
     int status = 0;
     const char* app = "Error-Warning";
     char untarCmd[CMD_BUFFER] = {0};
-    sprintf(untarCmd, "cat %s/%s*.tgz* | tar zx -C %s", tgz, app, logs);
+    sprintf(untarCmd, "cat %s/%s*.tgz* | tar jx -C %s", tgz, app, logs);
 
     if (pid == 0){  // child process
         printf("[CHILD]");
