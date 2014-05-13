@@ -3,7 +3,8 @@
 # AUTHORS : Space Concordia 2014, Joseph
 #
 # PURPOSE : calls the tgzWizard on each file present under CS1_LOGS
-#           To be run as a cron job
+#           To be run as a cron job, add a line to the crontab file :
+#                               $ crontab -e
 #
 # ARGUMENTS : NONE
 #

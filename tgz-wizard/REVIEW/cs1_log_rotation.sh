@@ -8,7 +8,7 @@
 # ARGUMENTS : NONE
 #
 #**********************************************************************************************************************
-source /etc/profile
+source /etc/profile # source SpaceDecl.sh instead
 
 SPACE_LIB="../../space-lib/include"
 if [ -f $SPACE_LIB/SpaceDecl.sh ]; then
