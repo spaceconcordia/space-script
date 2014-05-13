@@ -1,0 +1,9 @@
+1399569606:NOTICE:UpdaterServer:Launching UpdaterServer
+1399569606:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp5
+1399569626:NOTICE:UpdaterServer:Launching UpdaterServer
+1399569626:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp4
+1399569626:NOTICE:UpdaterServer:Launching UpdaterServer
+1399569626:NOTICE:UpdaterServer:UpdaterServer : got connection from : testApp3
+1399569626:NOTICE:UpdaterServer:Rollback success : DirToRollBack, status : SUCCESS
+1399569626:NOTICE:UpdaterServer:Launching UpdaterServer
+1399569627:NOTICE:UpdaterServer:Launching UpdaterServer

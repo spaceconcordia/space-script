@@ -4,8 +4,14 @@
 #
 # PURPOSE :  Extracts lines from a specified log file, compresses in a .tgz file and split the file according to the 
 #            parameters.
-#   N.B. add all valid apps in the validApps array below!!!!! The name has to match the file name (ex : Watych-Puppy -> Watch-Puppy20140101.log)
+#   N.B. add all valid apps to the validApps string below!!!!! The name has to match the file name 
+#        (ex : Watych-Puppy -> Watch-Puppy20140101.log)
+#  
+#   N.B. This script dos NOT work with DASH! By default /bin/sh -> /bin/dash in Ubuntu, change that to
+#         /bin/sh -> /bin/bash 
 #
+#   to untar multiple parts     :   cat Watch-Puppy20010101.0.tgz* | tar jx -C dest_folder 
+# 
 # ARGUMENTS : 
 #       -f     filename
 #       -a     subsystem (ex. "Watch-Puppy") - should match the log filename
@@ -16,14 +22,16 @@
 #       -t     tgz directory
 #
 #**********************************************************************************************************************
-source /etc/profile
-
 SPACE_LIB="../../space-lib/include"
 if [ -f $SPACE_LIB/SpaceDecl.sh ]; then
-    source $SPACE_LIB/SpaceDecl.sh
+    source $SPACE_LIB/SpaceDecl.sh  # source PC
+else
+    source /etc/SpaceDecl.h         # source Q6
 fi
 
-usage () {
+
+usage() 
+{
         echo "Usage : tgzWizard [-f filename] [-a app] [-d date]"
         echo "                  [-s sizeOfBigTgz] [-p sizeOfTgzParts] [-n numberOfLinesToExtract]"
         echo "                  [-u] [-l logDirectory] [-t tgzDirectory]"
@@ -53,9 +61,9 @@ APP=""                      # -a subsystem/app
 DATE=`date +%Y%m%d`         # -d date - default to current date 'YYYYmmdd'
 
 #
-# Add all valid application to the array (the ones that are used in the log filename (ex. "Watch-Puppy")
+# Add all valid application to the string (the ones that are used in the log filename (ex. "Watch-Puppy")
 #
-validApps="Error-Warning Baby-cron Watch-Puppy Updater Process-Updater"
+validApps="Error-Warning Baby-cron Process-Updater Updater Watch-Puppy"
 
 ERR_WARN_PATTERN="(ERROR|WARNING)"      # regex for the egrep
 EXTRACT_TMP="."                         # Temporary file path
@@ -140,8 +148,15 @@ done
 # if -a argument has been provided, validates.
 #
 if [ "$APP" != "" ]; then
-    if ( `echo $APP | grep $validApp` -eq 1 ) ; then exit 1; fi;
+    if ( `echo $APP | grep $validApp` -eq 1 ); then 
+        echo "'$APP' is not a valid application name"
+        exit 1
+    fi
 fi
+
+
+
+
 
 #####
 # build SOURCE and DEST (ex. 'Watch-Puppy20140101.log'
@@ -176,10 +191,11 @@ SOURCE="$SOURCE.log"
 # 
 # TITLE : finish
 #
-# PUPOSE : This function is executed when the script exits (success or failure)
+# PUPOSE : This is executed when the script exits (success or failure)
 #
 #------------------------------------------------------------------------------
-finish() {
+finish() 
+{
     echo "[INFO] EXIT signal trapped" 1>&2
     echo "[END]" 1>&2
 }
@@ -211,10 +227,9 @@ fi
 #           4. go to step 1 if archive size is SMALLER than TGZ_MAX_SIZE
 #
 #------------------------------------------------------------------------------
-extract_lines(){
+extract_lines()
+{
     local archive_size=0
-
-###    echo "$LOG_DIR/$SOURCE" > $EXTRACT_TMP
 
     while [ $archive_size -le $TGZ_MAX_SIZE -a  `wc -l $LOG_DIR/$SOURCE | awk '{print $1}'` -gt 0 ] 
     do
@@ -223,11 +238,13 @@ extract_lines(){
         sed -i "1,$NUM_LINES d" $LOG_DIR/$SOURCE                        # removes  the first NUM_LINES from SOURCE
 
 
-        tar -cvf $TGZ_DIR/$DEST   $EXTRACT_TMP     1>&2                 # append to DEST
+        tar -jcvf $TGZ_DIR/$DEST   $EXTRACT_TMP     1>&2                 # append to DEST
         archive_size=`stat -c %s $TGZ_DIR/$DEST`
     done
 
-    rm $EXTRACT_TMP 
+    if [ -f $EXTRACT_TMP ]; then
+        rm $EXTRACT_TMP || { echo "[ERROR] $0:$LINENO - rm $EXTRACT_TMP failed"; }
+    fi
 
     if [ `wc -l $LOG_DIR/$SOURCE | awk '{print $1}'` -eq 0 ]; then 
         rm $LOG_DIR/$SOURCE
@@ -241,12 +258,12 @@ extract_lines(){
 #-------------------
 #
 
-
-
 extract_lines
 
-split -b $PART_SIZE $TGZ_DIR/$DEST $TGZ_DIR/$DEST || { echo "[ERROR] split failed"; exit 1; }
-rm $TGZ_DIR/$DEST
+if [ -f $TGZ_DIR/$DEST ]; then
+    split -b $PART_SIZE $TGZ_DIR/$DEST $TGZ_DIR/$DEST || { echo "[ERROR] $0:$LINENO - split failed"; exit 1; }
+    rm $TGZ_DIR/$DEST
+fi
 
 
 
