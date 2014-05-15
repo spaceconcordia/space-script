@@ -235,10 +235,12 @@ extract_lines()
     do
 
         sed -n "1,$NUM_LINES p" $LOG_DIR/$SOURCE >> $EXTRACT_TMP         # extracts the first NUM_LINES from SOURCE
-        sed -i "1,$NUM_LINES d" $LOG_DIR/$SOURCE                        # removes  the first NUM_LINES from SOURCE
+        sed -i "1,$NUM_LINES d" $LOG_DIR/$SOURCE                         # removes  the first NUM_LINES from SOURCE
 
+        tar -cvf $TGZ_DIR/$DEST.tmp   $EXTRACT_TMP     1>&2              # append to DEST
+        gzip $TGZ_DIR/$DEST.tmp   || { echo "[ERROR] $0:$LINENO - gzip $TGZ_DIR/$DEST.tmp failed"; } 
+        mv $TGZ_DIR/$DEST.tmp.gz $TGZ_DIR/$DEST
 
-        tar -jcvf $TGZ_DIR/$DEST   $EXTRACT_TMP     1>&2                 # append to DEST
         archive_size=`stat -c %s $TGZ_DIR/$DEST`
     done
 
