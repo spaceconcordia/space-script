@@ -25,9 +25,18 @@ alias cspids="cd $CS1_PIDS"
 alias cspipes="cd $CS1_PIDS"
 alias cst="cd $CS1_TGZ"
 
+# repo
 alias cs1="cd $GIT_HOME"
-alias cscom="cd $GIT_HOME/space-commander"
-alias csscript="cd $GIT_HOME/space-script"
-alias css="csscript"
-alias cstw="cd $GIT_HOME/space-script/tgz-wizard"
+alias cscommander="cd $GIT_HOME/space-commander"
 alias cslib="cd $GIT_HOME/space-lib"
+alias csnetman="cd $GIT_HOME/space-netman"
+alias csscript="cd $GIT_HOME/space-script"
+alias cstools="cd $GIT_HOME/space-tools"
+alias csupdater="cs1 && cd space-updater"
+alias csupdaterapi="cs1 && cd space-updater-api"
+alias cswatchpuppy="cs1 && cd watch-puppy"
+
+# short
+alias css="csscript"
+alias cscom="cscommander"
+alias cstw="css && cd tgz-wizard"
