@@ -26,7 +26,7 @@ SPACE_LIB="../../space-lib/include"
 if [ -f $SPACE_LIB/SpaceDecl.sh ]; then
     source $SPACE_LIB/SpaceDecl.sh  # source PC
 else
-    source /etc/SpaceDecl.h         # source Q6
+    source /etc/SpaceDecl.sh        # source Q6
 fi
 
 
