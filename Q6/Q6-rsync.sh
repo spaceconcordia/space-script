@@ -2,6 +2,7 @@
 # file to install new binaries on Q6
 set -e
 exec_dir="/home/apps/current"
+RSYNC_FLAGS= -av --remove-source-files
 
 writeprotect off
 
@@ -79,6 +80,9 @@ rsync -av --remove-source-files RunAwkTest.sh /home/test/
 #rsync -av --remove-source-files Q6-rsync.sh  /usr/bin/
 echo "Self destructing..."
 rm Q6-rsync.sh
+
+# System utilities
+rsync $RSYNC_FLAGS split /usr/bin
 
 sync
 writeprotect on
