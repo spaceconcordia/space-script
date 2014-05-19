@@ -7,3 +7,12 @@ tgzWizard-v2.sh :
       - Creates a TGZ file containing the previousily extracted data and splits it into parts if needed.
       
       - should be run on all files present in the CS1_LOGS directory (schedule!)
+
+
+build_coreutils.sh :
+    
+    Description :
+        - Downloads and builds coreutils for the Q6 (we needed the to compile the 'split' command.
+
+cross_compile_coreutils :
+        - performs the ./configure step, assuming the ./bootstrap has been run already. Then you can 'make'.
