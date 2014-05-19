@@ -174,7 +174,7 @@ DEST="$SOURCE"
 # TGZ_MAX_SIZE archive.
 while [ -f "$TGZ_DIR/$DEST.$COUNT.tgzaa" ]      
 do
-    COUNT=$[$COUNT+1]
+    COUNT=$(($COUNT+1))
 done
 
 EXTRACT_TMP="$EXTRACT_TMP/$DEST.log"
