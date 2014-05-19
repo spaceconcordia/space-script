@@ -10,10 +10,12 @@
 #
 #**********************************************************************************************************************
 SPACE_LIB="../../space-lib/include"
-if [ -f $SPACE_LIB/SpaceDecl.sh ]; then
+if [ -f $SPACE_LIB/SpaceDecl.sh ]; then     # on PC
     source $SPACE_LIB/SpaceDecl.sh
-else
+    TGZWIZARD=./tgzWizard
+else                                        # on Q6
     source /etc/SpaceDecl.sh
+    TGZWIZARD=tgzWizard
 fi
 
 #
@@ -30,7 +32,7 @@ do
 
     while [ -f $FILE ]
     do
-        ./tgzWizard -f $file_no_path_no_ext -s 500        
+        $TGZWIZARD -f $file_no_path_no_ext -s 500        
     done
 done
 
