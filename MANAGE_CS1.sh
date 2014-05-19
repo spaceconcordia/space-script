@@ -88,7 +88,7 @@ check-package () {
 
 check-master-branch () {
     [ $1 ] && gdirectory="--git-dir=$1/.git" || gdirectory=""
-    branch_name="$(git ${gdirectory} symbolic-ref --short -q HEAD)"
+    branch_name="$(git ${gdirectory} symbolic-ref -q HEAD | sed 's|refs\/heads\/||g')"
     echo "Currently on branch: $branch_name"
     if [ "$branch_name" != "master" ]; then
         confirm "Repository $1 is on the '$branch_name' branch, are you sure you wish to continue?" && return 0 || return 1
@@ -175,7 +175,7 @@ cs1-clone-all () {
 
 cs1-update () {
     cd $1
-    branch_name="$(git symbolic-ref --short -q HEAD)"
+    branch_name="$(git symbolic-ref -q HEAD | sed 's|refs\/heads\/||g')"
     echo -e "${green}Updating $1 on branch $branch_name ${NC}"
     echo "git pull origin $branch_name #$1"
     git pull origin $branch_name
