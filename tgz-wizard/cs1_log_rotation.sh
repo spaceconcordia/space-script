@@ -19,8 +19,9 @@ else                                        # on Q6
 fi
 
 #
-# TODO check disk usage and make room if needed (by deleting the oldest tgz files under CS1_TGZ
+# check disk usage and make room if needed (by deleting the oldest tgz files under CS1_TGZ)
 #
+sh duChecker.sh
 
 #
 # Runs tgzWizard of each file present under CS1_LOGS    
@@ -32,7 +33,7 @@ do
 
     while [ -f $FILE ]
     do
-        $TGZWIZARD -f $file_no_path_no_ext -s 500        
+        $TGZWIZARD -f $file_no_path_no_ext -s 500        ## see tgzWizard -u for more options
     done
 done
 
