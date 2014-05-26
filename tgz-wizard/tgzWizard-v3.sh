@@ -14,8 +14,10 @@
 # 
 # ARGUMENTS : 
 #       -f     filename
-#       -a     subsystem (ex. "Watch-Puppy") - should match the log filename
+#       -a     subsystem (ex. "Watch-Puppy") - should match the log filename (used in conjunction with -d)
+#       -d     date (to be used in conjunction with -a, otherwise the current date is used)
 #       -s     archive max size 
+#       -p     size of parts
 #       -n     number of lines to extract from the log file
 #       -u     display usage
 #       -l     logs directory
