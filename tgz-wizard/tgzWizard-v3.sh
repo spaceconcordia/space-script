@@ -10,7 +10,7 @@
 #   N.B. This script dos NOT work with DASH! By default /bin/sh -> /bin/dash in Ubuntu, change that to
 #         /bin/sh -> /bin/bash 
 #
-#   to untar multiple parts     :   cat Watch-Puppy20010101.0.tgz* | tar jx -C dest_folder 
+#   to untar multiple parts     :   cat Watch-Puppy20010101.0.tgz* | tar zx -C dest_folder 
 # 
 # ARGUMENTS : 
 #       -f     filename
@@ -37,6 +37,8 @@ usage()
         echo "Usage : tgzWizard [-f filename] [-a app] [-d date]"
         echo "                  [-s sizeOfBigTgz] [-p sizeOfTgzParts] [-n numberOfLinesToExtract]"
         echo "                  [-u] [-l logDirectory] [-t tgzDirectory]"
+        echo "Description :   "
+        echo "                  HOW TO untar multiple parts     :   cat Watch-Puppy20010101.0.tgz* | tar zx -C dest_folder"
 }
 
 ###

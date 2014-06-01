@@ -13,15 +13,17 @@ SPACE_LIB="../../space-lib/include"
 if [ -f $SPACE_LIB/SpaceDecl.sh ]; then     # on PC
     source $SPACE_LIB/SpaceDecl.sh
     TGZWIZARD=./tgzWizard
+    DUCHECKER="./duChecker.sh -f sda1"
 else                                        # on Q6
     source /etc/SpaceDecl.sh
     TGZWIZARD=tgzWizard
+    DUCHECKER="/usr/bin/duChecker.sh -f xdm_root"
 fi
 
 #
 # check disk usage and make room if needed (by deleting the oldest tgz files under CS1_TGZ)
 #
-sh duChecker.sh
+sh $DUCHECKER 
 
 #
 # Runs tgzWizard of each file present under CS1_LOGS    
