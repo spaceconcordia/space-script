@@ -12,7 +12,7 @@
 ## build_coreutils.sh :
     
     Description :
-        - Downloads and builds coreutils for the Q6 (we needed the to compile the 'split' command.
+        - Downloads and builds coreutils for the Q6 (needed to compile the 'split' command.)
 
 ## cross_compile_coreutils.sh :
         - performs the ./configure step, assuming the ./bootstrap has been run already. Then you can 'make'.
