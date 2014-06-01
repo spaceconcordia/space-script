@@ -40,25 +40,40 @@ display_usage()
     exit 0
 }
 
-#
-# Parses command line arguments
-#
-while getopts "um:pf:" opt; do
-    case "$opt" in
-        f)  FILESYSTEM=$OPTARG
+
+ARGS=$(getopt -o um:pf: -n "$0"  -- "$@");
+
+if [ $? -ne 0 ]; then
+    exit 1
+fi
+
+eval set -- "$ARGS";
+
+while true; do
+    case "$1" in
+        -f) shift     
+            FILESYSTEM=$1
+            shift
         ;;
-        u)  display_usage
-        ;;
-        m)  MAX_DU=$OPTARG
-        ;;
-        p)  PROMPT_BEFORE_CLEANUP=1
-        ;;
-        *)  echo "[ERROR] bad argument"
+        -u)  
+            shift
             display_usage
+        ;;
+        -m)  
+            shift 
+            MAX_DU=$1
+            shift 
+        ;;
+        -p) 
+            shift 
+            PROMPT_BEFORE_CLEANUP=1
+        ;;
+        --)
+            shift;
+            break;
         ;;
     esac
 done
-
 
 
 #
