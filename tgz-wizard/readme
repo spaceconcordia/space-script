@@ -1,4 +1,5 @@
-tgzWizard-v2.sh : 
+# tgzWizard -> tgzWizard-vx.sh :
+: 
 
     Description :
       - Operates on 1 log file at a time.
