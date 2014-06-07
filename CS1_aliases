@@ -22,7 +22,7 @@ CS1_TGZ="/home/tgz"
 alias csl="cd $CS1_LOGS"
 alias csa="cd $CS1_APPS"
 alias cspids="cd $CS1_PIDS"
-alias cspipes="cd $CS1_PIDS"
+alias cspipes="cd $CS1_PIPES"
 alias cst="cd $CS1_TGZ"
 
 # repo
