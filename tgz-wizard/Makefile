@@ -17,7 +17,10 @@ INCLUDE = -I$(UPDATER_PATH)/include -I./include
 # 	Compilation for CppUTest
 #
 
-test : bin/fileIO.o bin/dirUtl.o AllTests
+test : make_dir bin/fileIO.o bin/dirUtl.o AllTests 
+
+make_dir :
+	mkdir -p ./bin
 
 bin/fileIO.o: $(UPDATER_PATH)/src/fileIO.cpp $(UPDATER_PATH)/include/fileIO.h
 	$(CXX) $(INCLUDE) -c $< -o $@
