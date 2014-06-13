@@ -1,16 +1,13 @@
 #!/bin/bash
 if [ -z "$BASH_VERSION" ]; then exec bash "$0" "$@"; fi;
-
 NC='\e[0m';black='\e[0;30m';darkgrey='\e[1;30m';blue='\e[0;34m';lightblue='\e[1;34m';green='\e[0;32m';lightgreen='\e[1;32m';cyan='\e[0;36m';lightcyan='\e[1;36m';red='\e[0;31m';lightred='\e[1;31m';purple='\e[0;35m';lightpurple='\e[1;35m';orange='\e[0;33m';yellow='\e[1;33m';lightgrey='\e[0;37m';yellow='\e[1;37m';
-
-#http://snipplr.com/view/63919/
-#API="https://api.github.com"
-#GITHUBLIST=`curl --silent -u $USER:$PASS ${API}/orgs/${ORG}/repos -q | grep name | awk -F': "' '{print $2}' | sed -e 's/",//g'`
 
 project_name='https://github.com/spaceconcordia/'
 declare -a SysReqs=('git' 'g++' 'gcc' 'dpkg')
 declare -a Tools=('tmux' 'screen' 'minicom')
 declare -a RepoList=('acs' 'baby-cron' 'ground-commander' 'HE100-lib' 'mail_arc' 'space-commander' 'space-lib' 'space-jobs' 'space-netman' 'space-script' 'space-tools' 'space-timer-lib' 'space-updater' 'space-updater-api' 'SRT' 'watch-puppy')
+declare -a OperatingSystem=('apt-get')
+
 READ_DIR=$(readlink -f "$0")
 CS1_DIR=$(dirname "$READ_DIR")
 NETMAN_DIR="$CS1_DIR/space-netman"
@@ -37,8 +34,9 @@ quit () {
   echo -e "${green}Exiting gracefully...${NC}"
   exit 1
 }
+
 fail () {
-  echo -e "${red}$1 ...Aborting...${NC}"
+  echo -e "${red}$1 Aborting...${NC}"
   exit 1
 }
 
@@ -68,7 +66,6 @@ install-packages () {
     list_name=$1[@]
     list_elements=("${!list_name}")
     confirm "Would you like to install this set of packages [${list_elements[*]}] ?" && $(for item in ${list_elements[*]}; do sudo apt-get -y install $item; done)
-    return 0
 }
 
 check-installed () {
@@ -117,8 +114,8 @@ ensure-system-requirements () {
 }
 
 offer-space-tools () {
+    echo "Some tools are recommended for working on the Q6. Checking if installed..."
     check-installed Tools || install-packages Tools
-    return 0
 }
 
 confirm-build-q6 () {
@@ -246,13 +243,13 @@ cs1-build-helium () {
   mkdir -p $CS1_DIR/HE100-lib/C/lib
   echo "cd: \c"
   pwd
-  # cp $HELIUM_DIR/inc/SC_he100.h $SPACE_INCLUDE/ # let's only copy here
   cp $COMMANDER_DIR/include/Net2Com.h $HELIUM_DIR/inc/ # depcrecated
   cp $COMMANDER_DIR/include/NamedPipe.h $HELIUM_DIR/inc/ # deprecated
 
   confirm-build-q6 && sh mbcc-compile-lib-static-cpp.sh || sh x86-compile-lib-static-cpp.sh
   
-  cp $HELIUM_DIR/inc/SC_he100.h $SPACE_LIB/ # let's only copy here
+  cp $HELIUM_DIR/lib/* $SPACE_LIB/lib/
+  cp $HELIUM_DIR/inc/SC_he100.h $SPACE_LIB/include/ 
   cp $HELIUM_DIR/lib/libhe100* $NETMAN_DIR/lib/ # deprecated
   cp $HELIUM_DIR/inc/SC_he100.h $NETMAN_DIR/lib/include/ # deprecated
 }
@@ -263,15 +260,14 @@ cs1-build-fletcher () {
   check-master-branch || fail "Cannot build project without"
   mkdir -p $CHECKSUM_DIR/lib
   confirm-build-q6 && sh mbcc-compile-lib-static.sh || sh x86-compile-lib-static.sh
-  #cp $CHECKSUM_DIR/lib/libfletcher* $SPACE_LIB/lib/;
-  cp $CHECKSUM_DIR/lib/libfletcher* $NETMAN_DIR/lib/;
-  cp $CHECKSUM_DIR/lib/libfletcher* $HELIUM_DIR/lib/;
-  cp $CHECKSUM_DIR/lib/libfletcher* $COMMANDER_DIR/lib/;
+  cp $CHECKSUM_DIR/lib/libfletcher* $SPACE_LIB/lib/
+  cp $CHECKSUM_DIR/lib/libfletcher* $NETMAN_DIR/lib/ #TODO deprecated
+  cp $CHECKSUM_DIR/lib/libfletcher* $HELIUM_DIR/lib/ #TODO deprecated
+  cp $CHECKSUM_DIR/lib/libfletcher* $COMMANDER_DIR/lib/ #TODO deprecated
   
-  #cp $CHECKSUM_DIR/inc/fletcher.h $SPACE_LIB/lib/include/;
-  cp $CHECKSUM_DIR/inc/fletcher.h $NETMAN_DIR/lib/include/;
-  cp $CHECKSUM_DIR/inc/fletcher.h $HELIUM_DIR/inc/;
-  cp $CHECKSUM_DIR/inc/fletcher.h $COMMANDER_DIR/include/;
+  cp $CHECKSUM_DIR/inc/fletcher.h $SPACE_LIB/include/
+  cp $CHECKSUM_DIR/inc/fletcher.h $HELIUM_DIR/inc/ #TODO deprecated
+  cp $CHECKSUM_DIR/inc/fletcher.h $COMMANDER_DIR/include/
 }
 
 cs1-build-job-runner () {
@@ -305,25 +301,24 @@ cs1-build-shakespeare () {
   mkdir -p $SHAKESPEARE_DIR/lib
   echo "cd: \c"
   pwd
-  cp inc/shakespeare.h $NETMAN_DIR/lib/include/
-  cp inc/shakespeare.h $HELIUM_DIR/inc/
-  cp inc/shakespeare.h $TIMER_DIR/inc/
-  cp inc/shakespeare.h $COMMANDER_DIR/include/
-  cp inc/shakespeare.h $WATCHPUPPY_DIR/inc/
-  cp inc/shakespeare.h $BABYCRON_DIR/include/
-  cp inc/shakespeare.h $JOBRUNNER_DIR/inc/
-  cp inc/shakespeare.h $JOBS_DIR/read-pwr-ad7998/inc/
+  cp inc/shakespeare.h $NETMAN_DIR/lib/include/ #TODO deprecated
+  cp inc/shakespeare.h $HELIUM_DIR/inc/ #TODO deprecated
+  cp inc/shakespeare.h $TIMER_DIR/inc/ #TODO deprecated
+  cp inc/shakespeare.h $WATCHPUPPY_DIR/inc/ #TODO deprecated
+  cp inc/shakespeare.h $BABYCRON_DIR/include/ #TODO deprecated
+  cp inc/shakespeare.h $JOBRUNNER_DIR/inc/ #TODO deprecated
+  cp inc/shakespeare.h $SPACE_LIB/include/
 
   confirm-build-q6 && sh mbcc-compile-lib-static.sh || sh x86-compile-lib-static.sh
 
-  cp lib/libshakespeare* $NETMAN_DIR/lib/
-  cp lib/libshakespeare* $HELIUM_DIR/lib/
-  cp lib/libshakespeare* $TIMER_DIR/lib/
-  cp lib/libshakespeare* $COMMANDER_DIR/lib/
-  cp lib/libshakespeare* $WATCHPUPPY_DIR/lib/
-  cp lib/libshakespeare* $BABYCRON_DIR/lib/
-  cp lib/libshakespeare* $JOBRUNNER_DIR/lib/
-  cp lib/libshakespeare* $JOBS_DIR/read-pwr-ad7998/lib/
+  cp lib/libshakespeare* $NETMAN_DIR/lib/ #TODO deprecated
+  cp lib/libshakespeare* $HELIUM_DIR/lib/ #TODO deprecated
+  cp lib/libshakespeare* $TIMER_DIR/lib/ #TODO deprecated
+  cp lib/libshakespeare* $COMMANDER_DIR/lib/ #TODO deprecated
+  cp lib/libshakespeare* $WATCHPUPPY_DIR/lib/ #TODO deprecated
+  cp lib/libshakespeare* $BABYCRON_DIR/lib/ #TODO deprecated
+  cp lib/libshakespeare* $JOBRUNNER_DIR/lib/ #TODO deprecated
+  cp lib/libshakespeare* $SPACE_LIB/lib/
 }
 
 cs1-build-space-updater () {
@@ -350,14 +345,18 @@ cs1-build-timer () {
   echo "cd: \c"
   pwd
   confirm-build-q6 && sh mbcc-compile-lib-static-cpp.sh || sh x86-compile-lib-static-cpp.sh
-  cp lib/libtimer* $NETMAN_DIR/lib
-  cp lib/libtimer* $HELIUM_DIR/lib
-  cp lib/libtimer* $JOBRUNNER_DIR/lib
-  #cp lib/libtimer* $JOBRUNNER_DIR/lib
-  cp inc/timer.h $NETMAN_DIR/lib/include
-  cp inc/timer.h $HELIUM_DIR/inc
-  cp inc/timer.h $JOBRUNNER_DIR/inc
-  #cp inc/timer.h $JOBRUNNER_DIR/inc
+  cp lib/libtimer* $NETMAN_DIR/lib #TODO deprecated
+  cp lib/libtimer* $HELIUM_DIR/lib #TODO deprecated
+  cp lib/libtimer* $JOBRUNNER_DIR/lib #TODO deprecated
+  cp lib/libtimer* $SPACE_LIB/lib
+  cp inc/timer.h $NETMAN_DIR/lib/include #TODO deprecated
+  cp inc/timer.h $HELIUM_DIR/inc #TODO deprecated
+  cp inc/timer.h $JOBRUNNER_DIR/inc #TODO deprecated
+  cp inc/timer.h $SPACE_LIB/include/
+}
+
+ensure-operating-system () {
+    check-installed OperatingSystem || fail "This script depends on apt-get, and thus requires a Debian-based system. With some modification you can get this to run on other systems and with their package managers. Have fun."
 }
 
 ensure-directories () {
@@ -368,17 +367,22 @@ ensure-directories () {
   done
 }
 
+cs1-build-libs() {
+    #libraries
+    ensure-directories
+    cs1-build-timer $1
+    cs1-build-shakespeare $1
+    cs1-build-fletcher $1
+    cs1-build-helium $1
+}
+
 cs1-build () {
     [ "$#" -eq 0 ] && fail "No build environment specified..." 
     build_environment="$1"
     echo -e "${orange}Building for $build_environment...${NC}"
     ensure-directories
 
-    #libraries
-    cs1-build-timer $build_environment
-    cs1-build-shakespeare $build_environment
-    cs1-build-fletcher $build_environment
-    cs1-build-helium $build_environment
+    cs1-build-libs $build_environment
 
     #executables
     cs1-build-commander $build_environment
@@ -435,8 +439,44 @@ cs1-build () {
     fi
 }
 
+# START EXECUTION
+# TODO tldp.org/LDP/abs/html/tabexpansion.html
 [ -d .git ] && fail "You are in a git directory, please copy this file to a new directory where you plan to build the project!"
+
+ensure-operating-system
 ensure-system-requirements
+
+usage () {
+    echo "./MANAGE_CS1.sh [options]"
+    echo "  -v version"
+    echo "  [-h or --help] usage"
+    echo "  -L build and distribute libs only"
+    echo "  --buildPC"
+    echo "  --buildQ6"
+}
+
+for arg in "$@"; do
+    case $arg in
+        "-v")
+            version; quit;
+        ;;
+        "-h")
+            usage; quit;
+        ;;
+        "--help")
+            usage; quit;
+        ;;
+        "-buildQ6")
+            cs1-build Q6; quit;
+        ;;
+        "--buildPC")
+            cs1-build PC; quit;
+        ;;
+        "-L") cs1-build-libs; quit;
+    esac
+done
+
+usage
 self-update
 
 echo "Repo size: ${#RepoList[*]}"
@@ -458,7 +498,7 @@ done;
 
 echo "---"
 check-projects || confirm "Clone missing projects?" && clone=0;
-confirm "Pull updates for cloned projects?" && update=0;
+check-projects && confirm "Pull updates for cloned projects?" && update=0;
   # TODO only offer updates if updates are available
   # http://stackoverflow.com/questions/3258243/git-check-if-pull-needed
 
@@ -476,6 +516,9 @@ do
     fi;
 done;
 cd $CS1_DIR
+if [ ! -d "gtest-1.7.0" -o ! -d "cpputest" ]; then
+    confirm "Install Test Environment (GTest and CPPUTest)?" && cs1-install-test-env
+fi
 confirm "Build project for PC?" && buildPC=0;
 check-microblaze || confirm "Install Microblaze environment?" && cs1-install-mbcc
 check-microblaze && confirm "Build project for Q6?" && buildQ6=0
@@ -485,13 +528,8 @@ if [ $buildPC ]; then
         cs1-build PC
     fi;
 fi;
-# space script directory is required for other scripts
 if [ $buildQ6 ]; then
     if [ -d "space-script" ]; then
         cs1-build Q6
     fi;
 fi;
-
-if [ ! -d "gtest-1.7.0" -o ! -d "cpputest" ]; then
-   confirm "Install Test Environment?" && cs1-install-test-env
-fi
