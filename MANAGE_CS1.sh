@@ -57,7 +57,7 @@ self-update () {
   fi
 }
 
-git-check () {
+git-check () { #TODO doesn't work when on commit hash
   [ "$#" -eq 1 ] || fail "Exactly one argument required: path"
   echo "Checking repo"
   git --git-dir=$1/.git diff-index --quiet HEAD
@@ -161,9 +161,9 @@ cs1-install-test-env () {
         ./configure
         make
         make -f Makefile_CppUTestExt 
-        #cp -r include/* $CS1_DIR/space-commander/include/
-        #cp lib/libCppUTest.a $CS1_DIR/space-commander/lib/
-        #cp lib/libCppUTestExt.a $CS1_DIR/space-commander/lib/
+        cp -r include/* $CS1_DIR/space-commander/include/
+        cp lib/libCppUTest.a $CS1_DIR/space-commander/lib/
+        cp lib/libCppUTestExt.a $CS1_DIR/space-commander/lib/
     fi
 }
 
@@ -480,6 +480,10 @@ confirm "Build project for PC?" && buildPC=0;
 check-microblaze || confirm "Install Microblaze environment?" && cs1-install-mbcc
 check-microblaze && confirm "Build project for Q6?" && buildQ6=0
 
+if [ ! -d "gtest-1.7.0" -o ! -d "cpputest" ]; then
+   confirm "Install Test Environment?" && cs1-install-test-env
+fi
+
 if [ $buildPC ]; then
     if [ -d "space-script" ]; then
         cs1-build PC
@@ -492,6 +496,4 @@ if [ $buildQ6 ]; then
     fi;
 fi;
 
-if [ ! -d "gtest-1.7.0" -o ! -d "cpputest" ]; then
-   confirm "Install Test Environment?" && cs1-install-test-env
-fi
+
