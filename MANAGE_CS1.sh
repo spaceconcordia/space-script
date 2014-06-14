@@ -31,7 +31,7 @@ build_environment="PC"      # GLOBAL VARIABLE
 set -e
 
 quit () {
-  echo -e "${green}Exiting gracefully...${NC}"
+  echo -e "${green}$1 Exiting gracefully...${NC}"
   exit 1
 }
 
@@ -48,6 +48,7 @@ self-update () {
         if check-master-branch . ; then
           echo -e "${green}UPDATING ...${NC}"
           cs1-update $SPACESCRIPT_DIR && rsync -avz --update $SPACESCRIPT_DIR/MANAGE_CS1.sh $CS1_DIR/MANAGE_CS1.sh
+          quit "Script updated, please restart."
         fi
       fi
     fi
@@ -55,7 +56,7 @@ self-update () {
   fi
 }
 
-git-check () { #TODO doesn't work when on commit hash
+git-check () {
   [ "$#" -eq 1 ] || fail "Exactly one argument required: path"
   echo "Checking repo"
   git --git-dir=$1/.git diff-index --quiet HEAD
@@ -153,14 +154,15 @@ cs1-install-test-env () {
         unzip gtest-1.7.0.zip && rm gtest-1.7.0.zip
     fi
     if [ ! -d "cpputest" ]; then
-        git clone git://github.com/cpputest/cpputest.git
-        cd cpputest
+        git clone git://github.com/cpputest/cpputest.git CppUTest
+        cd CppUTest
         ./configure
         make
         make -f Makefile_CppUTestExt 
         cp -r include/* $CS1_DIR/space-commander/include/
         cp lib/libCppUTest.a $CS1_DIR/space-commander/lib/
         cp lib/libCppUTestExt.a $CS1_DIR/space-commander/lib/
+        cd $CS1_DIR
     fi
 }
 
@@ -186,23 +188,15 @@ cs1-build-commander () {
     check-master-branch || fail "Cannot build project without"
     mkdir -p ./bin ./lib ./include
     confirm-build-q6 && make buildQ6 || make buildBin
-    #cp $COMMANDER_DIR/include/Net2Com.h $SPACE_INCLUDE/
-    #cp $COMMANDER_DIR/include/NamedPipe.h $SPACE_INCLUDE/
+    cp $COMMANDER_DIR/include/Net2Com.h $SPACE_INCLUDE/
+    cp $COMMANDER_DIR/include/NamedPipe.h $SPACE_INCLUDE/
 
-    # provide deps for NETMAN
     confirm-build-q6 && make staticlibsQ6.tar || make staticlibs.tar
-    cp staticlibs*.tar $NETMAN_DIR/lib/
-    cd $NETMAN_DIR/lib
+    cp staticlibs*.tar $SPACE_LIB/lib/
+    cd $SPACE_LIB/lib
     [ -f staticlibs.tar ] && tar -xf staticlibs.tar
     [ -f staticlibsQ6.tar ] && tar -xf staticlibsQ6.tar
     rm staticlibs*.tar
-
-    # TODO     
-    #cp staticlibs*.tar $SPACE_LIB/
-    #cd $SPACE_LIB/
-    #[ -f staticlibs.tar ] && tar -xf staticlibs.tar
-    #[ -f staticlibsQ6.tar ] && tar -xf staticlibsQ6.tar
-    #rm staticlibs*.tar
 }
 
 cs1-build-netman () {
@@ -210,9 +204,6 @@ cs1-build-netman () {
     cd $NETMAN_DIR
     check-master-branch || fail "Cannot build project without"
     mkdir -p ./bin ./lib ./include
-    cp $COMMANDER_DIR/include/Net2Com.h $NETMAN_DIR/lib/include
-    cp $COMMANDER_DIR/include/NamedPipe.h $NETMAN_DIR/lib/include
-
     confirm-build-q6 && make Q6 || make
 }
 
@@ -231,8 +222,6 @@ cs1-build-baby-cron () {
     cd $BABYCRON_DIR
     check-master-branch || fail "Cannot build project without"
     mkdir -p ./bin ./lib ./include
-    cp $CS1_DIR/space-lib/shakespeare/inc/shakespeare.h $CS1_DIR/baby-cron/include/
-    cp $CS1_DIR/space-lib/shakespeare/lib/libshakespeare* $CS1_DIR/baby-cron/lib/
     confirm-build-q6 && make buildQ6 || make buildBin
 }
 
@@ -286,8 +275,6 @@ cs1-build-jobs () {
     for item in ${JOBS_LIST[*]}; do
       cd $item 
       mkdir -p ./bin ./lib ./inc ./include
-      #cp $SHAKESPEARE_DIR/inc/shakespeare.h include/
-      #cp $SHAKESPEARE_DIR/lib/libshakespeare* lib/
       confirm-build-q6 && make buildQ6 || make buildBin
       cp bin/* $UPLOAD_FOLDER/jobs/
       cd $JOBS_DIR
@@ -301,22 +288,18 @@ cs1-build-shakespeare () {
   mkdir -p $SHAKESPEARE_DIR/lib
   echo "cd: \c"
   pwd
-  cp inc/shakespeare.h $NETMAN_DIR/lib/include/ #TODO deprecated
   cp inc/shakespeare.h $HELIUM_DIR/inc/ #TODO deprecated
   cp inc/shakespeare.h $TIMER_DIR/inc/ #TODO deprecated
   cp inc/shakespeare.h $WATCHPUPPY_DIR/inc/ #TODO deprecated
-  cp inc/shakespeare.h $BABYCRON_DIR/include/ #TODO deprecated
   cp inc/shakespeare.h $JOBRUNNER_DIR/inc/ #TODO deprecated
   cp inc/shakespeare.h $SPACE_LIB/include/
 
   confirm-build-q6 && sh mbcc-compile-lib-static.sh || sh x86-compile-lib-static.sh
 
-  cp lib/libshakespeare* $NETMAN_DIR/lib/ #TODO deprecated
   cp lib/libshakespeare* $HELIUM_DIR/lib/ #TODO deprecated
   cp lib/libshakespeare* $TIMER_DIR/lib/ #TODO deprecated
   cp lib/libshakespeare* $COMMANDER_DIR/lib/ #TODO deprecated
   cp lib/libshakespeare* $WATCHPUPPY_DIR/lib/ #TODO deprecated
-  cp lib/libshakespeare* $BABYCRON_DIR/lib/ #TODO deprecated
   cp lib/libshakespeare* $JOBRUNNER_DIR/lib/ #TODO deprecated
   cp lib/libshakespeare* $SPACE_LIB/lib/
 }
@@ -388,14 +371,14 @@ cs1-build () {
     cs1-build-commander $build_environment
     cs1-build-netman $build_environment
     cs1-build-job-runner $build_environment
-    cs1-build-jobs $build_environment
+    # TODO renable when jobs are fixed # cs1-build-jobs $build_environment
     cs1-build-watch-puppy $build_environment
     cs1-build-space-updater $build_environment
     cs1-build-space-updater-api $build_environment
     cs1-build-baby-cron $build_environment
 
     #COLLECT FILES
-    echo -e "${purple}Should Collect files for $build_environment ${NC}"
+    echo -e "${purple}Collecting files for $build_environment... ${NC}"
     if confirm-build-q6; then  
       ls $CS1_DIR/BUILD/Q6
       cp $COMMANDER_DIR/bin/space-commanderQ6 $UPLOAD_FOLDER/
@@ -447,12 +430,13 @@ ensure-operating-system
 ensure-system-requirements
 
 usage () {
-    echo "./MANAGE_CS1.sh [options]"
-    echo "  -v version"
-    echo "  [-h or --help] usage"
-    echo "  -L build and distribute libs only"
-    echo "  --buildPC"
-    echo "  --buildQ6"
+    echo "./MANAGE_CS1.sh   [options]"
+    echo "  -v               version"
+    echo "  [-h or --help]   usage"
+    echo "  -L               build and distribute libs only"
+    echo "  -J               build jobs"
+    echo "  --buildPC        build entire project with g++"
+    echo "  --buildQ6        build entire project for MicroBlaze"
 }
 
 for arg in "$@"; do
@@ -473,6 +457,8 @@ for arg in "$@"; do
             cs1-build PC; quit;
         ;;
         "-L") cs1-build-libs; quit;
+        ;;
+        "-J") cs1-build-libs; cs1-build-jobs; quit;
     esac
 done
 
@@ -516,16 +502,13 @@ do
     fi;
 done;
 cd $CS1_DIR
-if [ ! -d "gtest-1.7.0" -o ! -d "cpputest" ]; then
+
+if [ ! -d "gtest-1.7.0" -o ! -d "CppUTest" ]; then
     confirm "Install Test Environment (GTest and CPPUTest)?" && cs1-install-test-env
 fi
 confirm "Build project for PC?" && buildPC=0;
 check-microblaze || confirm "Install Microblaze environment?" && cs1-install-mbcc
 check-microblaze && confirm "Build project for Q6?" && buildQ6=0
-
-if [ ! -d "gtest-1.7.0" -o ! -d "cpputest" ]; then
-   confirm "Install Test Environment?" && cs1-install-test-env
-fi
 
 if [ $buildPC ]; then
     if [ -d "space-script" ]; then
