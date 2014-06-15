@@ -159,9 +159,9 @@ cs1-install-test-env () {
         ./configure
         make
         make -f Makefile_CppUTestExt 
-        cp -r include/* $CS1_DIR/space-commander/include/
-        cp lib/libCppUTest.a $CS1_DIR/space-commander/lib/
-        cp lib/libCppUTestExt.a $CS1_DIR/space-commander/lib/
+        cp -r include/* $SPACE_INCLUDE
+        cp lib/libCppUTest.a $SPACE_LIB/lib/
+        cp lib/libCppUTestExt.a $SPACE_LIB/lib/
         cd $CS1_DIR
     fi
 }
