@@ -153,7 +153,7 @@ cs1-install-test-env () {
         wget -c "https://googletest.googlecode.com/files/gtest-1.7.0.zip" -O gtest-1.7.0.zip
         unzip gtest-1.7.0.zip && rm gtest-1.7.0.zip
     fi
-    if [ ! -d "cpputest" ]; then
+    if [ ! -d "CppUTest" ]; then
         git clone git://github.com/cpputest/cpputest.git CppUTest
         cd CppUTest
         ./configure
@@ -232,15 +232,11 @@ cs1-build-helium () {
   mkdir -p $CS1_DIR/HE100-lib/C/lib
   echo "cd: \c"
   pwd
-  cp $COMMANDER_DIR/include/Net2Com.h $HELIUM_DIR/inc/ # depcrecated
-  cp $COMMANDER_DIR/include/NamedPipe.h $HELIUM_DIR/inc/ # deprecated
 
   confirm-build-q6 && sh mbcc-compile-lib-static-cpp.sh || sh x86-compile-lib-static-cpp.sh
   
   cp $HELIUM_DIR/lib/* $SPACE_LIB/lib/
   cp $HELIUM_DIR/inc/SC_he100.h $SPACE_LIB/include/ 
-  cp $HELIUM_DIR/lib/libhe100* $NETMAN_DIR/lib/ # deprecated
-  cp $HELIUM_DIR/inc/SC_he100.h $NETMAN_DIR/lib/include/ # deprecated
 }
 
 cs1-build-fletcher () {
@@ -250,12 +246,8 @@ cs1-build-fletcher () {
   mkdir -p $CHECKSUM_DIR/lib
   confirm-build-q6 && sh mbcc-compile-lib-static.sh || sh x86-compile-lib-static.sh
   cp $CHECKSUM_DIR/lib/libfletcher* $SPACE_LIB/lib/
-  cp $CHECKSUM_DIR/lib/libfletcher* $NETMAN_DIR/lib/ #TODO deprecated
-  cp $CHECKSUM_DIR/lib/libfletcher* $HELIUM_DIR/lib/ #TODO deprecated
-  cp $CHECKSUM_DIR/lib/libfletcher* $COMMANDER_DIR/lib/ #TODO deprecated
   
   cp $CHECKSUM_DIR/inc/fletcher.h $SPACE_LIB/include/
-  cp $CHECKSUM_DIR/inc/fletcher.h $HELIUM_DIR/inc/ #TODO deprecated
   cp $CHECKSUM_DIR/inc/fletcher.h $COMMANDER_DIR/include/
 }
 
@@ -288,19 +280,10 @@ cs1-build-shakespeare () {
   mkdir -p $SHAKESPEARE_DIR/lib
   echo "cd: \c"
   pwd
-  cp inc/shakespeare.h $HELIUM_DIR/inc/ #TODO deprecated
-  cp inc/shakespeare.h $TIMER_DIR/inc/ #TODO deprecated
-  cp inc/shakespeare.h $WATCHPUPPY_DIR/inc/ #TODO deprecated
-  cp inc/shakespeare.h $JOBRUNNER_DIR/inc/ #TODO deprecated
   cp inc/shakespeare.h $SPACE_LIB/include/
 
   confirm-build-q6 && sh mbcc-compile-lib-static.sh || sh x86-compile-lib-static.sh
 
-  cp lib/libshakespeare* $HELIUM_DIR/lib/ #TODO deprecated
-  cp lib/libshakespeare* $TIMER_DIR/lib/ #TODO deprecated
-  cp lib/libshakespeare* $COMMANDER_DIR/lib/ #TODO deprecated
-  cp lib/libshakespeare* $WATCHPUPPY_DIR/lib/ #TODO deprecated
-  cp lib/libshakespeare* $JOBRUNNER_DIR/lib/ #TODO deprecated
   cp lib/libshakespeare* $SPACE_LIB/lib/
 }
 
@@ -328,13 +311,7 @@ cs1-build-timer () {
   echo "cd: \c"
   pwd
   confirm-build-q6 && sh mbcc-compile-lib-static-cpp.sh || sh x86-compile-lib-static-cpp.sh
-  cp lib/libtimer* $NETMAN_DIR/lib #TODO deprecated
-  cp lib/libtimer* $HELIUM_DIR/lib #TODO deprecated
-  cp lib/libtimer* $JOBRUNNER_DIR/lib #TODO deprecated
   cp lib/libtimer* $SPACE_LIB/lib
-  cp inc/timer.h $NETMAN_DIR/lib/include #TODO deprecated
-  cp inc/timer.h $HELIUM_DIR/inc #TODO deprecated
-  cp inc/timer.h $JOBRUNNER_DIR/inc #TODO deprecated
   cp inc/timer.h $SPACE_LIB/include/
 }
 
@@ -343,11 +320,14 @@ ensure-operating-system () {
 }
 
 ensure-directories () {
-  declare -a REQDIR_LIST=("$NETMAN_DIR/lib/include/" "$HELIUM_DIR/inc/" "$TIMER_DIR/inc/" "$BABYCRON_DIR/include/" "$JOBRUNNER_DIR/inc/" "$COMMANDER_DIR/include/" "$WATCHPUPPY_DIR/lib/include/" "$HELIUM_DIR/lib/" "$TIMER_DIR/lib/" "$COMMANDER_DIR/lib/" "$WATCHPUPPY_DIR/lib/" "$WATCHPUPPY_DIR/inc/" "$BABYCRON_DIR/lib/" "$BABYCRON_DIR/lib/" "$JOBRUNNER_DIR/lib/" "$NETMAN_DIR/lib/include" "$NETMAN_DIR/bin" "$UPLOAD_FOLDER/jobs")
+  declare -a REQDIR_LIST=("$NETMAN_DIR/lib/include/" "$HELIUM_DIR/inc/" "$TIMER_DIR/inc/" "$BABYCRON_DIR/include/" "$JOBRUNNER_DIR/inc/" "$COMMANDER_DIR/include/" "$WATCHPUPPY_DIR/lib/include/" "$HELIUM_DIR/lib/" "$TIMER_DIR/lib/" "$COMMANDER_DIR/lib/" "$WATCHPUPPY_DIR/lib/" "$WATCHPUPPY_DIR/inc/" "$BABYCRON_DIR/lib/" "$BABYCRON_DIR/lib/" "$JOBRUNNER_DIR/lib/" "$NETMAN_DIR/lib/include" "$NETMAN_DIR/bin" "$UPLOAD_FOLDER/jobs" "$CS1_DIR/logs" "$CS1_DIR/pipes" "$CS1_DIR/pids" "$CS1_DIR/tgz")
   for item in ${REQDIR_LIST[*]}; do
     mkdir -p $item
     #[ ! -d $item ] && fail "$item does not exist and/or was not created properly"
   done
+  ln -s "$CS1_DIR/logs" /home/logs
+  ln -s "$CS1_DIR/pipes" /home/pipes
+  ln -s "$CS1_DIR/tgz" /home/tgz
 }
 
 cs1-build-libs() {
