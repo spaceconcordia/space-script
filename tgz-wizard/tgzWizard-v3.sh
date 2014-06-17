@@ -55,14 +55,14 @@ fi
 
 PATH_ROOT="/home"           ### HARDCODED ROOT PATH <===============================
 
-LOG_DIR="$CS1_LOGS"         # -l log directory
-TGZ_DIR="$CS1_TGZ"          # -t tgz directory
-TGZ_MAX_SIZE=$((1 * 1024))  # -s Default max size of the archives
-PART_SIZE=190               # -p Default part size
-NUM_LINES=50                # -n Default number of lines to extract from the log file
-SOURCE=""                   # -f filename
-APP=""                      # -a subsystem/app
-DATE=`date +%Y%m%d`         # -d date - default to current date 'YYYYmmdd'
+LOG_DIR="$CS1_LOGS"             # -l log directory
+TGZ_DIR="$CS1_TGZ"              # -t tgz directory
+TGZ_MAX_SIZE=$((1 * 1024))      # -s Default max size of the archives
+PART_SIZE="$CS1_MAX_FRAME_SIZE"  # -p Default part size
+NUM_LINES=50                    # -n Default number of lines to extract from the log file
+SOURCE=""                       # -f filename
+APP=""                          # -a subsystem/app
+DATE=`date +%Y%m%d`             # -d date - default to current date 'YYYYmmdd'
 
 #
 # Add all valid application to the string (the ones that are used in the log filename (ex. "Watch-Puppy")
