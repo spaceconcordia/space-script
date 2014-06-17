@@ -326,6 +326,12 @@ cs1-build-timer () {
   cp inc/timer.h $SPACE_LIB/include/
 }
 
+cs1-build-utls () {
+  echo -e "${green}Building cs1_utls Library...${NC}"
+  cd $SPACE_LIB/utls
+  bash csmake.sh 
+}
+
 ensure-operating-system () {
     check-installed OperatingSystem || fail "This script depends on apt-get, and thus requires a Debian-based system. With some modification you can get this to run on other systems and with their package managers. Have fun."
 }
@@ -336,9 +342,9 @@ ensure-directories () {
     mkdir -p $item
     #[ ! -d $item ] && fail "$item does not exist and/or was not created properly"
   done
-  ln -s "$CS1_DIR/logs" /home/logs
-  ln -s "$CS1_DIR/pipes" /home/pipes
-  ln -s "$CS1_DIR/tgz" /home/tgz
+  sudo ln -s "$CS1_DIR/logs" /home/logs
+  sudo ln -s "$CS1_DIR/pipes" /home/pipes
+  sudo ln -s "$CS1_DIR/tgz" /home/tgz
 }
 
 cs1-build-libs() {
@@ -348,6 +354,7 @@ cs1-build-libs() {
     cs1-build-shakespeare $1
     cs1-build-fletcher $1
     cs1-build-helium $1
+    cs1-build-utls $1
 }
 
 cs1-build () {
