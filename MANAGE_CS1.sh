@@ -111,12 +111,23 @@ check-microblaze () { # should not be in SysReqs, allow PC building without
 }
 
 ensure-system-requirements () {
-    check-installed SysReqs || install-packages SysReqs || quit
+    if check-installed SysReqs ; then
+      echo "System requirements met"
+    else 
+      echo "Attempting to install system requirements"
+      sudo apt-get install git build-essential 
+      #install-packages SysReqs || quit
+    fi
 }
 
 offer-space-tools () {
     echo "Some tools are recommended for working on the Q6. Checking if installed..."
-    check-installed Tools || install-packages Tools
+    if check-installed Tools ; then
+      echo "Suggested tools already present"
+    else 
+      echo "Attempting to install system requirements"
+      sudo apt-get install screen minicom
+    fi
 }
 
 confirm-build-q6 () {
@@ -233,7 +244,7 @@ cs1-build-helium () {
   echo "cd: \c"
   pwd
 
-  confirm-build-q6 && sh mbcc-compile-lib-static-cpp.sh || sh x86-compile-lib-static-cpp.sh
+  confirm-build-q6 && bash csmake.sh Q6 || bash csmake.sh PC
   
   cp $HELIUM_DIR/lib/* $SPACE_LIB/lib/
   cp $HELIUM_DIR/inc/SC_he100.h $SPACE_LIB/include/ 
