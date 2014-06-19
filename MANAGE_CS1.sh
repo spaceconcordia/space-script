@@ -342,9 +342,9 @@ ensure-directories () {
     mkdir -p $item
     #[ ! -d $item ] && fail "$item does not exist and/or was not created properly"
   done
-  sudo ln -s "$CS1_DIR/logs" /home/logs
-  sudo ln -s "$CS1_DIR/pipes" /home/pipes
-  sudo ln -s "$CS1_DIR/tgz" /home/tgz
+  [ -d "$CS1_DIR/logs" ] || sudo ln -s "$CS1_DIR"/logs /home/logs
+  [ -d "$CS1_DIR/pipes" ] || sudo ln -s "$CS1_DIR"/pipes /home/pipes
+  [ -d "$CS1_DIR/tgz" ] || sudo ln -s "$CS1_DIR"/tgz /home/tgz
 }
 
 cs1-build-libs() {
