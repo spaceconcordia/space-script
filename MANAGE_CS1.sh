@@ -3,7 +3,7 @@ if [ -z "$BASH_VERSION" ]; then exec bash "$0" "$@"; fi;
 NC='\e[0m';black='\e[0;30m';darkgrey='\e[1;30m';blue='\e[0;34m';lightblue='\e[1;34m';green='\e[0;32m';lightgreen='\e[1;32m';cyan='\e[0;36m';lightcyan='\e[1;36m';red='\e[0;31m';lightred='\e[1;31m';purple='\e[0;35m';lightpurple='\e[1;35m';orange='\e[0;33m';yellow='\e[1;33m';lightgrey='\e[0;37m';yellow='\e[1;37m';
 
 project_name='https://github.com/spaceconcordia/'
-declare -a SysReqs=('git' 'g++' 'gcc' 'dpkg')
+declare -a SysReqs=('git' 'g++' 'gcc' 'dpkg' 'stat' 'diff')
 declare -a Tools=('tmux' 'screen' 'minicom')
 declare -a RepoList=('acs' 'baby-cron' 'ground-commander' 'HE100-lib' 'mail_arc' 'space-commander' 'space-lib' 'space-jobs' 'space-netman' 'space-script' 'space-tools' 'space-timer-lib' 'space-updater' 'space-updater-api' 'SRT' 'watch-puppy')
 declare -a OperatingSystem=('apt-get')
@@ -41,17 +41,45 @@ fail () {
 }
 
 self-update () {
-  if [ -f "./space-script/MANAGE_CS1.sh" ]; then
-    cd $SPACESCRIPT_DIR
-    if ! git-check "."; then
-      if confirm "An update for this script may be available. Proceed?"; then
-        if check-master-branch . ; then
-          echo -e "${green}UPDATING ...${NC}"
-          cs1-update $SPACESCRIPT_DIR && rsync -avz --update $SPACESCRIPT_DIR/MANAGE_CS1.sh $CS1_DIR/MANAGE_CS1.sh
-          quit "Script updated, please restart."
+  SCRIPT_NAME="MANAGE_CS1.sh"
+  LOCAL_COPY="$CS1_DIR/$SCRIPT_NAME"
+  REPO_COPY="$SPACESCRIPT_DIR/$SCRIPT_NAME"
+  if [ -f "$REPO_COPY" ]; then
+    cd $CS1_DIR
+    if diff $LOCAL_COPY $REPO_COPY >> /dev/null ; then 
+        echo -e "${green}This script ($LOCAL_COPY) is up-to-date with the repo version ($REPO_COPY)${NC}"
+    else 
+        LOCAL_MOD=$(stat -c %Z "$LOCAL_COPY")
+        REPO_MOD=$(stat -c %Z "$REPO_COPY")
+        if [ "$LOCAL_MOD" -gt "$REPO_MOD" ] ; then 
+            echo -e "${yellow}Your local copy of this build script ($LOCAL_COPY) has changes that are not being tracked by git!${NC}"
+            confirm "View changes?" && diff $LOCAL_COPY $REPO_COPY 
+            if confirm "Overwrite repository version with your local file?" ; then
+                if git --git-dir=$SPACESCRIPT_DIR/.git status | grep "MANAGE_CS1.sh" >> /dev/null ; then
+                    fail "$REPO_COPY also has modifications since the last pull that risk being overwritten. Please resolve this manually..."
+                    #vimdiff $REPO_COPY $LOCAL_COPY 
+                else
+                    echo -e "${yellow}No conflicts on the repo, overwritting file!${NC}"
+                    cp $LOCAL_COPY $REPO_COPY
+                fi
+            fi
+        elif [ "$REPO_MOD" -gt "$LOCAL_MOD" ] ; then
+            echo -e "${yellow}Repo copy ($REPO_COPY) of this build script is newer!${NC}"
+            confirm "View changes?" && diff $REPO_COPY $LOCAL_COPY 
+            confirm "Overwrite your local copy?" && cp $REPO_COPY $LOCAL_COPY && quit "Please restart the script to use the updated file."
         fi
-      fi
     fi
+    # TODO CHECK if update is available
+    #cd $SPACESCRIPT_DIR
+    #if ! git-check "."; then
+    #  if confirm "An update for this script may be available. Proceed?"; then
+    #    if check-master-branch . ; then
+    #      echo -e "${green}UPDATING ...${NC}"
+    #      cs1-update $SPACESCRIPT_DIR && rsync -avz --update $SPACESCRIPT_DIR/MANAGE_CS1.sh $CS1_DIR/MANAGE_CS1.sh
+    #      quit "Script updated, please restart."
+    #    fi
+    #  fi
+    #fi
     cd $CS1_DIR
   fi
 }
@@ -240,7 +268,6 @@ cs1-build-helium () {
   echo -e "${green}Building HE-100 Library...${NC}"
   cd $HELIUM_DIR
   check-master-branch || fail "Cannot build project without"
-  mkdir -p $CS1_DIR/HE100-lib/C/lib
   echo "cd: \c"
   pwd
 
@@ -342,9 +369,18 @@ ensure-directories () {
     mkdir -p $item
     #[ ! -d $item ] && fail "$item does not exist and/or was not created properly"
   done
-  [ -d "$CS1_DIR/logs" ] || sudo ln -s "$CS1_DIR"/logs /home/logs
-  [ -d "$CS1_DIR/pipes" ] || sudo ln -s "$CS1_DIR"/pipes /home/pipes
-  [ -d "$CS1_DIR/tgz" ] || sudo ln -s "$CS1_DIR"/tgz /home/tgz
+  if [ ! -d "$CS1_DIR/logs" -o ! -d "/home/logs" ]; then 
+      echo -e "${yellow} Linking /home/logs${NC}"
+      mkdir -p "$CS1_DIR"/logs && sudo ln -s "$CS1_DIR"/logs /home/logs && sudo chown -R $(logname):$(logname) /home/logs
+  fi
+  if [ ! -d "$CS1_DIR/pipes" -o ! -d "/home/pipes" ]; then
+      echo -e "${yellow} Linking /home/pipes${NC}"
+      mkdir -p "$CS1_DIR"/pipes && sudo ln -s "$CS1_DIR"/pipes /home/pipes && sudo chown -R $(logname):$(logname) /home/pipes
+  fi
+  if [ ! -d "$CS1_DIR/tgz" -o ! -d "/home/tgz" ]; then 
+      echo -e "${yellow} Linking /home/tgz${NC}"
+      mkdir -p "$CS1_DIR"/tgz && sudo ln -s "$CS1_DIR"/tgz /home/tgz && sudo chown -R $(logname):$(logname) /home/tgz
+  fi
 }
 
 cs1-build-libs() {
