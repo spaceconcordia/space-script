@@ -5,7 +5,7 @@ NC='\e[0m';black='\e[0;30m';darkgrey='\e[1;30m';blue='\e[0;34m';lightblue='\e[1;
 project_name='https://github.com/spaceconcordia/'
 declare -a SysReqs=('git' 'g++' 'gcc' 'dpkg' 'stat' 'diff')
 declare -a Tools=('tmux' 'screen' 'minicom')
-declare -a RepoList=('acs' 'baby-cron' 'ground-commander' 'HE100-lib' 'mail_arc' 'space-commander' 'space-lib' 'space-jobs' 'space-netman' 'space-script' 'space-tools' 'space-timer-lib' 'space-updater' 'space-updater-api' 'SRT' 'watch-puppy')
+declare -a RepoList=('acs' 'baby-cron' 'ground-commander' 'HE100-lib' 'mail_arc' 'space-commander' 'space-lib' 'space-jobs' 'space-netman' 'space-script' 'space-tools' 'space-timer-lib' 'space-updater' 'space-updater-api' 'SRT' 'space-payload')
 declare -a OperatingSystem=('apt-get')
 
 READ_DIR=$(readlink -f "$0")
@@ -18,7 +18,6 @@ HELIUM_DIR="$CS1_DIR/HE100-lib/C"
 CHECKSUM_DIR="$CS1_DIR/space-lib/checksum"
 TIMER_DIR="$CS1_DIR/space-timer-lib"
 COMMANDER_DIR="$CS1_DIR/space-commander"
-WATCHPUPPY_DIR="$CS1_DIR/watch-puppy"
 BABYCRON_DIR="$CS1_DIR/baby-cron"
 JOBRUNNER_DIR="$CS1_DIR/space-jobs/job-runner"
 JOBS_DIR="$CS1_DIR/space-jobs"
@@ -26,6 +25,18 @@ SPACESCRIPT_DIR="$CS1_DIR/space-script"
 UPLOAD_FOLDER="$CS1_DIR/BUILD/Q6/uploads"
 
 build_environment="PC"      # GLOBAL VARIABLE
+
+# TODO
+# make clean on all
+# fix apt
+
+# enable non-interactive apt 
+export DEBIAN_FRONTEND=noninteractive
+# determine distribution and release
+DISTRIBUTION="$(lsb_release -i -s)"
+REQUIRED_DIST="Ubuntu"
+DISTRIBUTION_RELEASE="$(lsb_release -s -r | tail -n +1)"
+REQUIRED_RELEASE="14.04"
 
 #EXIT ON ERROR
 set -e
@@ -222,11 +233,11 @@ cs1-update () {
 
 cs1-build-commander () {
     #COMMANDER
-    echo -e "${green}Building Commander...${NC}"
+    echo -e "${green}Building Commander $build_environment ...${NC}"
     cd $COMMANDER_DIR
     check-master-branch || fail "Cannot build project without"
     mkdir -p ./bin ./lib ./include
-    confirm-build-q6 && make buildQ6 || make buildBin
+    confirm-build-q6 && make buildQ6 || bash csmake -c
     cp $COMMANDER_DIR/include/Net2Com.h $SPACE_INCLUDE/
     cp $COMMANDER_DIR/include/NamedPipe.h $SPACE_INCLUDE/
 
@@ -244,16 +255,6 @@ cs1-build-netman () {
     check-master-branch || fail "Cannot build project without"
     mkdir -p ./bin ./lib ./include
     confirm-build-q6 && make Q6 || make
-}
-
-cs1-build-watch-puppy () {
-    echo -e "${green}Building Watch-Puppy...${NC}"
-    cd $WATCHPUPPY_DIR
-    mkdir -p ./bin ./lib/include
-    cp $CS1_DIR/space-lib/shakespeare/inc/shakespeare.h $CS1_DIR/watch-puppy/inc/
-    cp $CS1_DIR/space-lib/shakespeare/lib/libshakespeare* $CS1_DIR/watch-puppy/lib/
-    check-master-branch || fail "Cannot build project without"
-    confirm-build-q6 && make buildQ6 || make buildBin
 }
 
 cs1-build-baby-cron () {
@@ -320,7 +321,7 @@ cs1-build-shakespeare () {
   pwd
   cp inc/shakespeare.h $SPACE_LIB/include/
 
-  confirm-build-q6 && sh mbcc-compile-lib-static.sh || sh x86-compile-lib-static.sh
+  confirm-build-q6 && bash csmake.sh Q6 || bash csmake.sh PC
 
   cp lib/libshakespeare* $SPACE_LIB/lib/
 }
@@ -360,11 +361,16 @@ cs1-build-utls () {
 }
 
 ensure-operating-system () {
+    if [ "$DISTRIBUTION" == "$REQUIRED_DIST" -a "$DISTRIBUTION_RELEASE" == "$REQUIRED_RELEASE" ] ; then 
+        echo -e "${green}Correct distribution and OS ($DISTRIBUTION $DISTRIBUTION_RELEASE)${NC}"
+    else
+        echo -e "${red}Warning, WrongOS! Need $REQUIRED_DIST $REQUIRED_RELEASE, you have $DISTRIBUTION $DISTRIBUTION_RELEASE${NC}"
+    fi
     check-installed OperatingSystem || fail "This script depends on apt-get, and thus requires a Debian-based system. With some modification you can get this to run on other systems and with their package managers. Have fun."
 }
 
 ensure-directories () {
-  declare -a REQDIR_LIST=("$NETMAN_DIR/lib/include/" "$HELIUM_DIR/inc/" "$TIMER_DIR/inc/" "$BABYCRON_DIR/include/" "$JOBRUNNER_DIR/inc/" "$COMMANDER_DIR/include/" "$WATCHPUPPY_DIR/lib/include/" "$HELIUM_DIR/lib/" "$TIMER_DIR/lib/" "$COMMANDER_DIR/lib/" "$WATCHPUPPY_DIR/lib/" "$WATCHPUPPY_DIR/inc/" "$BABYCRON_DIR/lib/" "$BABYCRON_DIR/lib/" "$JOBRUNNER_DIR/lib/" "$NETMAN_DIR/lib/include" "$NETMAN_DIR/bin" "$UPLOAD_FOLDER/jobs" "$CS1_DIR/logs" "$CS1_DIR/pipes" "$CS1_DIR/pids" "$CS1_DIR/tgz")
+  declare -a REQDIR_LIST=("$NETMAN_DIR/lib/include/" "$HELIUM_DIR/inc/" "$TIMER_DIR/inc/" "$BABYCRON_DIR/include/" "$JOBRUNNER_DIR/inc/" "$COMMANDER_DIR/include/" "$HELIUM_DIR/lib/" "$TIMER_DIR/lib/" "$COMMANDER_DIR/lib/" "$BABYCRON_DIR/lib/" "$BABYCRON_DIR/lib/" "$JOBRUNNER_DIR/lib/" "$NETMAN_DIR/lib/include" "$NETMAN_DIR/bin" "$UPLOAD_FOLDER/jobs" "$CS1_DIR/logs" "$CS1_DIR/pipes" "$CS1_DIR/pids" "$CS1_DIR/tgz")
   for item in ${REQDIR_LIST[*]}; do
     mkdir -p $item
     #[ ! -d $item ] && fail "$item does not exist and/or was not created properly"
@@ -406,7 +412,6 @@ cs1-build () {
     cs1-build-netman $build_environment
     cs1-build-job-runner $build_environment
     # TODO renable when jobs are fixed # cs1-build-jobs $build_environment
-    cs1-build-watch-puppy $build_environment
     cs1-build-space-updater $build_environment
     cs1-build-space-updater-api $build_environment
     cs1-build-baby-cron $build_environment
@@ -419,7 +424,6 @@ cs1-build () {
       cp $NETMAN_DIR/bin/gnd-mbcc $UPLOAD_FOLDER/../
       cp $NETMAN_DIR/bin/sat-mbcc $UPLOAD_FOLDER/sat
       cp $CS1_DIR/space-jobs/job-runner/bin/job-runner-mbcc $UPLOAD_FOLDER/
-      cp $WATCHPUPPY_DIR/bin/watch-puppy $UPLOAD_FOLDER/
       cp $CS1_DIR/space-updater-api/bin/UpdaterServer-Q6 $UPLOAD_FOLDER/
       cp $CS1_DIR/space-updater/bin/Updater-Q6 $UPLOAD_FOLDER/
       cp $BABYCRON_DIR/bin/baby-cron $UPLOAD_FOLDER/
@@ -447,7 +451,6 @@ cs1-build () {
       cp $NETMAN_DIR/bin/gnd $CS1_DIR/BUILD/PC/
       cp $NETMAN_DIR/bin/sat $CS1_DIR/BUILD/PC/
       #cp $CS1_DIR/space-jobs/job-runner/bin/job-runner $CS1_DIR/BUILD/PC/
-      cp $WATCHPUPPY_DIR/bin/watch-puppy $CS1_DIR/BUILD/PC/
       cp $CS1_DIR/space-updater-api/bin/UpdaterServer $CS1_DIR/BUILD/PC/
       cp $CS1_DIR/space-updater/bin/PC-Updater $CS1_DIR/BUILD/PC/
       cp $BABYCRON_DIR/bin/baby-cron $CS1_DIR/BUILD/PC/    
