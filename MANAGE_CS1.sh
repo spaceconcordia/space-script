@@ -272,8 +272,13 @@ cs1-build-helium () {
   echo "cd: \c"
   pwd
 
-  confirm-build-q6 && bash csmake.sh Q6 || bash csmake.sh PC
-  
+  if confirm-build-q6 
+  then bash csmake.sh Q6 
+  else 
+      cd test
+      bash csmaketest.sh unit
+  fi
+
   cp $HELIUM_DIR/lib/* $SPACE_LIB/lib/
   cp $HELIUM_DIR/inc/SC_he100.h $SPACE_LIB/include/ 
 }
@@ -321,7 +326,7 @@ cs1-build-shakespeare () {
   pwd
   cp inc/shakespeare.h $SPACE_LIB/include/
 
-  confirm-build-q6 && bash csmake.sh Q6 || bash csmake.sh PC
+  confirm-build-q6 && bash csmake.sh Q6 || bash csmake.sh test
 
   cp lib/libshakespeare* $SPACE_LIB/lib/
 }
