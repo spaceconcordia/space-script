@@ -242,6 +242,7 @@ cs1-build-commander () {
     cp $COMMANDER_DIR/include/NamedPipe.h $SPACE_INCLUDE/
 
     confirm-build-q6 && make staticlibsQ6.tar || make staticlibs.tar
+    cp lib/*.a $SPACE_LIB/lib/
     cp staticlibs*.tar $SPACE_LIB/lib/
     cd $SPACE_LIB/lib
     [ -f staticlibs.tar ] && tar -xf staticlibs.tar
@@ -272,12 +273,7 @@ cs1-build-helium () {
   echo "cd: \c"
   pwd
 
-  if confirm-build-q6 
-  then bash csmake.sh Q6 
-  else 
-      cd test
-      bash csmaketest.sh unit
-  fi
+  confirm-build-q6 && bash csmake.sh Q6 || bash csmake.sh
 
   cp $HELIUM_DIR/lib/* $SPACE_LIB/lib/
   cp $HELIUM_DIR/inc/SC_he100.h $SPACE_LIB/include/ 
