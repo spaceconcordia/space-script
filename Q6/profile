@@ -26,7 +26,7 @@ if [ "$PS1" ]; then
     export AD7998x23PATH='unset'
     export HMC5843PATH='unset'
     export INA2XXPATH='unset'
-    export RTCDS3232PATH='unset'
+    export RTCDS1307PATH='unset'
     
     source /etc/SpaceDecl.sh
     

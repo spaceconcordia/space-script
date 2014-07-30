@@ -1,0 +1,78 @@
+kernel/crypto/cbc.ko:
+kernel/crypto/aes_generic.ko:
+kernel/crypto/xor.ko:
+kernel/crypto/async_tx/async_tx.ko:
+kernel/crypto/async_tx/async_memcpy.ko: kernel/crypto/async_tx/async_tx.ko
+kernel/crypto/async_tx/async_xor.ko: kernel/crypto/xor.ko kernel/crypto/async_tx/async_tx.ko
+kernel/crypto/async_tx/async_pq.ko: kernel/lib/raid6/raid6_pq.ko kernel/crypto/async_tx/async_xor.ko kernel/crypto/xor.ko kernel/crypto/async_tx/async_tx.ko
+kernel/crypto/async_tx/async_raid6_recov.ko: kernel/lib/raid6/raid6_pq.ko kernel/crypto/async_tx/async_tx.ko
+kernel/drivers/block/loop.ko:
+kernel/drivers/mtd/tests/mtd_oobtest.ko:
+kernel/drivers/mtd/tests/mtd_pagetest.ko:
+kernel/drivers/mtd/tests/mtd_readtest.ko:
+kernel/drivers/mtd/tests/mtd_speedtest.ko:
+kernel/drivers/mtd/tests/mtd_stresstest.ko:
+kernel/drivers/mtd/tests/mtd_subpagetest.ko:
+kernel/drivers/mtd/tests/mtd_torturetest.ko:
+kernel/drivers/mtd/tests/mtd_nandecctest.ko:
+kernel/drivers/net/can/mcp251x.ko:
+kernel/drivers/net/wan/hdlc.ko:
+kernel/drivers/net/wan/hdlc_raw.ko: kernel/drivers/net/wan/hdlc.ko
+kernel/drivers/net/wan/hdlc_cisco.ko: kernel/drivers/net/wan/hdlc.ko
+kernel/drivers/net/wan/hdlc_fr.ko: kernel/drivers/net/wan/hdlc.ko
+kernel/drivers/net/wan/dlci.ko:
+kernel/drivers/rtc/rtc-ds1307.ko:
+kernel/drivers/rtc/rtc-ds1374.ko:
+kernel/drivers/rtc/rtc-ds3232.ko:
+kernel/drivers/watchdog/softdog.ko:
+kernel/drivers/md/raid1.ko: kernel/drivers/md/md-mod.ko
+kernel/drivers/md/raid10.ko: kernel/drivers/md/md-mod.ko
+kernel/drivers/md/raid456.ko: kernel/crypto/async_tx/async_raid6_recov.ko kernel/crypto/async_tx/async_memcpy.ko kernel/crypto/async_tx/async_pq.ko kernel/lib/raid6/raid6_pq.ko kernel/crypto/async_tx/async_xor.ko kernel/crypto/xor.ko kernel/crypto/async_tx/async_tx.ko kernel/drivers/md/md-mod.ko
+kernel/drivers/md/md-mod.ko:
+kernel/drivers/md/dm-bufio.ko:
+kernel/drivers/md/dm-delay.ko:
+kernel/drivers/md/dm-flakey.ko:
+kernel/drivers/md/dm-multipath.ko:
+kernel/drivers/md/dm-round-robin.ko: kernel/drivers/md/dm-multipath.ko
+kernel/drivers/md/dm-queue-length.ko: kernel/drivers/md/dm-multipath.ko
+kernel/drivers/md/dm-service-time.ko: kernel/drivers/md/dm-multipath.ko
+kernel/drivers/md/dm-snapshot.ko:
+kernel/drivers/md/dm-mirror.ko: kernel/drivers/md/dm-region-hash.ko kernel/drivers/md/dm-log.ko
+kernel/drivers/md/dm-log.ko:
+kernel/drivers/md/dm-region-hash.ko: kernel/drivers/md/dm-log.ko
+kernel/drivers/md/dm-raid.ko: kernel/drivers/md/raid456.ko kernel/crypto/async_tx/async_raid6_recov.ko kernel/crypto/async_tx/async_memcpy.ko kernel/crypto/async_tx/async_pq.ko kernel/lib/raid6/raid6_pq.ko kernel/crypto/async_tx/async_xor.ko kernel/crypto/xor.ko kernel/crypto/async_tx/async_tx.ko kernel/drivers/md/raid1.ko kernel/drivers/md/raid10.ko kernel/drivers/md/md-mod.ko
+kernel/drivers/md/dm-verity.ko: kernel/drivers/md/dm-bufio.ko
+kernel/drivers/staging/iio/adc/ad799x.ko: kernel/drivers/iio/industrialio-triggered-buffer.ko kernel/drivers/iio/kfifo_buf.ko kernel/drivers/iio/industrialio.ko
+kernel/drivers/iio/hmc5843.ko: kernel/drivers/iio/industrialio.ko
+kernel/drivers/staging/iio/trigger/iio-trig-periodic-rtc.ko: kernel/drivers/iio/industrialio.ko
+kernel/drivers/staging/iio/trigger/iio-trig-gpio.ko: kernel/drivers/iio/industrialio.ko
+kernel/drivers/staging/iio/trigger/iio-trig-sysfs.ko: kernel/drivers/iio/industrialio.ko
+kernel/drivers/staging/iio/ring_sw.ko: kernel/drivers/iio/industrialio.ko
+kernel/drivers/virtio/virtio.ko:
+kernel/drivers/virtio/virtio_ring.ko:
+kernel/drivers/connector/cn.ko:
+kernel/drivers/uio/uio.ko:
+kernel/drivers/uio/uio_pdrv.ko: kernel/drivers/uio/uio.ko
+kernel/drivers/uio/uio_pdrv_genirq.ko: kernel/drivers/uio/uio.ko
+kernel/drivers/pps/pps_core.ko:
+kernel/drivers/hwmon/hwmon.ko:
+kernel/drivers/hwmon/ina2xx.ko: kernel/drivers/hwmon/hwmon.ko
+kernel/drivers/hwmon/jc42.ko: kernel/drivers/hwmon/hwmon.ko
+kernel/drivers/hwmon/ltc4151.ko: kernel/drivers/hwmon/hwmon.ko
+kernel/drivers/remoteproc/remoteproc.ko: kernel/drivers/virtio/virtio.ko kernel/drivers/virtio/virtio_ring.ko
+kernel/drivers/remoteproc/mb_remoteproc.ko: kernel/drivers/remoteproc/remoteproc.ko kernel/drivers/virtio/virtio.ko kernel/drivers/virtio/virtio_ring.ko
+kernel/drivers/rpmsg/virtio_rpmsg_bus.ko: kernel/drivers/virtio/virtio.ko kernel/drivers/virtio/virtio_ring.ko
+kernel/drivers/iio/industrialio.ko:
+kernel/drivers/iio/industrialio-triggered-buffer.ko: kernel/drivers/iio/kfifo_buf.ko kernel/drivers/iio/industrialio.ko
+kernel/drivers/iio/kfifo_buf.ko: kernel/drivers/iio/industrialio.ko
+kernel/sound/soundcore.ko:
+kernel/sound/core/oss/snd-pcm-oss.ko: kernel/sound/core/snd-pcm.ko kernel/sound/core/snd-page-alloc.ko kernel/sound/core/snd-timer.ko kernel/sound/core/snd.ko kernel/sound/soundcore.ko
+kernel/sound/core/snd.ko: kernel/sound/soundcore.ko
+kernel/sound/core/snd-timer.ko: kernel/sound/core/snd.ko kernel/sound/soundcore.ko
+kernel/sound/core/snd-pcm.ko: kernel/sound/core/snd-page-alloc.ko kernel/sound/core/snd-timer.ko kernel/sound/core/snd.ko kernel/sound/soundcore.ko
+kernel/sound/core/snd-page-alloc.ko:
+kernel/sound/drivers/snd-dummy.ko: kernel/sound/core/snd-pcm.ko kernel/sound/core/snd-page-alloc.ko kernel/sound/core/snd-timer.ko kernel/sound/core/snd.ko kernel/sound/soundcore.ko
+kernel/sound/drivers/snd-aloop.ko: kernel/sound/core/snd-pcm.ko kernel/sound/core/snd-page-alloc.ko kernel/sound/core/snd-timer.ko kernel/sound/core/snd.ko kernel/sound/soundcore.ko
+kernel/net/rpmsg/rpmsg_proto.ko: kernel/drivers/rpmsg/virtio_rpmsg_bus.ko kernel/drivers/virtio/virtio.ko kernel/drivers/virtio/virtio_ring.ko
+kernel/lib/raid6/raid6_pq.ko:
+extra/q6sd_driver.ko:
