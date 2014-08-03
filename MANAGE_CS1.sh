@@ -4,7 +4,7 @@ NC='\e[0m';black='\e[0;30m';darkgrey='\e[1;30m';blue='\e[0;34m';lightblue='\e[1;
 
 project_name='https://github.com/spaceconcordia/'
 declare -a SysReqs=('git' 'g++' 'gcc' 'dpkg' 'stat' 'diff')
-declare -a Tools=('tmux' 'screen' 'minicom')
+declare -a Tools=('tmux' 'screen' 'minicom' 'libpcap-dev' 'libssl-dev')
 declare -a RepoList=('acs' 'baby-cron' 'ground-commander' 'HE100-lib' 'mail_arc' 'space-commander' 'space-lib' 'space-jobs' 'space-netman' 'space-script' 'space-tools' 'space-timer-lib' 'space-updater' 'space-updater-api' 'SRT' 'space-payload')
 declare -a OperatingSystem=('apt-get')
 
