@@ -370,6 +370,12 @@ ensure-operating-system () {
     check-installed OperatingSystem || fail "This script depends on apt-get, and thus requires a Debian-based system. With some modification you can get this to run on other systems and with their package managers. Have fun."
 }
 
+ensure-symlinks () {
+  if [ ! -f "/usr/bin/at-runner.sh" ]; then 
+      sudo ln -s "$SPACESCRIPT_DIR/at-runner/at-runner.sh" /usr/bin/
+  fi;
+}
+
 ensure-directories () {
   declare -a REQDIR_LIST=("$NETMAN_DIR/lib/include/" "$HELIUM_DIR/inc/" "$TIMER_DIR/inc/" "$BABYCRON_DIR/include/" "$JOBRUNNER_DIR/inc/" "$COMMANDER_DIR/include/" "$HELIUM_DIR/lib/" "$TIMER_DIR/lib/" "$COMMANDER_DIR/lib/" "$BABYCRON_DIR/lib/" "$BABYCRON_DIR/lib/" "$JOBRUNNER_DIR/lib/" "$NETMAN_DIR/lib/include" "$NETMAN_DIR/bin" "$UPLOAD_FOLDER/jobs" "$CS1_DIR/logs" "$CS1_DIR/pipes" "$CS1_DIR/pids" "$CS1_DIR/tgz")
   for item in ${REQDIR_LIST[*]}; do
@@ -405,6 +411,7 @@ cs1-build () {
     build_environment="$1"
     echo -e "${orange}Building for $build_environment...${NC}"
     ensure-directories
+    ensure-symlinks
 
     cs1-build-libs $build_environment
 

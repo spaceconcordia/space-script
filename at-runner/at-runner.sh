@@ -29,4 +29,5 @@ fi;
 # [tail -n +2] remove the following message: "warning: commands will be executed using /bin/sh"
 output="$( echo $command | /usr/bin/at -t $attime 2>&1 | tail -n +2) $command"
 echo $output >> schedule.log
+echo $output 
 quit
