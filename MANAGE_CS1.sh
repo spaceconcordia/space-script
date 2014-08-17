@@ -3,8 +3,8 @@ if [ -z "$BASH_VERSION" ]; then exec bash "$0" "$@"; fi;
 NC='\e[0m';black='\e[0;30m';darkgrey='\e[1;30m';blue='\e[0;34m';lightblue='\e[1;34m';green='\e[0;32m';lightgreen='\e[1;32m';cyan='\e[0;36m';lightcyan='\e[1;36m';red='\e[0;31m';lightred='\e[1;31m';purple='\e[0;35m';lightpurple='\e[1;35m';orange='\e[0;33m';yellow='\e[1;33m';lightgrey='\e[0;37m';yellow='\e[1;37m';
 
 project_name='https://github.com/spaceconcordia/'
-declare -a SysReqs=('git' 'g++' 'gcc' 'dpkg' 'stat' 'diff')
-declare -a Tools=('tmux' 'screen' 'minicom' 'libpcap-dev' 'libssl-dev')
+declare -a SysReqs=('git' 'g++' 'gcc' 'dpkg' 'libpcap-dev' 'libssl-dev')
+declare -a Tools=('tmux' 'screen' 'minicom' 'diffutils' )
 declare -a RepoList=('acs' 'baby-cron' 'ground-commander' 'HE100-lib' 'mail_arc' 'space-commander' 'space-lib' 'space-jobs' 'space-netman' 'space-script' 'space-tools' 'space-timer-lib' 'space-updater' 'space-updater-api' 'SRT' 'space-payload')
 declare -a OperatingSystem=('apt-get')
 
@@ -80,17 +80,6 @@ self-update () {
             confirm "Overwrite your local copy?" && cp $REPO_COPY $LOCAL_COPY && quit "Please restart the script to use the updated file."
         fi
     fi
-    # TODO CHECK if update is available
-    #cd $SPACESCRIPT_DIR
-    #if ! git-check "."; then
-    #  if confirm "An update for this script may be available. Proceed?"; then
-    #    if check-master-branch . ; then
-    #      echo -e "${green}UPDATING ...${NC}"
-    #      cs1-update $SPACESCRIPT_DIR && rsync -avz --update $SPACESCRIPT_DIR/MANAGE_CS1.sh $CS1_DIR/MANAGE_CS1.sh
-    #      quit "Script updated, please restart."
-    #    fi
-    #  fi
-    #fi
     cd $CS1_DIR
   fi
 }
@@ -105,7 +94,11 @@ git-check () {
 install-packages () {
     list_name=$1[@]
     list_elements=("${!list_name}")
-    confirm "Would you like to install this set of packages [${list_elements[*]}] ?" && $(for item in ${list_elements[*]}; do sudo apt-get -y install $item; done)
+    if confirm "Would you like to install this set of packages [${list_elements[*]}] ?";
+    then 
+        echo "sudo apt-get -y install ${list_elements[*]}"
+        sudo apt-get -y install ${list_elements[*]}
+    fi
 }
 
 check-installed () {
@@ -155,7 +148,7 @@ ensure-system-requirements () {
     else 
       echo "Attempting to install system requirements"
       sudo apt-get install git build-essential 
-      #install-packages SysReqs || quit
+      install-packages SysReqs || fail
     fi
 }
 
@@ -471,6 +464,8 @@ cs1-build () {
 # TODO tldp.org/LDP/abs/html/tabexpansion.html
 [ -d .git ] && fail "You are in a git directory, please copy this file to a new directory where you plan to build the project!"
 
+usage
+self-update
 ensure-operating-system
 ensure-system-requirements
 
@@ -506,9 +501,6 @@ for arg in "$@"; do
         "-J") cs1-build-libs; cs1-build-jobs; quit;
     esac
 done
-
-usage
-self-update
 
 echo "Repo size: ${#RepoList[*]}"
 echo "Current Dir: $CS1_DIR"
