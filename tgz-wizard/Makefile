@@ -1,7 +1,7 @@
 CXX = g++
 MICROCC=microblazeel-xilinx-linux-gnu-g++
 BB = arm-linux-gnueabi-g++
-CPPUTEST_HOME = .
+CPPUTEST_HOME = ../../CppUTest
 UPDATER_PATH  = ../../space-updater
 
 
@@ -29,7 +29,7 @@ bin/dirUtl.o: src/dirUtl.cpp include/dirUtl.h
 	$(CXX) $(INCLUDE) -c $< -o $@
 
 AllTests: tests/AllTests.cpp tests/tgz-wizard-test.cpp bin/fileIO.o bin/dirUtl.o
-	$(CXX) $(CFLAGS) $(CPPFLAGS) $(CXXFLAGS) $(INCLUDE) -o $@ $^ $(LD_LIBRARIES) ###-DDEBUG  need more output?
+	$(CXX) $(CFLAGS) $(CPPFLAGS) $(CXXFLAGS) $(INCLUDE) -o $@ $^ $(LD_LIBRARIES) ###-DCS1_DEBUG  need more output?
 	
 
 #
