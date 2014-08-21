@@ -2,7 +2,7 @@
 if [ -z "$BASH_VERSION" ]; then exec bash "$0" "$@"; fi;
 NC='\e[0m';black='\e[0;30m';darkgrey='\e[1;30m';blue='\e[0;34m';lightblue='\e[1;34m';green='\e[0;32m';lightgreen='\e[1;32m';cyan='\e[0;36m';lightcyan='\e[1;36m';red='\e[0;31m';lightred='\e[1;31m';purple='\e[0;35m';lightpurple='\e[1;35m';orange='\e[0;33m';yellow='\e[1;33m';lightgrey='\e[0;37m';yellow='\e[1;37m';
 
-project_name='https://github.com/spaceconcordia/'
+git_url='https://github.com/spaceconcordia/'
 declare -a SysReqs=('git' 'g++' 'gcc' 'dpkg' 'libpcap-dev' 'libssl-dev')
 declare -a Tools=('tmux' 'screen' 'minicom' 'diffutils' )
 declare -a RepoList=('acs' 'baby-cron' 'ground-commander' 'HE100-lib' 'mail_arc' 'space-commander' 'space-lib' 'space-jobs' 'space-netman' 'space-script' 'space-tools' 'space-timer-lib' 'space-updater' 'space-updater-api' 'SRT' 'space-payload')
@@ -211,8 +211,8 @@ cs1-install-test-env () {
 
 cs1-clone-all () {
     echo -e "${green}Cloning $1${NC}"
-    printf "git clone %s%s .\n" $project_name $1;
-    git clone $project_name$item $1
+    printf "git clone %s%s .\n" $git_url $1;
+    git clone $git_url$item $1
 }
 
 cs1-update () {
@@ -464,11 +464,6 @@ cs1-build () {
 # TODO tldp.org/LDP/abs/html/tabexpansion.html
 [ -d .git ] && fail "You are in a git directory, please copy this file to a new directory where you plan to build the project!"
 
-usage
-self-update
-ensure-operating-system
-ensure-system-requirements
-
 usage () {
     echo "./MANAGE_CS1.sh   [options]"
     echo "  -v               version"
@@ -478,6 +473,11 @@ usage () {
     echo "  --buildPC        build entire project with g++"
     echo "  --buildQ6        build entire project for MicroBlaze"
 }
+
+usage
+self-update
+ensure-operating-system
+ensure-system-requirements
 
 for arg in "$@"; do
     case $arg in

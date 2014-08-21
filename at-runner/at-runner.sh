@@ -28,6 +28,12 @@ fi;
 # [-t] time in iso format
 # [tail -n +2] remove the following message: "warning: commands will be executed using /bin/sh"
 output="$( echo $command | /usr/bin/at -t $attime 2>&1 | tail -n +2) $command"
-echo $output >> schedule.log
-echo $output 
-quit
+confirmation=$(echo "$output" | awk {'print $1'});
+if [ "$confirmation" = "job" ];
+then
+    echo $output >> schedule.log
+    echo $output | awk {'print $2'}
+else
+    # in this case 0 means failure
+    echo 0 
+fi
