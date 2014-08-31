@@ -8,7 +8,5 @@
 
 **/Q6**
 
-**/tgz-wizard**
-
-log rotation and archiving.
+**/tgz-wizard** - log rotation and archiving.
     
