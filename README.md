@@ -1,10 +1,10 @@
-** /at-runner **
+**/at-runner**
 
-** /boot-drivers **
+**/boot-drivers**
 
-** /kernel **
+**/kernel**
 
-** /monitoring **
+**/monitoring**
 
 **/Q6**
 
