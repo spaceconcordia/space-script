@@ -1,4 +1,4 @@
-# tgz-wizard #
+## tgz-wizard ##
 
-log rotation and archaving.
+log rotation and archiving.
 
