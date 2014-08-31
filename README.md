@@ -1,2 +1,4 @@
-space-script
-============
+# tgz-wizard #
+
+log rotation and archaving.
+
