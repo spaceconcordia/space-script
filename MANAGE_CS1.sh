@@ -62,6 +62,16 @@ confirm () {
     esac
 }
 
+check-master-branch () {
+    [ $1 ] && gdirectory="--git-dir=$1/.git" || gdirectory=""
+    branch_name="$(git ${gdirectory} symbolic-ref -q HEAD | sed 's|refs\/heads\/||g')"
+    echo "Currently on branch: $branch_name"
+    if [ "$branch_name" != "master" ]; then
+        confirm "Repository $1 is on the '$branch_name' branch, are you sure you wish to continue?" && return 0 || return 1
+    fi
+    return 0
+}
+
 cs1-clone-all () {
     echo -e "${green}Cloning $1${NC}"
     printf "git clone %s%s .\n" $git_url $1;
@@ -127,7 +137,7 @@ check-projects && confirm "Pull updates for cloned projects?" && update=0;
         fi;
         if [ $update ]; then
             if [ -d "$item" ]; then
-                check-master-branch $item && cs1-update $item
+                cs1-update $item
             fi;
         fi;
     done;
