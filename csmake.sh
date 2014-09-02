@@ -30,6 +30,11 @@ SKIP_TEST=0
 GROUP_LIST=() # insert the group of the test here.
 
 
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#
+# NAME : usage
+#
+#------------------------------------------------------------------------------
 usage()
 {
     echo "usage : cscomtest.sh  [-u] [-g testGroup] [-n testName] [-m numberOfRuns][-v][-s]"
@@ -46,10 +51,11 @@ usage()
     echo
 }
 
-
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #
-# Parses command line arguments
+# Parsing command line arguments
 #
+#------------------------------------------------------------------------------
 argType=""
 while getopts "cqg:n:uvm:s" opt; do
     case "$opt" in
@@ -73,9 +79,11 @@ while getopts "cqg:n:uvm:s" opt; do
     esac
 done
 
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #
-# GROUP
+# Test groups
 #
+#------------------------------------------------------------------------------
 if [ "$GROUP" != "" ]; then
     case $GROUP in 
         'getlog')       ARGUMENTS="-g GetLogTestGroup" ;;  # <----- this is just as an example, add your test groups!
@@ -85,9 +93,11 @@ fi
 ARGUMENTS="$ARGUMENTS $SINGLE_TEST" 
 
 
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #
-# Execute
+# Clean
 #
+#------------------------------------------------------------------------------
 if [ $CLEAN -eq 1 ]; then
     echo ""
     echo "=== Clean ==="
