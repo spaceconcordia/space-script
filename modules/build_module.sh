@@ -27,13 +27,6 @@ confirm-build-q6 () {
     esac
 }
 
-git-check () {
-  [ "$#" -eq 1 ] || fail "Exactly one argument required: path"
-  echo "Checking repo"
-  git --git-dir=$1/.git diff-index --quiet HEAD
-  #return $(git --git-dir=$1/.git rev-list HEAD...origin/master --count)
-}
-
 check-master-branch () {
     [ $1 ] && gdirectory="--git-dir=$1/.git" || gdirectory=""
     branch_name="$(git ${gdirectory} symbolic-ref -q HEAD | sed 's|refs\/heads\/||g')"
@@ -50,7 +43,7 @@ cs1-build-commander () {
     cd $COMMANDER_DIR
     check-master-branch || fail "Cannot build project without"
     mkdir -p ./bin ./lib ./include
-    confirm-build-q6 && make buildQ6 || bash  csmake -c
+    confirm-build-q6 && make buildQ6 || bash csmake.sh -c
     cp $COMMANDER_DIR/include/Net2Com.h $SPACE_INCLUDE/
     cp $COMMANDER_DIR/include/NamedPipe.h $SPACE_INCLUDE/
 

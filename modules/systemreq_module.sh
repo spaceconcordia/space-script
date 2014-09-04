@@ -31,6 +31,11 @@ done
 global_file=`find . -type f -name globals.sh`
 source $global_file
 
+DISTRIBUTION="$(lsb_release -i -s)"
+REQUIRED_DIST="Ubuntu"
+DISTRIBUTION_RELEASE="$(lsb_release -s -r | tail -n +1)"
+REQUIRED_RELEASE="14.04"
+
 ensure-operating-system () {
     if [ "$DISTRIBUTION" == "$REQUIRED_DIST" -a "$DISTRIBUTION_RELEASE" == "$REQUIRED_RELEASE" ] ; then 
         echo -e "${green}Correct distribution and OS ($DISTRIBUTION $DISTRIBUTION_RELEASE)${NC}"
@@ -90,5 +95,4 @@ ensure-test-environment() {
 }
 
 ensure-operating-system
-ensure-system-requirements
-ensure-test-environment
+ensure-system-requirements && ensure-test-environment

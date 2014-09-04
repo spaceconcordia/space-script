@@ -80,6 +80,4 @@ ensure-symlinks () {
   fi;
 }
 
-self-update
-ensure-symlinks
-ensure-directories
+self-update && ensure-symlinks && ensure-directories
