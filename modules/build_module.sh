@@ -4,18 +4,25 @@ if [ -z "$BASH_VERSION" ]; then exec bash bash  "$0" "$@"; fi;
 # Copyright (C) 2014 ngc598 <ngc598@Triangulum>
 #
 # Distributed under terms of the MIT license.
-# Credit to https://stackoverflow.com/a/3232082 for confirm function
 
 PROGRAM="build_functions.sh"
 VERSION="0.0.1"
 version () { echo "$PROGRAM version $VERSION"; }
 usage="usage: build_functions.sh [options: (-v version), (-u usage) ]"
 
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#
+# Exit on error
+#
+#------------------------------------------------------------------------------
 set -e
-globals=`find . -type f -name globals.sh`
-echo "$globals file"
-source $globals
 
+
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#
+# Function Bodies
+#
+#------------------------------------------------------------------------------
 confirm-build-q6 () {
     case $build_environment in
       "Q6")
@@ -26,6 +33,14 @@ confirm-build-q6 () {
             ;;
     esac
 }
+
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#
+# Source global functions
+#
+#------------------------------------------------------------------------------
+globals=`find . -type f -name globals.sh`
+source $globals
 
 check-master-branch () {
     [ $1 ] && gdirectory="--git-dir=$1/.git" || gdirectory=""
@@ -199,6 +214,13 @@ cs1-build () {
     cs1-build-space-updater-api $build_environment
     cs1-build-baby-cron $build_environment
 }
+
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#
+# Execution
+#
+#------------------------------------------------------------------------------
+echo "$CS1_DIR $(pwd)"
 
 confirm "Build project for PC?" && buildPC=0;
 check-microblaze || confirm "Install Microblaze environment?" && cs1-install-mbcc

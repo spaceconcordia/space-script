@@ -20,14 +20,19 @@ build_environment="PC"      # GLOBAL VARIABLE
 # enable non-interactive apt 
 export DEBIAN_FRONTEND=noninteractive
 # determine distribution and release
-DISTRIBUTION="$(lsb_release -i -s)"
-REQUIRED_DIST="Ubuntu"
-DISTRIBUTION_RELEASE="$(lsb_release -s -r | tail -n +1)"
-REQUIRED_RELEASE="14.04"
 
-#EXIT ON ERROR
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#
+# Exit on error
+#
+#------------------------------------------------------------------------------
 set -e
 
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#
+# Define functions
+#
+#------------------------------------------------------------------------------
 quit () {
   echo -e "${green}$1 Exiting gracefully...${NC}"
   exit 0
@@ -87,7 +92,12 @@ cs1-update () {
     cd $CS1_DIR
 }
 
-# START EXECUTION
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#
+# Parsing command line arguments
+#
+#------------------------------------------------------------------------------
+
 # TODO tldp.org/LDP/abs/html/tabexpansion.html
 [ -d .git ] && fail "You are in a git directory, please copy this file to a new directory where you plan to build the project!"
 
@@ -102,6 +112,34 @@ usage () {
 }
 
 usage
+
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#
+# Parsing command line arguments
+#
+#------------------------------------------------------------------------------
+argType=""
+while getopts "cqg:n:uvm:s" opt; do
+    case "$opt" in
+        b) bash build_module.sh; quit;
+        ;; 
+        u) GROUP=$OPTARG
+        ;;
+        m) MULTIPLE_RUN=$OPTARG
+        ;;
+        n) SINGLE_TEST="-n $OPTARG" 
+        ;;
+        q) MBCC=1
+        ;;
+        s) SKIP_TEST=1 
+        ;;
+        u)
+            usage
+            exit 0;
+        ;;
+        v) TODEVNULL=0 ;;
+    esac
+done
 
 echo "Repo size: ${#RepoList[*]}"
 echo "Current Dir: $CS1_DIR"

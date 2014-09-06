@@ -4,19 +4,31 @@ if [ -z "$BASH_VERSION" ]; then exec . .  "$0" "$@"; fi;
 # Copyright (C) 2014 ngc598 <ngc598@Triangulum>
 #
 # Distributed under terms of the MIT license.
-# Credit to https://stackoverflow.com/a/3232082 for confirm function
-
-declare -a SysReqs=('dialog' 'whiptail'); for item in ${SysReqs[*]}; do command -v $item >/dev/null 2>&1 || { echo >&2 "I require $item but it's not installed.  Aborting."; exit 1; }; done
 
 PROGRAM="environment_functions.sh"
 VERSION="0.0.1"
 version () { echo "$PROGRAM version $VERSION"; }
 usage="usage: environment_functions.sh [options: (-v version), (-u usage) ]"
 
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#
+# Exit on error
+#
+#------------------------------------------------------------------------------
 set -e
 
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#
+# Source global functions
+#
+#------------------------------------------------------------------------------
 source `find . -type f -name globals.sh`
 
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#
+# Function bodies
+#
+#------------------------------------------------------------------------------
 self-update () {
   SCRIPT_NAME="MANAGE_CS1.sh"
   LOCAL_COPY="$CS1_DIR/$SCRIPT_NAME"
@@ -58,7 +70,8 @@ ensure-directories () {
   done
   if [ ! -d "$CS1_DIR/apps" -o ! -d "/home/apps" ]; then 
       echo -e "${yellow} Linking /home/apps${NC}"
-      mkdir -p "$CS1_DIR"/logs && sudo ln -s "$CS1_DIR"/apps /home/apps && sudo chown -R $(logname):$(logname) /home/apps
+      mkdir -p "$CS1_DIR"/apps/current "$CS1_DIR"/apps/old "$CS1_DIR"/apps/new
+      sudo ln -s "$CS1_DIR"/apps /home/apps && sudo chown -R $(logname):$(logname) /home/apps
   fi
   if [ ! -d "$CS1_DIR/logs" -o ! -d "/home/logs" ]; then 
       echo -e "${yellow} Linking /home/logs${NC}"
@@ -80,4 +93,9 @@ ensure-symlinks () {
   fi;
 }
 
-self-update && ensure-symlinks && ensure-directories
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#
+# Execution
+#
+#------------------------------------------------------------------------------
+ensure-correct-path && self-update && ensure-symlinks && ensure-directories
