@@ -88,9 +88,12 @@ ensure-directories () {
 }
 
 ensure-symlinks () {
+  if [ ! -x "$SPACESCRIPT_DIR/at-runner/at-runner.sh" ]; then
+      sudo chmod +x $SPACESCRIPT_DIR/at-runner/at-runner.sh
+  fi
   if [ ! -f "/usr/bin/at-runner.sh" ]; then 
       sudo ln -s "$SPACESCRIPT_DIR/at-runner/at-runner.sh" /usr/bin/
-  fi;
+  fi
 }
 
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
