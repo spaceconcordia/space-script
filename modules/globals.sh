@@ -4,9 +4,16 @@ if [ -z "$BASH_VERSION" ]; then exec bash "$0" "$@"; fi;
 # Copyright (C) 2014 ngc598 <ngc598@Triangulum>
 #
 # Distributed under terms of the MIT license.
-# Credit to https://stackoverflow.com/a/3232082 for confirm function
 NC='\e[0m';black='\e[0;30m';darkgrey='\e[1;30m';blue='\e[0;34m';lightblue='\e[1;34m';green='\e[0;32m';lightgreen='\e[1;32m';cyan='\e[0;36m';lightcyan='\e[1;36m';red='\e[0;31m';lightred='\e[1;31m';purple='\e[0;35m';lightpurple='\e[1;35m';orange='\e[0;33m';yellow='\e[1;33m';lightgrey='\e[0;37m';yellow='\e[1;37m'; # colors: echo -e "${red}Text${NC}"
 
+ensure-correct-path () {
+  if [ "$(basename $(pwd))" = "modules" ] ; 
+  then 
+      echo "Changing to project root"
+      cd ../../
+  fi
+}
+ensure-correct-path
 
 READ_DIR=$(pwd)
 CS1_DIR=$(dirname "$READ_DIR/..")
