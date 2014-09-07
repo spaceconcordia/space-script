@@ -171,24 +171,6 @@ cs1-install-mbcc () {
   #cd $CS1_DIR/Microblaze && sh xsc-devkit-installer-lit.sh
 }
 
-cs1-install-test-env () {
-    if [ ! -d "gtest-1.7.0" ]; then
-        wget -c "https://googletest.googlecode.com/files/gtest-1.7.0.zip" -O gtest-1.7.0.zip
-        unzip gtest-1.7.0.zip && rm gtest-1.7.0.zip
-    fi
-    if [ ! -d "CppUTest" ]; then
-        git clone git://github.com/cpputest/cpputest.git CppUTest
-        cd CppUTest
-        configure
-        make
-        make -f Makefile_CppUTestExt 
-        cp -r include/* $SPACE_INCLUDE
-        cp lib/libCppUTest.a $SPACE_LIB/lib/
-        cp lib/libCppUTestExt.a $SPACE_LIB/lib/
-        cd $CS1_DIR
-    fi
-}
-
 cs1-build-libs() {
     #libraries
     cs1-build-timer $1
