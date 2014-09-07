@@ -109,6 +109,24 @@ offer-space-tools () {
     fi
 }
 
+cs1-install-test-env () {
+    if [ ! -d "gtest-1.7.0" ]; then
+        wget -c "https://googletest.googlecode.com/files/gtest-1.7.0.zip" -O gtest-1.7.0.zip
+        unzip gtest-1.7.0.zip && rm gtest-1.7.0.zip
+    fi
+    if [ ! -d "CppUTest" ]; then
+        wget -c https://github.com/cpputest/cpputest.github.io/blob/master/releases/cpputest-3.5.zip?raw=true -O CppUTest.zip
+        unzip CppUTest.zip
+        mv cpputest-3.5 CppUTest
+        cd CppUTest/
+        pwd
+        ./configure
+        make
+        make -f Makefile_CppUTestExt 
+        cd $CS1_DIR
+    fi
+}
+
 ensure-test-environment() {
     if [ ! -d "gtest-1.7.0" -o ! -d "CppUTest" ]; then
         confirm "Install Test Environment (GTest and CPPUTest)?" && cs1-install-test-env
@@ -135,3 +153,4 @@ done
 ensure-correct-path
 ensure-operating-system
 ensure-system-requirements && ensure-test-environment
+offer-space-tools

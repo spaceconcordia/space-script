@@ -167,7 +167,6 @@ cs1-build-utls () {
 }
 
 cs1-install-mbcc () {
-  offer-space-tools
   echo "Microblaze install not supported yet... See admin for details"
   #cd $CS1_DIR/Microblaze && sh xsc-devkit-installer-lit.sh
 }
