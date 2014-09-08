@@ -59,9 +59,6 @@ cs1-build-commander () {
     check-master-branch || fail "Cannot build project without"
     mkdir -p ./bin ./lib ./include
     confirm-build-q6 && make buildQ6 || bash csmake.sh -c
-    cp $COMMANDER_DIR/include/Net2Com.h $SPACE_INCLUDE/
-    cp $COMMANDER_DIR/include/NamedPipe.h $SPACE_INCLUDE/
-
     confirm-build-q6 && make staticlibsQ6.tar || make staticlibs.tar
 }
 
@@ -89,9 +86,6 @@ cs1-build-helium () {
   pwd
 
   confirm-build-q6 && bash  csmake.sh Q6 || bash  csmake.sh
-
-  cp $HELIUM_DIR/lib/* $SPACE_LIB/lib/
-  cp $HELIUM_DIR/inc/SC_he100.h $SPACE_LIB/include/ 
 }
 
 cs1-build-fletcher () {
@@ -131,7 +125,7 @@ cs1-build-shakespeare () {
   mkdir -p $SHAKESPEARE_DIR/lib
   echo "cd: \c"
   pwd
-  confirm-build-q6 && bash  csmake.sh Q6 || bash  csmake.sh test
+  confirm-build-q6 && bash csmake.sh Q6 || bash  csmake.sh test
 }
 
 cs1-build-space-updater () {
@@ -173,11 +167,11 @@ cs1-install-mbcc () {
 
 cs1-build-libs() {
     #libraries
+    cs1-build-utls $1
     cs1-build-timer $1
     cs1-build-shakespeare $1
     cs1-build-fletcher $1
     cs1-build-helium $1
-    cs1-build-utls $1
 }
 
 cs1-build () {

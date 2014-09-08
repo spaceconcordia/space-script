@@ -44,7 +44,14 @@ collect-files () {
 
     cp $SPACESCRIPT_DIR/tgz-wizard/tgzWizard $UPLOAD_FOLDER/
     cp $SPACESCRIPT_DIR/tgz-wizard/cs1_log_rotation.sh $UPLOAD_FOLDER/
+    
     cp $SPACE_LIB/include/SpaceDecl.sh $UPLOAD_FOLDER/
+
+    cp $SPACESCRIPT_DIR/tgz-wizard/cs1_log_rotation.sh $UPLOAD_FOLDER
+    cp $SPACESCRIPT_DIR/tgz-wizard/duChecker.sh $UPLOAD_FOLDER
+    cp $SPACESCRIPT_DIR/tgz-wizard/tgzWizard $UPLOAD_FOLDER
+
+    ## TODO test jobs under baby-cron 
 
     cp $SPACESCRIPT_DIR/Q6/* $UPLOAD_FOLDER/
     cp $SPACESCRIPT_DIR/at-runner/at-runner.sh $UPLOAD_FOLDER/
@@ -64,6 +71,11 @@ collect-files () {
     cp $COMMANDER_DIR/bin/space-commander $CS1_DIR/BUILD/PC/
     cp $NETMAN_DIR/bin/gnd $CS1_DIR/BUILD/PC/
     cp $NETMAN_DIR/bin/sat $CS1_DIR/BUILD/PC/
+    
+    cp $SPACESCRIPT_DIR/tgz-wizard/cs1_log_rotation.sh $CS1_DIR/BUILD/PC/
+    cp $SPACESCRIPT_DIR/tgz-wizard/duChecker.sh $CS1_DIR/BUILD/PC/
+    cp $SPACESCRIPT_DIR/tgz-wizard/tgzWizard $CS1_DIR/BUILD/PC/
+
     #cp $CS1_DIR/space-jobs/job-runner/bin/job-runner $CS1_DIR/BUILD/PC/
     cp $CS1_DIR/space-updater-api/bin/UpdaterServer $CS1_DIR/BUILD/PC/
     cp $CS1_DIR/space-updater/bin/PC-Updater $CS1_DIR/BUILD/PC/
