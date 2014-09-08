@@ -9,15 +9,16 @@
 # ARGUMENTS : NONE
 #
 #**********************************************************************************************************************
-SPACE_LIB="../../space-lib/include"
+DIR=`dirname $0`
+SPACE_LIB="$HOME/CONSAT1/space-lib/include"
 if [ -f $SPACE_LIB/SpaceDecl.sh ]; then     # on PC
     source $SPACE_LIB/SpaceDecl.sh
-    TGZWIZARD=./tgzWizard
-    DUCHECKER="./duChecker.sh -f sda1"
+    TGZWIZARD=$DIR/tgzWizard
+    DUCHECKER="$DIR/duChecker.sh -f sda1"
 else                                        # on Q6
-    source /etc/SpaceDecl.sh
-    TGZWIZARD=tgzWizard
-    DUCHECKER="/usr/bin/duChecker.sh -f xdm_root"
+    source $DIR/SpaceDecl.sh
+    TGZWIZARD=$DIR/tgzWizard
+    DUCHECKER="$DIR/duChecker.sh -f xdm_root"
 fi
 
 #

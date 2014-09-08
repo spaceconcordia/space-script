@@ -12,15 +12,15 @@
 #           -u  display usage
 #
 #**********************************************************************************************************************
-SPACE_LIB="../../space-lib/include"
-
+DIR=`dirname $0`
+SPACE_LIB="$HOME/CONSAT1/space-lib/include"
 #
 # Includes
 #
 if [ -f $SPACE_LIB/SpaceDecl.sh ]; then     # on PC
     source $SPACE_LIB/SpaceDecl.sh
 else                                        # on Q6
-    source /etc/SpaceDecl.sh
+    source $DIR/SpaceDecl.sh
 fi
 
 #

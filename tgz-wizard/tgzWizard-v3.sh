@@ -24,11 +24,12 @@
 #       -t     tgz directory
 #
 #**********************************************************************************************************************
-SPACE_LIB="../../space-lib/include"
+DIR=`dirname $0`
+SPACE_LIB="$HOME/CONSAT1/space-lib/include"
 if [ -f $SPACE_LIB/SpaceDecl.sh ]; then
     source $SPACE_LIB/SpaceDecl.sh  # source PC
 else
-    source /etc/SpaceDecl.sh        # source Q6
+    source $DIR/SpaceDecl.sh
 fi
 
 
