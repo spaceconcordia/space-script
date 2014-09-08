@@ -90,7 +90,6 @@ collect-files () {
 # Execution
 #
 #------------------------------------------------------------------------------
-ensure-correct-path
 confirm "Collect files for deployment?" && {
   if [ ! $build_environment ] ; then 
     confirm "Prepare deployment for Q6 (else PC)?" && build_environment="Q6" || build_environment="PC"

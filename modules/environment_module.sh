@@ -55,7 +55,7 @@ self-update () {
         elif [ "$REPO_MOD" -gt "$LOCAL_MOD" ] ; then
             echo -e "${yellow}Repo copy ($REPO_COPY) of this build script is newer!${NC}"
             confirm "View changes?" && diff $REPO_COPY $LOCAL_COPY 
-            confirm "Overwrite your local copy?" && cp $REPO_COPY $LOCAL_COPY && quit "Please restart the script to use the updated file."
+            confirm "Overwrite your local copy?" && cp $REPO_COPY $LOCAL_COPY && echo "Please restart the script to use the updated file." && return 1
         fi
     fi
     cd $CS1_DIR
@@ -65,12 +65,11 @@ self-update () {
 ensure-directories () {
   declare -a REQDIR_LIST=("$NETMAN_DIR/lib/include/" "$HELIUM_DIR/inc/" "$TIMER_DIR/inc/" "$BABYCRON_DIR/include/" "$JOBRUNNER_DIR/inc/" "$COMMANDER_DIR/include/" "$HELIUM_DIR/lib/" "$TIMER_DIR/lib/" "$COMMANDER_DIR/lib/" "$BABYCRON_DIR/lib/" "$BABYCRON_DIR/lib/" "$JOBRUNNER_DIR/lib/" "$NETMAN_DIR/lib/include" "$NETMAN_DIR/bin" "$UPLOAD_FOLDER/jobs" "$CS1_DIR/logs" "$CS1_DIR/pipes" "$CS1_DIR/pids" "$CS1_DIR/tgz")
   for item in ${REQDIR_LIST[*]}; do
-    mkdir -p $item
-    #[ ! -d $item ] && fail "$item does not exist and/or was not created properly"
+    mkdir -p $item || fail "Could not create $item"
   done
   if [ ! -d "$CS1_DIR/apps" -o ! -d "/home/apps" ]; then 
       echo -e "${yellow} Linking /home/apps${NC}"
-      mkdir -p "$CS1_DIR"/apps/current "$CS1_DIR"/apps/old "$CS1_DIR"/apps/new
+      mkdir -p "$CS1_DIR"/apps/current "$CS1_DIR"/apps/old "$CS1_DIR"/apps/new && sudo chown -R $(logname):$(logname) /home/apps
       sudo ln -s "$CS1_DIR"/apps /home/apps && sudo chown -R $(logname):$(logname) /home/apps
   fi
   if [ ! -d "$CS1_DIR/logs" -o ! -d "/home/logs" ]; then 

@@ -11,11 +11,8 @@ SPACESCRIPT_DIR="$CS1_DIR/space-script"
 
 declare -a SourceLibraries=("$SPACESCRIPT_DIR/modules/environment_module.sh" "$SPACESCRIPT_DIR/modules/systemreq_module.sh"  "$SPACESCRIPT_DIR/modules/build_module.sh" "$SPACESCRIPT_DIR/modules/deploy_module.sh" )
 
-build_environment="PC"      # GLOBAL VARIABLE
 
-# TODO
-# make clean on all
-# fix apt
+build_environment="PC"      # GLOBAL VARIABLE
 
 # enable non-interactive apt 
 export DEBIAN_FRONTEND=noninteractive
@@ -166,20 +163,20 @@ echo "---"
 check-projects || confirm "Clone missing projects?" && clone=0;
 check-projects && confirm "Pull updates for cloned projects?" && update=0;
 
-    for item in ${RepoList[*]}
-    do
-        if [ $clone ]; then
-            if [ ! -d "$item" ]; then
-                cs1-clone-all $item
-            fi;
+for item in ${RepoList[*]}
+do
+    if [ $clone ]; then
+        if [ ! -d "$item" ]; then
+            cs1-clone-all $item
         fi;
-        if [ $update ]; then
-            if [ -d "$item" ]; then
-                cs1-update $item
-            fi;
+    fi;
+    if [ $update ]; then
+        if [ -d "$item" ]; then
+            cs1-update $item
         fi;
-    done;
-    cd $CS1_DIR
+    fi;
+done;
+cd $CS1_DIR
 
 echo "running modules if present..."
 # run the modules in order of the array
