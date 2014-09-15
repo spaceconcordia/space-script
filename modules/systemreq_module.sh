@@ -21,7 +21,7 @@ usage="usage: systemreq_module.sh [options: (-v version), (-u usage) ]"
 #
 #------------------------------------------------------------------------------
 declare -a OperatingSystem=('apt-get')
-declare -a SysReqs=('git' 'g++' 'gcc' 'dpkg' 'libpcap-dev' 'libssl-dev' 'build-essential')
+declare -a SysReqs=('git' 'g++' 'gcc' 'dpkg' 'libpcap-dev' 'libssl-dev' 'build-essential' 'zip')
 declare -a Tools=('tmux' 'screen' 'minicom' 'diffutils' )
 
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

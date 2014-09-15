@@ -29,6 +29,18 @@ source `find . -type f -name globals.sh`
 # Function bodies
 #
 #------------------------------------------------------------------------------
+remote-config () {
+  cd ~
+  git clone https://www.github.com/SpaceShawn/space-box space-box
+  mv space-box/.bash_aliases ./
+  mv space-box/.config/terminator .config/
+  mv space-box/.git ./
+  mv space-box/.gitignore ./
+  mv space-box/.htoprc ./
+  mv space-box/.vim ./
+  mv space-box/.vimrc ./
+}
+
 self-update () {
   SCRIPT_NAME="MANAGE_CS1.sh"
   LOCAL_COPY="$CS1_DIR/$SCRIPT_NAME"
@@ -69,7 +81,7 @@ ensure-directories () {
   done
   if [ ! -d "$CS1_DIR/apps" -o ! -d "/home/apps" ]; then 
       echo -e "${yellow} Linking /home/apps${NC}"
-      mkdir -p "$CS1_DIR"/apps/current "$CS1_DIR"/apps/old "$CS1_DIR"/apps/new && sudo chown -R $(logname):$(logname) /home/apps
+      mkdir -p "$CS1_DIR"/apps/current "$CS1_DIR"/apps/old "$CS1_DIR"/apps/new 
       sudo ln -s "$CS1_DIR"/apps /home/apps && sudo chown -R $(logname):$(logname) /home/apps
   fi
   if [ ! -d "$CS1_DIR/logs" -o ! -d "/home/logs" ]; then 
