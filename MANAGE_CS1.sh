@@ -166,7 +166,7 @@ echo "Running modules if present..."
 for item in ${SourceLibraries[*]}
 do
     if [ -e $item ]; then
-        bash $item || yield "Yield on $item, please restart MANAGE_CS1.sh"
+        bash $item || yield "Yield on $item"
     else
         fail "$item not found..."
     fi
