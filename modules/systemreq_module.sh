@@ -36,8 +36,8 @@ export DEBIAN_FRONTEND=noninteractive
 # Source global functions
 #
 #------------------------------------------------------------------------------
-global_file=`find . -type f -name globals.sh`
-source $global_file
+globals=`find . -type f -name globals.sh`
+source $globals || echo "Failed to source globals"
 
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #
@@ -138,7 +138,6 @@ ensure-test-environment() {
 # Execution
 #
 #------------------------------------------------------------------------------
-echo "Executing systemreq_module, current directory is: $(pwd)"
 argType=""
 for arg in "$@"; do
     case $argType in

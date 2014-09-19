@@ -72,5 +72,3 @@ confirm-build-q6 () {
             ;;
     esac
 }
-
-echo -e "${green}Correctly sourced globals file${NC}"

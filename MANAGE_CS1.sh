@@ -11,12 +11,10 @@ SPACESCRIPT_DIR="$CS1_DIR/space-script"
 
 declare -a SourceLibraries=("$SPACESCRIPT_DIR/modules/environment_module.sh" "$SPACESCRIPT_DIR/modules/systemreq_module.sh"  "$SPACESCRIPT_DIR/modules/build_module.sh" "$SPACESCRIPT_DIR/modules/deploy_module.sh" )
 
-
 build_environment="PC"      # GLOBAL VARIABLE
 
 # enable non-interactive apt 
 export DEBIAN_FRONTEND=noninteractive
-# determine distribution and release
 
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #
@@ -33,6 +31,11 @@ set -e
 quit () {
   echo -e "${green}$1 Exiting gracefully...${NC}"
   exit 0
+}
+
+yield () {
+  echo -e "${yellow}$1${NC}"
+  exit 1
 }
 
 fail () {
@@ -100,41 +103,21 @@ cs1-update () {
 
 usage () {
     echo "./MANAGE_CS1.sh   [options]"
-    echo "  -v               version"
-    echo "  [-h or --help]   usage"
-    echo "  -L               build and distribute libs only"
-    echo "  -J               build jobs"
-    echo "  --buildPC        build entire project with g++"
-    echo "  --buildQ6        build entire project for MicroBlaze"
+    echo "                  -v               version"
+    echo "                  -h               usage"
+    #echo "  -L               build and distribute libs only"
+    #echo "  -J               build jobs"
+    #echo "  --buildPC        build entire project with g++"
+    #echo "  --buildQ6        build entire project for MicroBlaze"
 }
 
-usage
-
-#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-#
-# Parsing command line arguments
-#
-#------------------------------------------------------------------------------
 argType=""
 while getopts "cqg:n:uvm:s" opt; do
     case "$opt" in
-        b) bash build_module.sh; quit;
+        u) usage
         ;; 
-        u) GROUP=$OPTARG
+        h) usage
         ;;
-        m) MULTIPLE_RUN=$OPTARG
-        ;;
-        n) SINGLE_TEST="-n $OPTARG" 
-        ;;
-        q) MBCC=1
-        ;;
-        s) SKIP_TEST=1 
-        ;;
-        u)
-            usage
-            exit 0;
-        ;;
-        v) TODEVNULL=0 ;;
     esac
 done
 
@@ -159,7 +142,7 @@ check-changes () {
 
 check-changes
 
-echo "---"
+echo "----"
 check-projects || confirm "Clone missing projects?" && clone=0;
 check-projects && confirm "Pull updates for cloned projects?" && update=0;
 
@@ -178,14 +161,12 @@ do
 done;
 cd $CS1_DIR
 
-echo "running modules if present..."
+echo "Running modules if present..."
 # run the modules in order of the array
 for item in ${SourceLibraries[*]}
 do
-    echo "Checking $item"
     if [ -e $item ]; then
-        echo "Running $item"
-        bash $item
+        bash $item || yield "Yield on $item, please restart MANAGE_CS1.sh"
     else
         fail "$item not found..."
     fi

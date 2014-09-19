@@ -23,7 +23,8 @@ for arg in "$@"; do
 done
 
 set -e
-source `find . -type f -name globals.sh`
+globals=`find . -type f -name globals.sh`
+source $globals || echo "Failed to source $globals"
 
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #

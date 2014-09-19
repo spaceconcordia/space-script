@@ -40,7 +40,7 @@ confirm-build-q6 () {
 #
 #------------------------------------------------------------------------------
 globals=`find . -type f -name globals.sh`
-source $globals
+source $globals || echo "Failed to source $globals"
 
 check-master-branch () {
     [ $1 ] && gdirectory="--git-dir=$1/.git" || gdirectory=""
@@ -195,8 +195,6 @@ cs1-build () {
 # Execution
 #
 #------------------------------------------------------------------------------
-echo "$CS1_DIR $(pwd)"
-
 confirm "Build project for PC?" && buildPC=0;
 check-microblaze || confirm "Install Microblaze environment?" && cs1-install-mbcc
 check-microblaze && confirm "Build project for Q6?" && buildQ6=0
