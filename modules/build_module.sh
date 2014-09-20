@@ -157,7 +157,7 @@ cs1-build-timer () {
 cs1-build-utls () {
   echo -e "${green}Building cs1_utls Library...${NC}"
   cd $SPACE_LIB/utls
-  bash csmake.sh 
+  confirm-build-q6 && bash csmake.sh -q || bash csmake.sh 
 }
 
 cs1-install-mbcc () {
