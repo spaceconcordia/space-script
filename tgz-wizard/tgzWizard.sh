@@ -1,4 +1,4 @@
-#!/bin/sh -e
+#!/bin/sh
 #**********************************************************************************************************************
 # AUTHORS : Space Concordia 2014, Joseph
 #
@@ -54,12 +54,14 @@ fi
 #
 ##
 
+E_CANT_OPEN_FILE=66              # error code
+
 PATH_ROOT="/home"           ### HARDCODED ROOT PATH <===============================
 
 LOG_DIR="$CS1_LOGS"             # -l log directory
 TGZ_DIR="$CS1_TGZ"              # -t tgz directory
 TGZ_MAX_SIZE=$((1 * 1024))      # -s Default max size of the archives
-PART_SIZE="$CS1_MAX_FRAME_SIZE"  # -p Default part size
+PART_SIZE="$CS1_MAX_FRAME_SIZE" # -p Default part size
 NUM_LINES=50                    # -n Default number of lines to extract from the log file
 SOURCE=""                       # -f filename
 APP=""                          # -a subsystem/app
@@ -201,11 +203,14 @@ SOURCE="$SOURCE.log"
 #------------------------------------------------------------------------------
 finish() 
 {
+    sts=$?
     echo "[INFO] EXIT signal trapped" 1>&2
+    echo "return status : $sts" 1>&2
     echo "[END]" 1>&2
+    exit $sts
 }
 
-trap finish EXIT
+#trap finish EXIT
 
 #
 # Extract the ERROR and WARNING
@@ -239,8 +244,10 @@ extract_lines()
     while [ $archive_size -le $TGZ_MAX_SIZE -a  `wc -l $LOG_DIR/$SOURCE | awk '{print $1}'` -gt 0 ] 
     do
 
-        sed -n "1,$NUM_LINES p" $LOG_DIR/$SOURCE >> $EXTRACT_TMP         # extracts the first NUM_LINES from SOURCE
-        sed -i "1,$NUM_LINES d" $LOG_DIR/$SOURCE                         # removes  the first NUM_LINES from SOURCE
+        # extracts the first NUM_LINES from SOURCE
+        sed -n "1,$NUM_LINES p" $LOG_DIR/$SOURCE >> $EXTRACT_TMP   ||  { echo "can't open $SOURCE"; exit $E_CANT_OPEN_FILE; } 
+        # removes  the first NUM_LINES from SOURCE
+        sed -i "1,$NUM_LINES d" $LOG_DIR/$SOURCE
 
         tar -cvf $TGZ_DIR/$DEST.tmp   $EXTRACT_TMP     1>&2              # append to DEST
         gzip $TGZ_DIR/$DEST.tmp   || { echo "[ERROR] $0:$LINENO - gzip $TGZ_DIR/$DEST.tmp failed"; } 
