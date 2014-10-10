@@ -17,45 +17,6 @@ VERSION="0.0.1"
 version () { echo "$PROGRAM version $VERSION"; }
 usage="usage: deploy_module.sh [options: (-v version), (-u usage) ]"
 
-#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-#
-# Folder Structure
-#
-#------------------------------------------------------------------------------
-root="$UPLOAD_FOLDER"
-etc="$root/etc"
-home="$root/home"
-apps="$home/apps"
-apps_new="$apps/new" # place new files here, space-updater-api will ensure new file or rollback
-apps_current="$apps/current"
-apps_old="$apps/old"
-logs="$home/logs"
-pids="$home/pids"
-
-apps_etc="$apps_new/config"
-
-ground="~/CONSAT1/ground"
-
-commander="$apps_new/space-commander"
-baby_cron="$apps_new/baby-cron"
-netman="$apps_new/space-netman"
-updaterapi="$apps_new/space-updater-api"
-updater="$apps_new/space-updater"
-spacejobs="$apps_new/jobs"
-tgz_wizard="$apps_new/tgz-wizard"
-
-initd="$etc/init.d"
-bin="/usr/bin"
-tests="$home/tests"
-
-scripts="$apps_new/scripts"
-boot_scripts="$apps_new/boot/"
-
-
-make_directories () {
-    mkdir -p $etc $home $apps $apps_etc $apps_new $apps_current $apps_old $logs $pids $ground $commander $baby_cron $netman $updaterapi $updater $spacejobs $tgz_wizard $initd $bin $tests $scripts $boot_scripts
-}
-
 argType=""
 for arg in "$@"; do
     case $argType in
@@ -74,35 +35,77 @@ source $globals || echo "Failed to source $globals"
 
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #
+# Folder Structure
+#
+#------------------------------------------------------------------------------
+if [ ! $UPLOAD_FOLDER ] ; then
+    echo "No upload folder selected, please enter one:"
+    read UPLOAD_FOLDER
+fi
+
+root="$UPLOAD_FOLDER/$(date --iso)"
+etc="$root/etc"
+home="$root/home"
+apps="$home/apps"
+apps_new="$apps/new" # place new files here, space-updater-api will ensure new file or rollback
+apps_current="$apps/current"
+apps_old="$apps/old"
+logs="$home/logs"
+pids="$home/pids"
+
+apps_etc="$apps_new/etc"
+
+ground="~/CONSAT1/ground"
+
+commander="$apps_new/space-commander"
+baby_cron="$apps_new/baby-cron"
+netman="$apps_new/space-netman"
+updaterapi="$apps_new/space-updater-api"
+updater="$apps_new/space-updater"
+spacejobs="$apps_new/jobs"
+tgz_wizard="$apps_new/tgz-wizard"
+
+initd="$etc/init.d"
+bin="/usr/bin"
+tests="$home/tests"
+
+scripts="$apps_new/scripts"
+boot_scripts="$apps_new/boot/"
+
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#
 # Function Bodies
 #
 #------------------------------------------------------------------------------
+make_directories () {
+    mkdir -p $etc $home $apps $apps_etc $apps_new $apps_current $apps_old $logs $pids $ground $commander $baby_cron $netman $updaterapi $updater $spacejobs $tgz_wizard $initd $bin $tests $scripts $boot_scripts
+}
+
 collect_files () {
   echo -e "${purple}Collecting files for $build_environment... ${NC}"
   if confirm-build-q6; then  
-    root="$UPLOAD_FOLDER"
     make_directories 
     ls $CS1_DIR/BUILD/Q6
     cp $COMMANDER_DIR/bin/space-commanderQ6                 $commander/space-commander
-    cp $NETMAN_DIR/bin/gnd-mbcc                             $UPLOAD_FOLDER/../
-    cp $NETMAN_DIR/bin/sat-mbcc                             $UPLOAD_FOLDER/sat
-    cp $CS1_DIR/space-jobs/job-runner/bin/job-runner-mbcc   $spacejobs/job-runner
+    cp $NETMAN_DIR/bin/sat-mbcc                             $netman/space-netman
     cp $CS1_DIR/space-updater-api/bin/UpdaterServer-Q6      $updaterapi/
     cp $CS1_DIR/space-updater/bin/Updater-Q6                $updater/
     cp $BABYCRON_DIR/bin/baby-cron                          $baby_cron/
+    
+    cp $CS1_DIR/space-jobs/job-runner/bin/job-runner-mbcc   $spacejobs/job-runner
 
     cp $SPACESCRIPT_DIR/tgz-wizard/tgzWizard                $tgz_wizard/
     cp $SPACESCRIPT_DIR/tgz-wizard/cs1_log_rotation.sh      $tgz_wizard/
     cp $SPACESCRIPT_DIR/tgz-wizard/duChecker.sh             $tgz_wizard/
-
+    
     cp $SPACE_LIB/include/SpaceDecl.sh                      $apps_etc/
-
+    
     ## TODO test jobs under baby-cron/tests/jobs
-
+    
     cp $SPACESCRIPT_DIR/Q6/*                                $tests/
-    mv $tests/Q6-rsync.sh                                   $UPLOAD_FOLDER/
+    mv $tests/Q6-rsync.sh                                   $root/
     cp $SPACESCRIPT_DIR/at-runner/at-runner.sh              $scripts/
-    cp $SPACESCRIPT_DIR/boot-drivers/*.sh                   $bootscripts/
+    cp $SPACESCRIPT_DIR/boot-drivers/*.sh                   $boot_scripts/
     
     chmod +x $UPLOAD_FOLDER/*
     cd $UPLOAD_FOLDER
@@ -111,7 +114,7 @@ collect_files () {
     ls
     cd $CS1_DIR
     echo 'Binaries left in $CS1_DIR/BUILD/Q6'
-    echo -e "${purple}$(date --iso)-Q6.tar.gz left in $CS1_DIR/BUILD/Q6, transfer it to Q6, tar -xvf it, and run Q6-rsync.sh${NC}"
+    echo -e "${purple}Left archive: $CS1_DIR/BUILD/Q6/$(date --iso)-Q6.tar.gz left in, transfer it to Q6, tar -xvf it, and run Q6-rsync.sh${NC}"
   else
     root="$CS1_DIR/BUILD/PC"
     make_directories 

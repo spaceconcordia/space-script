@@ -67,7 +67,7 @@ cs1-build-netman () {
     cd $NETMAN_DIR
     check-master-branch || fail "Cannot build project without"
     mkdir -p ./bin ./lib ./include
-    confirm-build-q6 && make Q6 || make
+    confirm-build-q6 && bash csmake.sh -q || bash csmake.sh
 }
 
 cs1-build-baby-cron () {
