@@ -117,6 +117,7 @@ collect_files () {
     echo -e "${purple}Left archive: $CS1_DIR/BUILD/Q6/$(date --iso)-Q6.tar.gz left in, transfer it to Q6, tar -xvf it, and run Q6-rsync.sh${NC}"
   else
     root="$CS1_DIR/BUILD/PC"
+    mkdir -p $root
     make_directories 
     cp $COMMANDER_DIR/bin/space-commander                   $CS1_DIR/BUILD/PC/
     cp $NETMAN_DIR/bin/gnd                                  $CS1_DIR/BUILD/PC/
