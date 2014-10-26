@@ -136,6 +136,19 @@ collect_files () {
   fi
 }
 
+ground_station_setup () {
+   sudo ln -s $CS1_DIR/BUILD/PC/gnd /usr/bin/gnd
+   sudo ln -s $CS1_DIR/BUILD/PC/sat /usr/bin/sat
+   sudo ln -s $CS1_DIR/BUILD/PC/space-commander /usr/bin/space-commander
+   sudo ln -s $CS1_DIR/space-tools/echo-for-pipes/decode-command.rb /usr/bin/decode-command.rb  
+   sudo ln -s $CS1_DIR/space-tools/echo-for-pipes/getlog-command.rb /usr/bin/getlog-command.rb  
+   sudo ln -s $CS1_DIR/space-tools/echo-for-pipes/gettime-command.rb /usr/bin/gettime-command.rb  
+   sudo ln -s $CS1_DIR/space-tools/echo-for-pipes/reboot-command.rb /usr/bin/reboot-command.rb  
+   sudo ln -s $CS1_DIR/space-tools/echo-for-pipes/update-command.rb /usr/bin/update-command.rb  
+   sudo ln -s $CS1_DIR/space-tools/echo-for-pipes/step2.rb /usr/bin/step2.rb  
+   touch /home/logs/gs.log
+}
+
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #
 # Execution
