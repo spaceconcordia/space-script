@@ -137,15 +137,20 @@ collect_files () {
 }
 
 ground_station_setup () {
-   sudo ln -s $CS1_DIR/BUILD/PC/gnd /usr/bin/gnd
-   sudo ln -s $CS1_DIR/BUILD/PC/sat /usr/bin/sat
-   sudo ln -s $CS1_DIR/BUILD/PC/space-commander /usr/bin/space-commander
-   sudo ln -s $CS1_DIR/space-tools/echo-for-pipes/decode-command.rb /usr/bin/decode-command.rb  
-   sudo ln -s $CS1_DIR/space-tools/echo-for-pipes/getlog-command.rb /usr/bin/getlog-command.rb  
-   sudo ln -s $CS1_DIR/space-tools/echo-for-pipes/gettime-command.rb /usr/bin/gettime-command.rb  
-   sudo ln -s $CS1_DIR/space-tools/echo-for-pipes/reboot-command.rb /usr/bin/reboot-command.rb  
-   sudo ln -s $CS1_DIR/space-tools/echo-for-pipes/update-command.rb /usr/bin/update-command.rb  
-   sudo ln -s $CS1_DIR/space-tools/echo-for-pipes/step2.rb /usr/bin/step2.rb  
+   echo "Linking Named Pipes"
+   cs1_mkfifo /home/pipes/gnd-input
+   cs1_mkfifo /home/pipes/gnd-out-sat-in
+   cs1_mkfifo /home/pipes/sat-out-gnd-in
+   echo "Linking Binaries"
+   su_symlink $CS1_DIR/BUILD/PC/gnd /usr/bin/gnd
+   su_symlink $CS1_DIR/BUILD/PC/sat /usr/bin/sat
+   su_symlink $CS1_DIR/BUILD/PC/space-commander /usr/bin/space-commander
+   su_symlink $CS1_DIR/space-tools/echo-for-pipes/decode-command.rb /usr/bin/decode-command.rb  
+   su_symlink $CS1_DIR/space-tools/echo-for-pipes/getlog-command.rb /usr/bin/getlog-command.rb  
+   su_symlink $CS1_DIR/space-tools/echo-for-pipes/gettime-command.rb /usr/bin/gettime-command.rb  
+   su_symlink $CS1_DIR/space-tools/echo-for-pipes/reboot-command.rb /usr/bin/reboot-command.rb  
+   su_symlink $CS1_DIR/space-tools/echo-for-pipes/update-command.rb /usr/bin/update-command.rb  
+   su_symlink $CS1_DIR/space-tools/echo-for-pipes/step2.rb /usr/bin/step2.rb  
    touch /home/logs/gs.log
 }
 
@@ -160,3 +165,5 @@ confirm "Collect files for deployment?" && {
   fi
   collect_files
 }
+
+confirm "Prepare Ground Control dependencies?" && ground_station_setup

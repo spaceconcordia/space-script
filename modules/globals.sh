@@ -55,6 +55,63 @@ confirm () {
     esac
 }
 
+su_symlink () {
+    if [ $# -ne 2 ] ; then
+        return 1
+    fi
+    source_file=$1
+    dest_symlink=$2
+    if [ -f $source_file ]; then
+        if [ -f $dest_symlink ]; then
+            if [ ! -h $dest_symlink ]; then
+                echo "sudo ln -s $source_file $dest_symlink"
+                sudo ln -s $source_file $dest_symlink
+            else
+                echo "$dest_symlink is already linked"
+                ll $dest_symlink
+            fi
+        else 
+            echo "sudo ln -s $source_file $dest_symlink"
+            sudo ln -s $source_file $dest_symlink
+        fi
+    else 
+        echo "Invalid source file provided: $source_file"
+    fi
+}
+
+symlink () {
+    if [ $# -ne 2 ] ; then
+        return 1
+    fi
+    source_file=$1
+    dest_symlink=$2
+    if [ -f $source_file ]; then
+        if [ -f $dest_symlink ]; then
+            echo "$dest_symlink already exists"
+            if [ ! -h $dest_symlink ]; then
+                echo "sudo ln -s $source_file $dest_symlink"
+                ln -s $source_file $dest_symlink
+            else
+                echo "$dest_symlink is already linked"
+                ll $dest_symlink
+            fi
+        else 
+            echo "sudo ln -s $source_file $dest_symlink"
+            ln -s $source_file $dest_symlink
+        fi
+    else 
+        echo "Invalid source file provided: $source_file"
+    fi
+}
+
+cs1_mkfifo () {
+    dest_pipe=$1 
+    if [ ! -p $dest_pipe ]; then
+        echo "mkfifo $dest_pipe"
+        mkfifo $dest_pipe
+    fi
+}
+
 #TODO these doesn't belong here
 check-package () {
     command -v $1 >/dev/null 2>&1
