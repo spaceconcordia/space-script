@@ -47,7 +47,7 @@ root="$UPLOAD_FOLDER/$(date --iso)"
 etc="$root/etc"
 home="$root/home"
 apps="$home/apps"
-apps_new="$apps/new" # place new files here, space-updater-api will ensure new file or rollback
+apps_new="$apps/current" # place new files here, space-updater-api will ensure new file or rollback
 apps_current="$apps/current"
 apps_old="$apps/old"
 logs="$home/logs"
@@ -70,7 +70,7 @@ bin="/usr/bin"
 tests="$home/tests"
 
 scripts="$apps_new/scripts"
-boot_scripts="$apps_new/boot/"
+boot_scripts="$initd"
 
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #
@@ -93,6 +93,7 @@ collect_files () {
     cp $BABYCRON_DIR/bin/baby-cron                          $baby_cron/
     
     cp $CS1_DIR/space-jobs/job-runner/bin/job-runner-mbcc   $spacejobs/job-runner
+    #cp $CS1_DIR/space-jobs/jobs/bin/*                       $spacejobs/
 
     cp $SPACESCRIPT_DIR/tgz-wizard/tgzWizard                $tgz_wizard/
     cp $SPACESCRIPT_DIR/tgz-wizard/cs1_log_rotation.sh      $tgz_wizard/
@@ -122,6 +123,7 @@ collect_files () {
     cp $COMMANDER_DIR/bin/space-commander                   $CS1_DIR/BUILD/PC/
     cp $NETMAN_DIR/bin/gnd                                  $CS1_DIR/BUILD/PC/
     cp $NETMAN_DIR/bin/sat                                  $CS1_DIR/BUILD/PC/
+    cp $NETMAN_DIR/bin/mock_sat                             $CS1_DIR/BUILD/PC/
     
     cp $SPACESCRIPT_DIR/tgz-wizard/cs1_log_rotation.sh      $CS1_DIR/BUILD/PC/
     cp $SPACESCRIPT_DIR/tgz-wizard/duChecker.sh             $CS1_DIR/BUILD/PC/
@@ -144,6 +146,7 @@ ground_station_setup () {
    echo "Linking Binaries"
    su_symlink $CS1_DIR/BUILD/PC/gnd /usr/bin/gnd
    su_symlink $CS1_DIR/BUILD/PC/sat /usr/bin/sat
+   su_symlink $CS1_DIR/BUILD/PC/mock_sat /usr/bin/mock_sat
    su_symlink $CS1_DIR/BUILD/PC/space-commander /usr/bin/space-commander
    su_symlink $CS1_DIR/space-tools/echo-for-pipes/decode-command.rb /usr/bin/decode-command.rb  
    su_symlink $CS1_DIR/space-tools/echo-for-pipes/getlog-command.rb /usr/bin/getlog-command.rb  

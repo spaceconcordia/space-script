@@ -41,10 +41,10 @@ symlink () {
 
 create_symlinks () {
     # link driver start scripts
-    symlink $exec_dir/boot/I01ad799x.sh           /etc/init.d/I01ad799x.sh
-    symlink $exec_dir/boot/I02hmc5843.sh          /etc/init.d/I02hmc5843.sh
-    symlink $exec_dir/boot/I03ina2xx.sh           /etc/init.d/I03ina2xx.sh
-    symlink $exec_dir/boot/I04rtc-ds3232e.sh      /etc/init.d/I04rtc-ds3232e.sh
+    #symlink $exec_dir/boot/I01ad799x.sh           /etc/init.d/I01ad799x.sh
+    #symlink $exec_dir/boot/I02hmc5843.sh          /etc/init.d/I02hmc5843.sh
+    #symlink $exec_dir/boot/I03ina2xx.sh           /etc/init.d/I03ina2xx.sh
+    #symlink $exec_dir/boot/I04rtc-ds3232e.sh      /etc/init.d/I04rtc-ds3232e.sh
 
     # link log rotation scripts
     symlink $exec_dir/tgz_wizard/tgzWizard.sh         /usr/bin/tgzwizard.sh
@@ -78,6 +78,12 @@ execute_on_q6 ()
     fi
 
     create_symlinks
+
+    # ensure permissions
+    chmod +x /etc/init.d/I01ad799x.sh
+    chmod +x /etc/init.d/I02hmc5843.sh
+    chmod +x /etc/init.d/I03ina2xx.sh
+    chmod +x /etc/init.d/I04rtc-ds3232e.sh
 
     echo "Self destructing..."
     rm Q6-rsync.sh
