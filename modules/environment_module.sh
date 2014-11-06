@@ -112,4 +112,4 @@ ensure-symlinks () {
 # Execution
 #
 #------------------------------------------------------------------------------
-ensure-correct-path && self-update && ensure-symlinks && ensure-directories
+ensure-correct-path && self-update && ensure-symlinks && ensure-directories 
