@@ -114,7 +114,6 @@ usage () {
     #echo "  --buildQ6        build entire project for MicroBlaze"
 }
 
-SKIP=1
 argType=""
 while getopts "bdpq:n:uvm:s" opt; do
     case "$opt" in
@@ -134,7 +133,7 @@ while getopts "bdpq:n:uvm:s" opt; do
     esac
 done
 
-if [ $SKIP -ne 1 ] ; then
+if [ ! $SKIP ] ; then
     echo "Repo size: ${#RepoList[*]}"
     echo "Current Dir: $CS1_DIR"
 
