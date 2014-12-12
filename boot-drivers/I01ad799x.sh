@@ -1,6 +1,7 @@
 #! /bin/sh
 if lsmod | grep "ad799x" &> /dev/null ; then
   if [ "$1" == "-r" ]; then
+    writeprotect off
     echo 0x21 > /sys/bus/i2c/devices/i2c-1/delete_device 
     sed -i "s|AD7998x21PATH=.*|AD7998x21PATH='unset'|g" /etc/profile
     echo 0x22 > /sys/bus/i2c/devices/i2c-1/delete_device 
@@ -8,6 +9,8 @@ if lsmod | grep "ad799x" &> /dev/null ; then
     echo 0x23 > /sys/bus/i2c/devices/i2c-1/delete_device
     sed -i "s|AD7998x23PATH=.*|AD7998x23PATH='unset'|g" /etc/profile
     modprobe -r ad799x 
+    sync
+    writeprotect on
   else
     echo "ad799x is already loaded"
     exit 0; # driver is loaded
@@ -15,6 +18,7 @@ if lsmod | grep "ad799x" &> /dev/null ; then
 else
     source /etc/profile
     if modprobe ad799x ; then
+      writeprotect on
       if echo ad7998 0x21 > /sys/bus/i2c/devices/i2c-1/new_device ; then
         driverpath="$(find /sys/bus/i2c/devices/1-0021/ -type d -name 'iio:device*' -print | head -1)"
         sed -i "s|AD7998x21PATH=.*|AD7998x21PATH='$driverpath'|g" /etc/profile
@@ -27,5 +31,7 @@ else
         driverpath="$(find /sys/bus/i2c/devices/1-0023/ -type d -name 'iio:device*' -print | head -1)"
         sed -i "s|AD7998x23PATH=.*|AD7998x23PATH='$driverpath'|g" /etc/profile
       fi
+      sync
+      writeprotect on
     fi
 fi   
