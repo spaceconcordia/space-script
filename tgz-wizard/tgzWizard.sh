@@ -70,7 +70,7 @@ DATE=`date +%Y%m%d`             # -d date - default to current date 'YYYYmmdd'
 #
 # Add all valid application to the string (the ones that are used in the log filename (ex. "Watch-Puppy")
 #
-validApps="Error-Warning Baby-cron Process-Updater Updater Watch-Puppy"
+validApps="Error-Warning Baby-cron Process-Updater Updater Watch-Puppy"  ## *** OBSOLETE ***
 
 ERR_WARN_PATTERN="(ERROR|WARNING)"      # regex for the egrep
 EXTRACT_TMP="."                         # Temporary file path
