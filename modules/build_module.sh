@@ -202,10 +202,10 @@ check-microblaze && confirm "Build project for Q6?" && buildQ6=0
 if [ $buildPC ]; then
     if [ -d "space-script" ]; then
         cs1-build PC
-    fi;
-fi;
+    fi
+fi
 if [ $buildQ6 ]; then
     if [ -d "space-script" ]; then
         cs1-build Q6
-    fi;
-fi;
+    fi
+fi

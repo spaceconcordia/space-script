@@ -68,7 +68,7 @@ su_symlink () {
                 sudo ln -s $source_file $dest_symlink
             else
                 echo "$dest_symlink is already linked"
-                ll $dest_symlink
+                ls -alF $dest_symlink
             fi
         else 
             echo "sudo ln -s $source_file $dest_symlink"

@@ -103,8 +103,11 @@ cs1-update () {
 
 usage () {
     echo "./MANAGE_CS1.sh   [options]"
-    echo "                  -v               version"
-    echo "                  -h               usage"
+    echo "                  -b               run the build process"
+    echo "                  -d               run the deployment process"
+    echo "                  -p               update all Git repositories"
+    echo "                  -q               set environment to Q6"
+    echo "                  -u               usage"
     #echo "  -L               build and distribute libs only"
     #echo "  -J               build jobs"
     #echo "  --buildPC        build entire project with g++"
@@ -112,39 +115,50 @@ usage () {
 }
 
 argType=""
-while getopts "cqg:n:uvm:s" opt; do
+while getopts "bdpq:n:uvm:s" opt; do
     case "$opt" in
-        u) usage
-        ;; 
-        h) usage
+        b) 
+            bash "$SPACESCRIPT_DIR/modules/build_module.sh" ; 
+            bash "$SPACESCRIPT_DIR/modules/deploy_module.sh" ; 
+            quit
         ;;
+        d) bash "$SPACESCRIPT_DIR/modules/deploy_module.sh" ; quit
+        ;;
+        p) SKIP=1; update=1; 
+        ;;
+        q) build_environment="Q6"
+        ;;
+        u) usage; quit
+        ;; 
     esac
 done
 
-echo "Repo size: ${#RepoList[*]}"
-echo "Current Dir: $CS1_DIR"
+if [ ! $SKIP ] ; then
+    echo "Repo size: ${#RepoList[*]}"
+    echo "Current Dir: $CS1_DIR"
 
-check-changes () {
-    for item in ${RepoList[*]}
-        do
-        if [ -d "$item" ]; then
-            cd $item
-            CHANGED=$(git diff-index --name-only HEAD --)
-            if [ -n "$CHANGED" ]; then
-                echo "---"
-                echo -e "${red}$item has local changes...${NC}"
-                git status
+    check-changes () {
+        for item in ${RepoList[*]}
+            do
+            if [ -d "$item" ]; then
+                cd $item
+                CHANGED=$(git diff-index --name-only HEAD --)
+                if [ -n "$CHANGED" ]; then
+                    echo "---"
+                    echo -e "${red}$item has local changes...${NC}"
+                    git status
+                fi;
+                cd $CS1_DIR
             fi;
-            cd $CS1_DIR
-        fi;
-    done;
-}
+        done;
+    }
 
-check-changes
+    check-changes
 
-echo "----"
-check-projects || confirm "Clone missing projects?" && clone=0;
-check-projects && confirm "Pull updates for cloned projects?" && update=0;
+    echo "----"
+    check-projects || confirm "Clone missing projects?" && clone=0;
+    check-projects && confirm "Pull updates for cloned projects?" && update=0;
+fi;
 
 for item in ${RepoList[*]}
 do
@@ -159,8 +173,8 @@ do
         fi;
     fi;
 done;
-cd $CS1_DIR
 
+cd $CS1_DIR
 echo "Running modules if present..."
 # run the modules in order of the array
 for item in ${SourceLibraries[*]}
