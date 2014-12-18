@@ -99,7 +99,7 @@ collect_files () {
     cp $SPACESCRIPT_DIR/tgz-wizard/cs1_log_rotation.sh      $tgz_wizard/
     cp $SPACESCRIPT_DIR/tgz-wizard/duChecker.sh             $tgz_wizard/
     
-    cp $SPACE_LIB/include/SpaceDecl.sh                      $apps_etc/
+    cp $SPACE_LIB/include/SpaceDecl.sh                      $tgz_wizard/
     
     ## TODO test jobs under baby-cron/tests/jobs
     
