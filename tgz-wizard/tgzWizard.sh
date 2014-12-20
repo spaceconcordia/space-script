@@ -155,7 +155,8 @@ done
 # if -a argument has been provided, validates.
 #
 if [ "$APP" != "" ]; then
-    if ( `echo $APP | grep $validApp` -eq 1 ); then 
+    echo $validApps | grep "$APP" 1>/dev/null
+    if [ $? -eq 1 ]; then 
         echo "'$APP' is not a valid application name"
         exit 1
     fi
@@ -191,6 +192,11 @@ SOURCE="$SOURCE.log"
 #
 ##################
 
+
+if [ ! -f $LOG_DIR/$SOURCE ]; then
+    echo "[ERROR] $LOG_DIR/$SOURCE does not exist."
+    exit 1
+fi
 
 
 
