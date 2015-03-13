@@ -155,7 +155,8 @@ done
 # if -a argument has been provided, validates.
 #
 if [ "$APP" != "" ]; then
-    if ( `echo $APP | grep $validApp` -eq 1 ); then 
+    echo $validApps | grep "$APP" 1>/dev/null
+    if [ $? -eq 1 ]; then 
         echo "'$APP' is not a valid application name"
         exit 1
     fi
@@ -184,13 +185,18 @@ do
     COUNT=$(($COUNT+1))
 done
 
-EXTRACT_TMP="$EXTRACT_TMP/$DEST.log"
+EXTRACT_TMP="$EXTRACT_TMP/$DEST.tmp"
 DEST="$DEST.$COUNT.tgz"
 SOURCE="$SOURCE.log"
 #
 #
 ##################
 
+
+if [ ! -f $LOG_DIR/$SOURCE ]; then
+    echo "[ERROR] $LOG_DIR/$SOURCE does not exist."
+    exit 1
+fi
 
 
 
@@ -261,6 +267,7 @@ extract_lines()
     fi
 
     if [ `wc -l $LOG_DIR/$SOURCE | awk '{print $1}'` -eq 0 ]; then 
+        echo "[INFO] rm $LOG_DIR/$SOURCE"
         rm $LOG_DIR/$SOURCE
     fi
 }
@@ -272,6 +279,7 @@ extract_lines()
 #-------------------
 #
 
+echo "[INFO] calling extract_lines on file : $LOG_DIR/$SOURCE"
 extract_lines
 
 if [ -f $TGZ_DIR/$DEST ]; then
