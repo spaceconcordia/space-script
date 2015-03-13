@@ -86,27 +86,27 @@ collect_files () {
   if confirm-build-q6; then  
     make_directories 
     ls $CS1_DIR/BUILD/Q6
-    cp $COMMANDER_DIR/bin/space-commanderQ6                 $commander/space-commander
-    cp $NETMAN_DIR/bin/sat-mbcc                             $netman/space-netman
-    cp $CS1_DIR/space-updater-api/bin/UpdaterServer-Q6      $updaterapi/
-    cp $CS1_DIR/space-updater/bin/Updater-Q6                $updater/
-    cp $BABYCRON_DIR/bin/baby-cron                          $baby_cron/
+    cp $COMMANDER_DIR/bin/space-commanderQ6/space-commanderQ6   $commander/space-commander
+    cp $NETMAN_DIR/bin/sat-mbcc                                 $netman/space-netman
+    cp $CS1_DIR/space-updater-api/bin/UpdaterServer-Q6          $updaterapi/
+    cp $CS1_DIR/space-updater/bin/Updater-Q6                    $updater/
+    cp $BABYCRON_DIR/bin/baby-cron                              $baby_cron/
     
-    cp $CS1_DIR/space-jobs/job-runner/bin/job-runner-mbcc   $spacejobs/job-runner
-    #cp $CS1_DIR/space-jobs/jobs/bin/*                       $spacejobs/
+    cp $CS1_DIR/space-jobs/job-runner/bin/job-runner-mbcc       $spacejobs/job-runner
+    #cp $CS1_DIR/space-jobs/jobs/bin/*                           $spacejobs/
 
-    cp $SPACESCRIPT_DIR/tgz-wizard/tgzWizard                $tgz_wizard/
-    cp $SPACESCRIPT_DIR/tgz-wizard/cs1_log_rotation.sh      $tgz_wizard/
-    cp $SPACESCRIPT_DIR/tgz-wizard/duChecker.sh             $tgz_wizard/
+    cp $SPACESCRIPT_DIR/tgz-wizard/tgzWizard                    $tgz_wizard/
+    cp $SPACESCRIPT_DIR/tgz-wizard/cs1_log_rotation.sh          $tgz_wizard/
+    cp $SPACESCRIPT_DIR/tgz-wizard/duChecker.sh                 $tgz_wizard/
     
-    cp $SPACE_LIB/include/SpaceDecl.sh                      $tgz_wizard/
+    cp $SPACE_LIB/include/SpaceDecl.sh                          $tgz_wizard/
     
     ## TODO test jobs under baby-cron/tests/jobs
     
-    cp $SPACESCRIPT_DIR/Q6/*                                $tests/
-    mv $tests/Q6-rsync.sh                                   $root/
-    cp $SPACESCRIPT_DIR/at-runner/at-runner.sh              $scripts/
-    cp $SPACESCRIPT_DIR/boot-drivers/*.sh                   $boot_scripts/
+    cp $SPACESCRIPT_DIR/Q6/*                                    $tests/
+    mv $tests/Q6-rsync.sh                                       $root/
+    cp $SPACESCRIPT_DIR/at-runner/at-runner.sh                  $scripts/
+    cp $SPACESCRIPT_DIR/boot-drivers/*.sh                       $boot_scripts/
     
     chmod +x $UPLOAD_FOLDER/*
     cd $UPLOAD_FOLDER
@@ -120,7 +120,7 @@ collect_files () {
     root="$CS1_DIR/BUILD/PC"
     mkdir -p $root
     make_directories 
-    cp $COMMANDER_DIR/bin/space-commander                   $CS1_DIR/BUILD/PC/
+    cp $COMMANDER_DIR/bin/space-commander/space-commander   $CS1_DIR/BUILD/PC/
     cp $NETMAN_DIR/bin/gnd                                  $CS1_DIR/BUILD/PC/
     cp $NETMAN_DIR/bin/sat                                  $CS1_DIR/BUILD/PC/
     cp $NETMAN_DIR/bin/mock_sat                             $CS1_DIR/BUILD/PC/

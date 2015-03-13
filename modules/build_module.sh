@@ -85,7 +85,7 @@ cs1-build-helium () {
   echo "cd: \c"
   pwd
 
-  confirm-build-q6 && bash  csmake.sh Q6 || bash  csmake.sh
+  confirm-build-q6 && bash csmake.sh -q || bash csmake.sh 
 }
 
 cs1-build-fletcher () {
