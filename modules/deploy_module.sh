@@ -103,6 +103,7 @@ collect_files () {
     
     ## TODO test jobs under baby-cron/tests/jobs
     
+    cp $SPACESCRIPT_DIR/testing/settime_rtc_commander_test.sh   $tests/
     cp $SPACESCRIPT_DIR/Q6/*                                    $tests/
     mv $tests/Q6-rsync.sh                                       $root/
     cp $SPACESCRIPT_DIR/at-runner/at-runner.sh                  $scripts/
