@@ -3,7 +3,7 @@ if [ -z "$BASH_VERSION" ]; then exec bash "$0" "$@"; fi;
 NC='\e[0m';black='\e[0;30m';darkgrey='\e[1;30m';blue='\e[0;34m';lightblue='\e[1;34m';green='\e[0;32m';lightgreen='\e[1;32m';cyan='\e[0;36m';lightcyan='\e[1;36m';red='\e[0;31m';lightred='\e[1;31m';purple='\e[0;35m';lightpurple='\e[1;35m';orange='\e[0;33m';yellow='\e[1;33m';lightgrey='\e[0;37m';yellow='\e[1;37m';
 
 git_url='https://github.com/spaceconcordia/'
-declare -a RepoList=('acs' 'baby-cron' 'ground-commander' 'HE100-lib' 'space-commander' 'space-lib' 'space-jobs' 'space-netman' 'space-script' 'space-tools' 'space-timer-lib' 'space-updater' 'space-updater-api' 'space-payload')
+declare -a RepoList=('ground-config' 'baby-cron' 'ground-commander' 'HE100-lib' 'space-commander' 'space-lib' 'space-jobs' 'space-netman' 'space-script' 'space-tools' 'space-timer-lib' 'space-updater' 'space-updater-api' 'space-payload')
 
 READ_DIR=$(readlink -f "$0")
 CS1_DIR=$(dirname "$READ_DIR")
