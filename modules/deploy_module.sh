@@ -140,6 +140,11 @@ collect_files () {
 }
 
 ground_station_setup () {
+   echo "Building Ground Commander"
+   cd $COMMANDER_DIR/
+   make buildGroundCommander
+   cp $COMMANDER_DIR/bin/ground-commander/ground-commander   $CS1_DIR/BUILD/PC/
+
    echo "Linking Named Pipes"
    cs1_mkfifo /home/pipes/gnd-input
    cs1_mkfifo /home/pipes/gnd-out-sat-in
@@ -149,6 +154,8 @@ ground_station_setup () {
    su_symlink $CS1_DIR/BUILD/PC/sat /usr/bin/sat
    su_symlink $CS1_DIR/BUILD/PC/mock_sat /usr/bin/mock_sat
    su_symlink $CS1_DIR/BUILD/PC/space-commander /usr/bin/space-commander
+   su_symlink $CS1_DIR/BUILD/PC/ground-commander /usr/bin/ground-commander
+
    su_symlink $CS1_DIR/space-tools/echo-for-pipes/decode-command.rb /usr/bin/decode-command.rb  
    su_symlink $CS1_DIR/space-tools/echo-for-pipes/getlog-command.rb /usr/bin/getlog-command.rb  
    su_symlink $CS1_DIR/space-tools/echo-for-pipes/gettime-command.rb /usr/bin/gettime-command.rb  
