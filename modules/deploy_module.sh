@@ -155,7 +155,9 @@ ground_station_setup () {
    su_symlink $CS1_DIR/BUILD/PC/mock_sat /usr/bin/mock_sat
    su_symlink $CS1_DIR/BUILD/PC/space-commander /usr/bin/space-commander
    su_symlink $CS1_DIR/BUILD/PC/ground-commander /usr/bin/ground-commander
-   su_symlink $CS1_DIR/ground-commander/Python/gs.py /usr/bin/ground-control
+   sudo rm /usr/bin/ground-control
+   su_symlink $CS1_DIR/ground-commander/BASH/ground-control.sh /usr/bin/ground-control
+   su_symlink $CS1_DIR/ground-commander/Python/gs.py /usr/bin/ground-control.py
 
    su_symlink $CS1_DIR/space-tools/echo-for-pipes/decode-command.rb /usr/bin/decode-command.rb  
    su_symlink $CS1_DIR/space-tools/echo-for-pipes/getlog-command.rb /usr/bin/getlog-command.rb  
