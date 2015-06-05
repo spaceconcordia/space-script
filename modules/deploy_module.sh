@@ -163,6 +163,11 @@ ground_station_setup () {
    su_symlink $CS1_DIR/BUILD/PC/mock_sat /usr/bin/mock_sat
    su_symlink $CS1_DIR/BUILD/PC/space-commander /usr/bin/space-commander
    su_symlink $CS1_DIR/BUILD/PC/ground-commander /usr/bin/ground-commander
+
+   su_symlink $CS1_DIR/BUILD/PC/cs1_log_rotation.sh /usr/bin/cs1_log_rotation.sh
+   su_symlink $CS1_DIR/BUILD/PC/duChecker.sh /usr/bin/duChecker.sh
+   su_symlink $CS1_DIR/BUILD/PC/tgzWizard /usr/bin/tgzWizard
+
    su_symlink $CS1_DIR/ground-commander/BASH/ground-control.sh /usr/bin/ground-control
    su_symlink $CS1_DIR/ground-commander/Python/gs.py /usr/bin/ground-control.py
 
