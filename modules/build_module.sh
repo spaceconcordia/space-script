@@ -52,13 +52,17 @@ check-master-branch () {
     return 0
 }
 
+cs1-build-cmd-tests-then-notests () {
+    bash csmake.sh -c && bash csmake.sh -cs
+}
+
 cs1-build-commander () {
     #COMMANDER
     echo -e "${green}Building Commander $build_environment ...${NC}"
     cd $COMMANDER_DIR
     check-master-branch || fail "Cannot build project without"
     mkdir -p ./bin ./lib ./include
-    confirm-build-q6 && make buildQ6 || bash csmake.sh -c
+    confirm-build-q6 && make buildQ6 || cs1-build-cmd-tests-then-notests 
     confirm-build-q6 && make staticlibsQ6.tar || make staticlibs.tar
 }
 
