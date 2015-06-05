@@ -81,6 +81,12 @@ make_directories () {
     mkdir -p $etc $home $apps $apps_etc $apps_new $apps_current $apps_old $logs $pids $ground $commander $baby_cron $netman $updaterapi $updater $spacejobs $tgz_wizard $initd $bin $tests $scripts $boot_scripts
 }
 
+build_pcd() {
+    cd $CS1_DIR/space-pcd/pcd-1.1.6
+    sudo make pcd
+    sudo make install 
+}
+
 collect_files () {
   echo -e "${purple}Collecting files for $build_environment... ${NC}"
   if confirm-build-q6; then  
@@ -145,6 +151,8 @@ ground_station_setup () {
    make buildGroundCommander
    cp $COMMANDER_DIR/bin/ground-commander/ground-commander   $CS1_DIR/BUILD/PC/
 
+   build_pcd
+
    echo "Linking Named Pipes"
    cs1_mkfifo /home/pipes/gnd-input
    cs1_mkfifo /home/pipes/gnd-out-sat-in
@@ -155,7 +163,6 @@ ground_station_setup () {
    su_symlink $CS1_DIR/BUILD/PC/mock_sat /usr/bin/mock_sat
    su_symlink $CS1_DIR/BUILD/PC/space-commander /usr/bin/space-commander
    su_symlink $CS1_DIR/BUILD/PC/ground-commander /usr/bin/ground-commander
-   sudo rm /usr/bin/ground-control
    su_symlink $CS1_DIR/ground-commander/BASH/ground-control.sh /usr/bin/ground-control
    su_symlink $CS1_DIR/ground-commander/Python/gs.py /usr/bin/ground-control.py
 
