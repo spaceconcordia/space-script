@@ -124,7 +124,7 @@ while getopts "bdpq:n:uvm:s" opt; do
         ;;
         d) bash "$SPACESCRIPT_DIR/modules/deploy_module.sh" ; quit
         ;;
-        p) SKIP=1; update=1; 
+        p) update=1; 
         ;;
         q) build_environment="Q6"
         ;;
