@@ -17,6 +17,16 @@ usage="usage: environment_functions.sh [options: (-v version), (-u usage) ]"
 #------------------------------------------------------------------------------
 set -e
 
+ensure-permissions () {
+    # make sure all directories are owned by the local user 
+    echo -e "${green}Ensuring directory permissions...$(NC)"
+    cd $CS1_DIR
+    sudo find ./ -type d -exec chown $(logname):$(logname) {} \; 
+}
+
+ensure-permissions # otherwise, directories owned by root will cause sourcing
+# of global functions to fail
+
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #
 # Source global functions
@@ -24,6 +34,7 @@ set -e
 #------------------------------------------------------------------------------
 globals=`find . -type f -name globals.sh`
 source $globals || echo "Failed to source $globals"
+
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #
 # Function bodies
@@ -80,10 +91,20 @@ ensure-working-bash () {
 }
 
 ensure-directories () {
-  declare -a REQDIR_LIST=("$NETMAN_DIR/lib/include/" "$HELIUM_DIR/inc/" "$TIMER_DIR/inc/" "$BABYCRON_DIR/include/" "$JOBRUNNER_DIR/inc/" "$COMMANDER_DIR/include/" "$HELIUM_DIR/lib/" "$TIMER_DIR/lib/" "$COMMANDER_DIR/lib/" "$BABYCRON_DIR/lib/" "$BABYCRON_DIR/lib/" "$JOBRUNNER_DIR/lib/" "$NETMAN_DIR/lib/include" "$NETMAN_DIR/bin" "$UPLOAD_FOLDER/jobs" "$CS1_DIR/logs" "$CS1_DIR/pipes" "$CS1_DIR/pids" "$CS1_DIR/tgz")
+  declare -a REQDIR_LIST=("$NETMAN_DIR/lib/include/" "$HELIUM_DIR/inc/" "$TIMER_DIR/inc/" "$BABYCRON_DIR/include/" "$JOBRUNNER_DIR/inc/" "$COMMANDER_DIR/include/" "$HELIUM_DIR/lib/" "$TIMER_DIR/lib/" "$COMMANDER_DIR/lib/" "$COMMANDER_DIR/cs1_utest/tgz/" "$BABYCRON_DIR/lib/" "$BABYCRON_DIR/lib/" "$JOBRUNNER_DIR/lib/" "$NETMAN_DIR/lib/include" "$NETMAN_DIR/bin" "$UPLOAD_FOLDER/jobs" "$CS1_DIR/logs" "$CS1_DIR/pipes" "$CS1_DIR/pids" "$CS1_DIR/tgz")
   for item in ${REQDIR_LIST[*]}; do
     mkdir -p $item || fail "Could not create $item"
+    sudo chown -R $(logname):$(logname) $item
   done
+}
+
+ensure-symlinks () {
+  if [ ! -x "$SPACESCRIPT_DIR/at-runner/at-runner.sh" ]; then
+      sudo chmod +x $SPACESCRIPT_DIR/at-runner/at-runner.sh
+  fi
+  if [ ! -f "/usr/bin/at-runner.sh" ]; then 
+      sudo ln -s "$SPACESCRIPT_DIR/at-runner/at-runner.sh" /usr/bin/
+  fi
   if [ ! -d "$CS1_DIR/apps" -o ! -d "/home/apps" ]; then 
       echo -e "${yellow} Linking /home/apps${NC}"
       mkdir -p "$CS1_DIR"/apps/current "$CS1_DIR"/apps/old "$CS1_DIR"/apps/new 
@@ -103,18 +124,9 @@ ensure-directories () {
   fi
 }
 
-ensure-symlinks () {
-  if [ ! -x "$SPACESCRIPT_DIR/at-runner/at-runner.sh" ]; then
-      sudo chmod +x $SPACESCRIPT_DIR/at-runner/at-runner.sh
-  fi
-  if [ ! -f "/usr/bin/at-runner.sh" ]; then 
-      sudo ln -s "$SPACESCRIPT_DIR/at-runner/at-runner.sh" /usr/bin/
-  fi
-}
-
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #
 # Execution
 #
 #------------------------------------------------------------------------------
-ensure-working-bash ensure-correct-path && self-update && ensure-symlinks && ensure-directories 
+ensure-correct-path && self-update && ensure-directories && ensure-symlinks &&  ensure-working-bash  
