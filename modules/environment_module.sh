@@ -62,6 +62,11 @@ self-update () {
   fi
 }
 
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#
+# Function bodies
+#
+#------------------------------------------------------------------------------
 ensure-directories () {
   declare -a REQDIR_LIST=("$NETMAN_DIR/lib/include/" "$HELIUM_DIR/inc/" "$TIMER_DIR/inc/" "$BABYCRON_DIR/include/" "$JOBRUNNER_DIR/inc/" "$COMMANDER_DIR/include/" "$HELIUM_DIR/lib/" "$TIMER_DIR/lib/" "$COMMANDER_DIR/lib/" "$BABYCRON_DIR/lib/" "$BABYCRON_DIR/lib/" "$JOBRUNNER_DIR/lib/" "$NETMAN_DIR/lib/include" "$NETMAN_DIR/bin" "$UPLOAD_FOLDER/jobs" "$CS1_DIR/logs" "$CS1_DIR/pipes" "$CS1_DIR/pids" "$CS1_DIR/tgz")
   for item in ${REQDIR_LIST[*]}; do
@@ -85,6 +90,7 @@ ensure-directories () {
       mkdir -p "$CS1_DIR"/tgz && sudo ln -s "$CS1_DIR"/tgz /home/tgz && sudo chown -R $(logname):$(logname) /home/tgz
   fi
 }
+
 
 ensure-symlinks () {
   if [ ! -x "$SPACESCRIPT_DIR/at-runner/at-runner.sh" ]; then
