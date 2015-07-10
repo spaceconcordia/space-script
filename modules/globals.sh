@@ -62,18 +62,8 @@ su_symlink () {
     source_file=$1
     dest_symlink=$2
     if [ -f $source_file ]; then
-        if [ -f $dest_symlink ]; then
-            if [ ! -h $dest_symlink ]; then
-                echo "sudo ln -s $source_file $dest_symlink"
-                sudo ln -s $source_file $dest_symlink
-            else
-                echo "$dest_symlink is already linked"
-                ls -alF $dest_symlink
-            fi
-        else 
-            echo "sudo ln -s $source_file $dest_symlink"
-            sudo ln -s $source_file $dest_symlink
-        fi
+        echo "sudo ln -nsf $source_file $dest_symlink"
+        sudo ln -nsf $source_file $dest_symlink
     else 
         echo "Invalid source file provided: $source_file"
     fi

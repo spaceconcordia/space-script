@@ -90,7 +90,7 @@ self-update () {
 
 ensure-working-bash () {
     sudo rm /bin/sh
-    sudo ln -s /bin/bash /bin/sh
+    su_symlink /bin/bash /bin/sh
 }
 
 ensure-directories () {
@@ -106,24 +106,24 @@ ensure-symlinks () {
       sudo chmod +x "$SPACESCRIPT_DIR"/at-runner/at-runner.sh
   fi
   if [ ! -f "/usr/bin/at-runner.sh" ]; then 
-      sudo ln -s "$SPACESCRIPT_DIR/at-runner/at-runner.sh" /usr/bin/
+      su_symlink "$SPACESCRIPT_DIR/at-runner/at-runner.sh" /usr/bin/
   fi
   if [ ! -d "$CS1_DIR/apps" -o ! -d "/home/apps" ]; then 
       echo -e "${yellow} Linking /home/apps${NC}"
       mkdir -p "$CS1_DIR"/apps/current "$CS1_DIR"/apps/old "$CS1_DIR"/apps/new 
-      sudo ln -s "$CS1_DIR"/apps /home/apps && sudo chown -R $(logname):$(logname) /home/apps
+      su_symlink "$CS1_DIR"/apps /home/apps && sudo chown -R $(logname):$(logname) /home/apps
   fi
   if [ ! -d "$CS1_DIR/logs" -o ! -d "/home/logs" ]; then 
       echo -e "${yellow} Linking /home/logs${NC}"
-      mkdir -p "$CS1_DIR"/logs && sudo ln -s "$CS1_DIR"/logs /home/logs && sudo chown -R $(logname):$(logname) /home/logs
+      mkdir -p "$CS1_DIR"/logs && su_symlink "$CS1_DIR"/logs /home/logs && sudo chown -R $(logname):$(logname) /home/logs
   fi
   if [ ! -d "$CS1_DIR/pipes" -o ! -d "/home/pipes" ]; then
       echo -e "${yellow} Linking /home/pipes${NC}"
-      mkdir -p "$CS1_DIR"/pipes && sudo ln -s "$CS1_DIR"/pipes /home/pipes && sudo chown -R $(logname):$(logname) /home/pipes
+      mkdir -p "$CS1_DIR"/pipes && su_symlink "$CS1_DIR"/pipes /home/pipes && sudo chown -R $(logname):$(logname) /home/pipes
   fi
   if [ ! -d "$CS1_DIR/tgz" -o ! -d "/home/tgz" ]; then 
       echo -e "${yellow} Linking /home/tgz${NC}"
-      mkdir -p "$CS1_DIR"/tgz && sudo ln -s "$CS1_DIR"/tgz /home/tgz && sudo chown -R $(logname):$(logname) /home/tgz
+      mkdir -p "$CS1_DIR"/tgz && su_symlink "$CS1_DIR"/tgz /home/tgz && sudo chown -R $(logname):$(logname) /home/tgz
   fi
 }
 
