@@ -18,7 +18,7 @@ ensure-correct-path () {
 ensure-correct-path
 
 READ_DIR=$(pwd)
-CS1_DIR=$(dirname "$READ_DIR/..")
+CS1_DIR="$HOME/CONSAT1" # TODO this is a kludge, need to fix relative path detection
 NETMAN_DIR="$CS1_DIR/space-netman"
 SPACE_LIB="$CS1_DIR/space-lib"
 SPACE_INCLUDE="$SPACE_LIB/include"

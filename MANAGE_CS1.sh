@@ -6,7 +6,7 @@ git_url='https://github.com/spaceconcordia/'
 declare -a RepoList=('ground-config' 'baby-cron' 'ground-commander' 'HE100-lib' 'space-commander' 'space-lib' 'space-jobs' 'space-netman' 'space-script' 'space-tools' 'space-timer-lib' 'space-updater' 'space-updater-api' 'space-payload' 'space-pcd')
 
 READ_DIR=$(readlink -f "$0")
-CS1_DIR=$(dirname "$READ_DIR")
+CS1_DIR="$HOME/CONSAT1" # TODO this is a kludge, need to fix relative path detection
 SPACESCRIPT_DIR="$CS1_DIR/space-script"
 
 declare -a SourceLibraries=("$SPACESCRIPT_DIR/modules/environment_module.sh" "$SPACESCRIPT_DIR/modules/systemreq_module.sh"  "$SPACESCRIPT_DIR/modules/build_module.sh" "$SPACESCRIPT_DIR/modules/deploy_module.sh" )

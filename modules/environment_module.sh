@@ -5,6 +5,7 @@ if [ -z "$BASH_VERSION" ]; then exec . .  "$0" "$@"; fi;
 #
 # Distributed under terms of the MIT license.
 
+
 PROGRAM="environment_functions.sh"
 VERSION="0.0.1"
 version () { echo "$PROGRAM version $VERSION"; }
@@ -19,7 +20,7 @@ set -e
 
 ensure-permissions () {
     # make sure all directories are owned by the local user 
-    echo -e "${green}Ensuring directory permissions...$(NC)"
+    echo "Ensuring directory permissions..."
     cd $CS1_DIR
     sudo find ./ -type d -exec chown $(logname):$(logname) {} \; 
 }
@@ -34,6 +35,8 @@ ensure-permissions # otherwise, directories owned by root will cause sourcing
 #------------------------------------------------------------------------------
 globals=`find . -type f -name globals.sh`
 source $globals || echo "Failed to source $globals"
+
+echo "ENVIRONMENT_MODULE - CS1_DIR:$CS1_DIR"
 
 #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #
@@ -100,7 +103,7 @@ ensure-directories () {
 
 ensure-symlinks () {
   if [ ! -x "$SPACESCRIPT_DIR/at-runner/at-runner.sh" ]; then
-      sudo chmod +x $SPACESCRIPT_DIR/at-runner/at-runner.sh
+      sudo chmod +x "$SPACESCRIPT_DIR"/at-runner/at-runner.sh
   fi
   if [ ! -f "/usr/bin/at-runner.sh" ]; then 
       sudo ln -s "$SPACESCRIPT_DIR/at-runner/at-runner.sh" /usr/bin/
@@ -129,4 +132,8 @@ ensure-symlinks () {
 # Execution
 #
 #------------------------------------------------------------------------------
-ensure-correct-path && self-update && ensure-directories && ensure-symlinks &&  ensure-working-bash  
+ensure-correct-path 
+self-update 
+ensure-directories 
+ensure-symlinks 
+ensure-working-bash  
