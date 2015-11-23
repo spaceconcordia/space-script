@@ -83,6 +83,7 @@ make_directories () {
 
 build_pcd() {
     cd $CS1_DIR/space-pcd/pcd-1.1.6
+    sudo make clean
     sudo make pcd
     sudo make install 
 }
